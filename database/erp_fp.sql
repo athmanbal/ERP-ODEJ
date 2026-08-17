@@ -1,0 +1,1342 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 29 sep. 2025 à 16:46
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `erp_fp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `alocation`
+--
+
+CREATE TABLE `alocation` (
+  `id_enfant` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `nom_enfant` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `prenom_enfant` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `date_naissance` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `scolarise` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `id_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `articls`
+--
+
+CREATE TABLE `articls` (
+  `id_articl` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `articl` longtext DEFAULT NULL COMMENT 'TRIAL',
+  `résultat` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categoriefonctionnaire`
+--
+
+CREATE TABLE `categoriefonctionnaire` (
+  `id_categoriefonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `nom_categoriefonctionnaire` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `display` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categoriefonctionnaires`
+--
+
+CREATE TABLE `categoriefonctionnaires` (
+  `Id_CategorieFonctionnaire` bigint(20) UNSIGNED NOT NULL,
+  `Nom_CategorieFonctionnaire` varchar(255) NOT NULL,
+  `Display` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `categoriefonctionnaires`
+--
+
+INSERT INTO `categoriefonctionnaires` (`Id_CategorieFonctionnaire`, `Nom_CategorieFonctionnaire`, `Display`, `created_at`, `updated_at`) VALUES
+(1, 'Permanents', 1, NULL, NULL),
+(2, 'Vacataires', 1, NULL, NULL),
+(3, '5 Heures', 1, NULL, NULL),
+(4, 'Contractuels', 1, NULL, NULL),
+(5, 'P-A-P', 1, NULL, NULL),
+(6, 'PRC Permanents', 0, NULL, NULL),
+(7, 'PRC Vacataires', 0, NULL, NULL),
+(8, 'PRC 5 Heures', 0, NULL, NULL),
+(9, 'PRC Contractuels', 0, NULL, NULL),
+(10, 'PRC P-A-P', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `compte`
+--
+
+CREATE TABLE `compte` (
+  `id_compte` double DEFAULT NULL COMMENT 'TRIAL',
+  `n_compte` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `id_typecompte` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comptes`
+--
+
+CREATE TABLE `comptes` (
+  `Id_Compte` bigint(20) UNSIGNED NOT NULL,
+  `N_Compte` bigint(20) NOT NULL,
+  `Id_TypeCompte` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `comptes`
+--
+
+INSERT INTO `comptes` (`Id_Compte`, `N_Compte`, `Id_TypeCompte`, `created_at`, `updated_at`) VALUES
+(1, 524936, 'CCP', NULL, NULL),
+(2, 552455, 'CCP', NULL, NULL),
+(3, 354523, 'CPA', NULL, NULL),
+(4, 53252, 'CCP', NULL, NULL),
+(5, 245214, 'CCP', NULL, NULL),
+(6, 22361214, 'CCP', NULL, NULL),
+(7, 25542, 'CPA', NULL, NULL),
+(8, 56586, 'CPA', NULL, NULL),
+(9, 654987, 'CCP', NULL, NULL),
+(10, 9851, 'CCP', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `corps`
+--
+
+CREATE TABLE `corps` (
+  `Id_Corps` varchar(255) NOT NULL,
+  `Nom_Corps` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `corps`
+--
+
+INSERT INTO `corps` (`Id_Corps`, `Nom_Corps`) VALUES
+('1', 'Pedagogique'),
+('2', 'Commain'),
+('3', 'Technique'),
+('4', 'OP');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `datafeeds`
+--
+
+CREATE TABLE `datafeeds` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `data` double(10,2) DEFAULT NULL,
+  `dataset_name` tinyint(4) DEFAULT NULL,
+  `data_type` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `disqueccp`
+--
+
+CREATE TABLE `disqueccp` (
+  `id_disquetteccp` double DEFAULT NULL COMMENT 'TRIAL',
+  `titredisqccp` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `datedccp` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etablissements`
+--
+
+CREATE TABLE `etablissements` (
+  `id_etablissement` bigint(20) UNSIGNED NOT NULL,
+  `nom_etablissement` varchar(255) NOT NULL,
+  `type_etablissement` varchar(255) NOT NULL,
+  `address_etablissement` varchar(255) DEFAULT NULL,
+  `telFax_etablissement` varchar(255) DEFAULT NULL,
+  `mail_etablissement` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `etablissements`
+--
+
+INSERT INTO `etablissements` (`id_etablissement`, `nom_etablissement`, `type_etablissement`, `address_etablissement`, `telFax_etablissement`, `mail_etablissement`, `created_at`, `updated_at`) VALUES
+(1, 'ODEJ', 'Office Administration', 'cite 120 lgts bouira', '026739457', 'odejbouira@mjs.gove.dz', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etat_fonctionaire`
+--
+
+CREATE TABLE `etat_fonctionaire` (
+  `id_fonctionaire` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `date_d` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `date_f` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `motif` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fonctionnaires`
+--
+
+CREATE TABLE `fonctionnaires` (
+  `id_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `matricule_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `nom_fonctionnaire` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `prenom_fonctionnaire` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `date_naissance` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `date_recretement` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `nbr_annees` double DEFAULT NULL COMMENT 'TRIAL',
+  `date_sortie` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `sexe` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `lieu_naissance` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `id_grade` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_fonction` int(25) DEFAULT NULL COMMENT 'TRIAL',
+  `id_service` double DEFAULT NULL COMMENT 'TRIAL',
+  `n_ss` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_categoriefonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_situationfamiliale` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `femme_foyer` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `nb_enfant` double DEFAULT NULL COMMENT 'TRIAL',
+  `nb_enf_ben` double DEFAULT NULL COMMENT 'TRIAL',
+  `nb_enf_sco` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_echelon` double DEFAULT NULL COMMENT 'TRIAL',
+  `niveau_responsabilite` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_compte` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL',
+  `telephone` varchar(255) DEFAULT NULL COMMENT 'Numéro de téléphone du fonctionnaire',
+  `id_etablissement` bigint(20) DEFAULT NULL COMMENT 'Établissement du fonctionnaire',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+--
+-- Déchargement des données de la table `fonctionnaires`
+--
+
+INSERT INTO `fonctionnaires` (`id_fonctionnaire`, `matricule_fonctionnaire`, `nom_fonctionnaire`, `prenom_fonctionnaire`, `date_naissance`, `date_recretement`, `nbr_annees`, `date_sortie`, `sexe`, `lieu_naissance`, `id_grade`, `id_fonction`, `id_service`, `n_ss`, `id_categoriefonctionnaire`, `id_situationfamiliale`, `femme_foyer`, `nb_enfant`, `nb_enf_ben`, `nb_enf_sco`, `id_echelon`, `niveau_responsabilite`, `id_compte`, `trial739`, `telephone`, `id_etablissement`, `created_at`, `updated_at`) VALUES
+(1, 101, 'Bal', 'Athman', '1986-02-04 00:00:00', '2013-03-26 00:00:00', NULL, NULL, 'M', 'Bouira', NULL, 21, NULL, NULL, 1, 'C', '0', 0, 0, 0, 1, NULL, 1, NULL, '0667158082', 1, NULL, NULL),
+(2, 102, 'GhAZALI', 'FAOUZI', '1983-07-13 00:00:00', '2012-10-17 00:00:00', NULL, NULL, 'M', 'Bouira', NULL, 30, NULL, NULL, 1, 'C', '0', 0, 0, 0, 0, NULL, 2, NULL, '0667158082', 1, NULL, NULL),
+(4, 104, 'Maddour', 'Karim', '1978-09-11 00:00:00', '2013-12-18 00:00:00', NULL, NULL, 'M', 'Bouira', NULL, 31, NULL, NULL, 1, 'M', 'OUI', 1, 0, 0, 3, NULL, 3, NULL, '0667158082', 1, NULL, NULL),
+(6, 106, 'KACI', 'ABDELKADER', '1962-12-01 00:00:00', '2001-10-02 00:00:00', NULL, NULL, 'M', 'BOUIRA', 1, 1, NULL, NULL, 1, 'M', 'OUI', 0, 0, 0, 0, NULL, 4, NULL, '0667158082', 1, NULL, NULL),
+(7, 107, 'RAHAB', 'RAMDHAN', '1964-11-11 00:00:00', '1992-12-30 00:00:00', NULL, NULL, 'M', NULL, 2, 1, NULL, NULL, 1, NULL, 'NOM', 3, 0, 0, 0, NULL, 10, NULL, '0667158082', 1, NULL, NULL),
+(8, 108, 'ZOURDANI', 'ZOUHIR AMINE', '1988-07-03 00:00:00', '2012-04-11 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, 5, NULL, '0667158082', 1, NULL, NULL),
+(9, 109, 'AOUSSADI', 'YASMINA', '1973-03-02 00:00:00', '1998-12-19 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, 6, NULL, '0667158082', 1, NULL, NULL),
+(10, 110, 'ABAS', 'SAMIA', '1981-05-21 00:00:00', '2010-02-01 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, 7, NULL, '0667158082', 1, NULL, NULL),
+(11, 111, 'KIBAILI', 'MOHAMED', NULL, '2013-10-01 00:00:00', NULL, NULL, 'M', NULL, 2, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, 8, NULL, '0667158082', 1, NULL, NULL),
+(12, 112, 'BERKAN', 'KARIM', NULL, '2013-10-01 00:00:00', NULL, NULL, 'M', NULL, 3, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, 9, NULL, '0667158082', 1, NULL, NULL),
+(13, 113, 'ARAAR', 'BOUALAM', NULL, '2012-12-31 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(14, 114, 'AOUADI', 'KADA', '1974-06-04 00:00:00', '2002-12-01 00:00:00', NULL, NULL, 'M', NULL, 3, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(15, 115, 'OUAMRANE', 'RABAH', '1984-05-19 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(16, 116, 'ALOUACHE', 'MOUHAMED', '1981-05-06 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(17, 117, 'SLIMI', 'AHCENE', '1987-10-01 00:00:00', '2012-12-26 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(18, 118, 'SAOUDI', 'MAHDI', '1987-07-25 00:00:00', '2012-12-26 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(19, 119, 'TERDJMANE', 'MOURAD', '1986-06-09 00:00:00', '2012-12-26 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(20, 120, 'ABACE', 'SAMIRA', '1989-08-31 00:00:00', '2012-12-26 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(21, 121, 'ATALIA', 'MOUHAMED', '1988-01-16 00:00:00', '2012-12-26 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(22, 122, 'ELALOUNI', 'LAMAA', '1987-07-01 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(23, 123, 'MAKHLOUF', 'IMAN', '1989-08-17 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(24, 124, 'AKMOUCHE', 'NABILA', '1979-01-17 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(25, 125, 'TAIBI', 'ABDERAZAKE', '1987-04-01 00:00:00', '2012-11-13 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(26, 126, 'BERNOU', 'FAIZA', '1973-10-22 00:00:00', '1996-12-28 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 6, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(27, 127, 'TAIABI', 'ABDERAHMANE', '1979-05-22 00:00:00', '2009-12-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 2, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(29, 129, 'AISSOU', 'ASSIA', '1979-10-26 00:00:00', '2010-01-10 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(30, 130, 'ELALOUI', 'ESKANDER', '1979-01-15 00:00:00', '2009-02-11 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(31, 131, 'FALAK', 'RACHID', '1953-03-18 00:00:00', '1992-12-13 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(32, 132, 'KAOUEDJ', 'AHMED', '1979-09-23 00:00:00', '2002-12-01 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(33, 133, 'DJOUADI', 'FARES ABDELMALEK', '1972-05-09 00:00:00', '1993-01-09 00:00:00', NULL, NULL, 'M', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(34, 134, 'BELAIDI', 'FATIHA', '1969-02-16 00:00:00', '1993-09-20 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(35, 135, 'ZAOUED', 'NOURA', '1972-10-25 00:00:00', '1992-09-30 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(36, 136, 'HAMADI', 'LINDA', '1971-11-10 00:00:00', '1994-12-03 00:00:00', NULL, NULL, 'F', NULL, NULL, 1, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(37, 137, 'ALILOUCHE', 'SAMIRA', '1973-07-18 00:00:00', '1996-11-13 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(38, 138, 'OUARAB', 'FADHILA', '1976-03-23 00:00:00', '2001-10-08 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(39, 139, 'KACI', 'HAMOUCHE', '1972-06-12 00:00:00', '1993-11-20 00:00:00', NULL, NULL, 'M', NULL, 4, 2, NULL, NULL, 1, NULL, 'NOM', 2, 0, 0, 7, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(40, 140, 'AAMER', 'HOURIA', '1970-05-19 00:00:00', '1993-11-20 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 1, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(41, 140, 'MEDDAHI', 'BRAHIM', '1960-09-07 00:00:00', '1992-12-06 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(42, 142, 'FEDHALA', 'KAMEL', '1972-05-19 00:00:00', '1992-12-07 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(43, 143, 'AAMANI', 'SAAD', '1968-04-01 00:00:00', '1992-12-06 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, 10, NULL, '0667158082', 1, NULL, NULL),
+(44, 144, 'ABDELHAMIDE', 'RABAH', '1970-05-12 00:00:00', '1992-12-09 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(45, 145, 'MAMECHE', 'ALI', '1964-05-12 00:00:00', '1992-12-07 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(46, 146, 'BIRAGOUBA', 'RACHID', '1968-04-28 00:00:00', '1992-12-08 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(47, 147, 'DERADJ', 'AHMED', '1969-08-06 00:00:00', '1992-12-06 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(48, 148, 'MOUSSAOUI', 'MOUHED AREZKI', '1964-06-02 00:00:00', '1992-12-07 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(49, 149, 'SLIMI', 'AAMAR', '1967-06-02 00:00:00', '1992-10-19 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(50, 150, 'ACHAOUCHE', 'AMAR', '1958-08-28 00:00:00', '2001-12-01 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(51, 151, 'HALOUANI', 'AHMED', '1967-10-13 00:00:00', '2001-12-01 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(52, 152, 'GUENOUNE', 'DJAMEL', '1971-02-22 00:00:00', '2001-12-01 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(53, 153, 'SIAD', 'ZAHIRA', '1971-05-17 00:00:00', '2001-12-01 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(54, 154, 'ANSER', 'KAMEL', '1978-11-28 00:00:00', '2002-12-01 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(55, 155, 'AIT KACI', 'ABDERAHMAN', '1971-11-06 00:00:00', '2007-12-14 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(56, 156, 'TOUATI', 'DJAMEL', '1974-10-11 00:00:00', '2007-12-14 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(57, 157, 'ZINE', 'YAKHLAF', '1972-08-18 00:00:00', '2009-12-14 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(58, 158, 'ACHIT', 'SAMIA', '1970-12-31 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(59, 159, 'REZIG MARHOUNE', 'FARIDA', '1960-07-27 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(60, 160, 'BOUSAIDE', 'MOUHAMED', '1970-11-18 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(61, 161, 'YOUSFI', 'NOUREDDINE', '1975-05-22 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(62, 162, 'TAIB', 'BAYZID', '1971-12-21 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(63, 163, 'MIBARKI', 'MOHAMED', '1977-11-12 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(64, 164, 'BOUABDALAH', 'KAMEL', '1969-04-23 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(65, 165, 'HADANOU', 'BAYA', '1970-07-13 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'F', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(66, 166, 'BEKRI', 'MOHAMED', '1978-09-04 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(67, 167, 'HELLALI', 'KAMEL', '1980-08-22 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(68, 168, 'ALALOUANI', 'AMROU', '1964-05-22 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(69, 169, 'AMROUCHE', 'HAMID', '1963-02-16 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(70, 170, 'MOUHOUCHE', 'HAMID', '1979-05-02 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(71, 171, 'FACI', 'MAAYOUF', '1960-05-04 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(72, 172, 'MOUSSAOUI', 'SAMIR', '1964-01-15 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(73, 173, 'KACI', 'ABDELKRIM', '1968-01-15 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(74, 174, 'HADJ ARAB', 'NOUREDDINE', '1964-01-19 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(75, 175, 'BOURAHLA', 'SLIMAN', '1964-12-26 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(76, 176, 'AOUDIA', 'YACINE', '1974-09-02 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(77, 177, 'BELACEL', 'MOUSTAFA', '1971-03-02 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(78, 178, 'CHAALAL', 'SAMIR', '1978-03-19 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(79, 179, 'QARIANI', 'FATEH', '1978-09-19 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(80, 180, 'KAHLAL', 'ELHADJ', '1973-11-18 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 2, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(81, 181, 'KHELIF', 'YACINE', '1981-09-24 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(82, 182, 'MIDOUNE', 'KARIM', '1971-12-06 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(83, 183, 'MELOUK', 'AHMED', '1983-01-15 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(84, 184, 'MEKHFI', 'YOUSSEF', '1985-03-11 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(85, 185, 'MAAZOUZ', 'AZIZ', '1984-06-04 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(86, 186, 'BACHIRI', 'QADOUR', '1975-01-22 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(87, 187, 'REMMAM', 'SALAH', '1969-03-27 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(88, 188, 'SAADI', 'MOHAMED', '1974-09-22 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(89, 189, 'BOULARAS', 'LAKHDER', '1972-08-21 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(90, 190, 'MSILI', 'MOUSSA', '1975-01-31 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(91, 191, 'BEN ZAROUAL', 'HAMZA', '1985-01-26 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(92, 192, 'MASSAOUDANE', 'CHAFIQ', '1973-02-13 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(93, 193, 'REHAB', 'HAMID', '1984-10-30 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(94, 194, 'FELLAK', 'SALAH', '1987-07-10 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(95, 195, 'CHERGI', 'RACHID', '1983-03-16 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(96, 196, 'DERADJI', 'RACHD', '1959-12-31 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(97, 197, 'BERKANE', 'MOUHAMED', '1983-11-18 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(98, 198, 'ABDEDOU', 'RABAH', '1983-10-23 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(99, 199, 'KENOUCHE', 'BOUALAM', '1977-09-26 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(100, 200, 'MEZHOUDE', 'ABDENOURE', '1971-12-29 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(101, 201, 'BENYOUCEF', 'AISSAT', '1964-01-12 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(102, 202, 'NEOUI', 'RABAH', '1974-03-25 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(103, 203, 'BERIANE', 'TAHAR', '1980-07-13 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(104, 204, 'CHEBOUT', 'KARIM', '1977-06-16 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(105, 205, 'GHOUMARI', 'MAHFOUDH', '1973-06-26 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(106, 206, 'HAMOUDI', 'YAHIA', '1970-12-24 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(107, 207, 'MEZIANE', 'KAMEL', '1974-06-13 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(108, 208, 'RAHMANI', 'AMAR', '1972-06-21 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(109, 209, 'BELAIDI', 'ABDELMADJID', '1963-12-19 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(110, 210, 'GATTACHE', 'AHMED', '1974-10-27 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(111, 211, 'HIDEB', 'BEN DJEDDOU', '1974-03-23 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(112, 212, 'ALILI', 'MOULOUD', '1978-02-23 00:00:00', '2009-11-23 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(113, 213, 'ZITOUNI', 'DJAMILA', '1982-11-18 00:00:00', '2008-12-24 00:00:00', NULL, NULL, 'F', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(114, 214, 'TAIBAOUI', 'DJAMEL', '1975-03-03 00:00:00', '2001-12-22 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(115, 215, 'ADJRAD', 'MADJID', '1976-11-05 00:00:00', '2011-01-16 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(116, 216, 'BOURAHLA', 'AISSA', '1983-03-17 00:00:00', '2011-01-24 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(117, 217, 'FARHI', 'AMIROUCHE', '1977-11-17 00:00:00', '2011-01-16 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(118, 218, 'OUAAREB', 'FATEH', '1973-08-03 00:00:00', '2011-01-16 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(119, 219, 'AOUAD', 'MALIKA', '1977-08-03 00:00:00', '2011-01-16 00:00:00', NULL, NULL, 'F', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(120, 220, 'BRAHIMI', 'FADHILA', '1977-08-31 00:00:00', '2011-01-16 00:00:00', NULL, NULL, 'F', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(121, 221, 'KISSE', 'KALED', '1981-03-08 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(122, 222, 'LAOUNIS', 'ELBACHIRE', '1987-07-10 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(123, 223, 'KEDOUR', 'CHRIF', '1968-08-12 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(124, 224, 'FRIDI', 'TAHAR', '1973-07-19 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'F', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(125, 225, 'TOUNSI', 'ABDELHAFIDH', '1984-03-25 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(126, 226, 'ZEKRAOUI', 'ABDELKADER', '1959-02-09 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(127, 227, 'DJEDID', 'SAAD', '1980-02-13 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(128, 228, 'MANI', 'AMAR', '1971-04-05 00:00:00', '2011-12-15 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(129, 229, 'BENANI', 'AMAR', NULL, '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(130, 230, 'TALBI', 'MHANA', NULL, '2013-11-03 00:00:00', NULL, NULL, 'F', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(131, 231, 'SAADI', 'ISAMIL', NULL, '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(132, 232, 'BELHADI', 'AKHLI', '1965-03-05 00:00:00', '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(133, 233, 'CHACHOUA', 'AMAR', NULL, '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(134, 234, 'MEDDAHI', 'MALEK', NULL, '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(135, 235, 'AZIZI', 'AZEDDINE', '1975-03-04 00:00:00', '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL),
+(136, 236, 'KOUDJBACHE', 'MOULOUD', NULL, '2013-11-03 00:00:00', NULL, NULL, 'M', NULL, NULL, 3, NULL, NULL, 2, NULL, 'NOM', 0, 0, 0, 0, NULL, NULL, NULL, '0667158082', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fonctions`
+--
+
+CREATE TABLE `fonctions` (
+  `id_fonction` double DEFAULT NULL COMMENT 'TRIAL',
+  `section` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `taux_prime` double DEFAULT NULL COMMENT 'TRIAL',
+  `nom_fonction` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `code_fonction` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `niveau` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `valeur_indiciere` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `id_corps` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+--
+-- Déchargement des données de la table `fonctions`
+--
+
+INSERT INTO `fonctions` (`id_fonction`, `section`, `taux_prime`, `nom_fonction`, `code_fonction`, `niveau`, `valeur_indiciere`, `id_corps`, `trial739`) VALUES
+(1, 'Administration', 4, 'ADMINISTRATEUR', 1, 12, 537, '2', NULL),
+(2, 'Administration', 4, 'ADMINISTRATEUR PRINCIPAL', 2, 14, 621, '2', NULL),
+(3, 'Administration', 4, 'ADMINISTRATEUR CONSIEL', 3, 16, 713, '2', NULL),
+(4, 'Administration', 25, 'ATTACHE D\'ADMINISTARTION', 4, 9, 418, '2', NULL),
+(5, 'Administration', 25, 'ATTACHE PRINCIPAL D\'ADMINISTARTION', 5, 10, 453, '2', NULL),
+(7, 'Administration', 25, 'AGENT DE BUREAU', 6, 5, 288, '2', NULL),
+(8, 'Administration', 25, 'AGENT D\'ADMINISTATION', 7, 7, 348, '2', NULL),
+(9, 'Administration', 25, 'AGENT D\'ADMINISTATION PRINCIPAL', 8, 8, 379, '2', NULL),
+(10, 'Administration', 25, 'AGENT ARCHIVAGE', 9, 5, 288, '2', NULL),
+(11, 'Administration', 25, 'SUCRITAIRE', 10, 6, 315, '2', NULL),
+(12, 'Administration', 25, 'SUCRITAIRE DE DIRECTION', 12, 8, 379, '2', NULL),
+(13, 'Administration', 25, 'SUCRITAIRE DE DIRECTION PRINCIPAL', 11, 10, 453, '2', NULL),
+(14, 'Comptabilité', 25, 'AIDE COMPTABLE D\'ADMINISTRATION', 13, 5, 288, '2', NULL),
+(15, 'Comptabilité', 25, 'COMPTABLE D\'ADMINISTRATION', 14, 8, 379, '2', NULL),
+(16, 'Comptabilité', 25, 'COMPTABLE D\'ADMINISTRATION PRINCIPAL', 15, 10, 453, '2', NULL),
+(17, 'Interpritation', 4, 'INTERPRETE', 16, 12, 537, '2', NULL),
+(18, 'Interpritation', 4, 'INTERPRETE PRINCIPAL', 17, 14, 621, '2', NULL),
+(19, 'Interpritation', 4, 'CHEF INTERPRETES', 18, 16, 713, '2', NULL),
+(20, 'Informatique', 4, 'INGENIEUR D\'APPLICATION', 19, 11, 498, '2', NULL),
+(21, 'Informatique', 4, 'INGENIEUR D\'ETAT EN INFORMATIQUE', 20, 13, 578, '2', NULL),
+(22, 'Informatique', 4, 'INGENIEUR PRINCIPAL EN INFORMATIQUE', 21, 14, 621, '2', NULL),
+(23, 'Informatique', 4, 'CHEF INGENIEURS INFORMATIQUE', 23, 16, 713, '2', NULL),
+(24, 'Informatique', 25, 'TECHNICIEN EN INFORMATIQUE', 24, 8, 379, '2', NULL),
+(25, 'Informatique', 25, 'TECHNICIEN SUPERIEUR EN INFORMATIQUE', 25, 10, 453, '2', NULL),
+(26, 'Informatique', 25, 'AIDE TECHNICIEN', 26, 7, 348, '2', NULL),
+(27, 'Informatique', 25, 'AGENT TECHNICIEN', 27, 5, 288, '2', NULL),
+(28, 'Jeunnesse', 4, 'EDUCATEUR EN ANIMATION JEUNNESSE', 28, 10, 453, '1', NULL),
+(29, 'Jeunnesse', 4, 'EDUCATEUR PRINCIPAL EN ANIMATION JEUNNESSE', 29, 11, 498, '1', NULL),
+(30, 'Jeunnesse', 4, 'CONSIELLER JEUNNESSE', 30, 13, 578, '1', NULL),
+(31, 'Jeunnesse', 4, 'CONSIELLER PRINCIPAL JEUNNESSE', 31, 14, 621, '1', NULL),
+(32, 'Sport', 4, 'EDUCATEUR EN ACTIVITES PHYSIQUES ET SPORTIVES', 32, 10, 453, '1', NULL),
+(33, 'Sport', 4, 'EDUCATEUR PRINCIPAL EN ACTIVITES PHYSIQUES ET SPORTIVES', 33, 11, 498, '1', NULL),
+(34, 'Sport', 4, 'CONSIELLER SPORTIF', 34, 13, 578, '1', NULL),
+(35, 'Sport', 4, 'CONSIELLER PRINCIPAL SPORTIF', 35, 14, 621, '1', NULL),
+(36, 'Inspecteur', 4, 'INSPECTEUR JEUNNESSE ET SPORT', 36, 15, 666, '1', NULL),
+(37, 'Econome', 4, 'ECONOME', 37, 12, 537, '1', NULL),
+(38, 'Econome', 4, 'ECONOME PRINCIPAL', 38, 14, 621, '1', NULL),
+(39, 'Econome', 4, 'ADJOIND ECONOME', 39, 9, 418, '1', NULL),
+(40, 'Econome', 4, 'ADJOIND ECONOME PRINCIPAL', 40, 10, 453, '1', NULL),
+(41, 'Econome', 4, 'AIDE SERVICE ECONOME', 41, 7, 348, '1', NULL),
+(42, 'OP', 4, 'OP1', 42, 5, 288, '4', NULL),
+(43, 'OP', 4, 'OP2', 43, 3, 240, '4', NULL),
+(44, 'OP', 4, 'OP3', 44, 1, 200, '4', NULL),
+(45, 'OP', 4, 'OPHorsCateg', 45, 6, 315, '4', NULL),
+(46, 'OP', 4, 'CHAUFFEUR NIVEAU1', 46, 3, 240, '4', NULL),
+(47, 'OP', 4, 'CHAUFFEUR NIVEAU2', 47, 2, 219, '4', NULL),
+(48, 'OP', 4, 'GARDIEN', 48, 1, 200, '4', NULL),
+(49, 'OP', 4, 'GARDIEN PRINCIPAL', 49, 2, 219, '4', NULL),
+(50, 'OP', 4, 'GARDIEN PRINCIPAL', 50, NULL, NULL, NULL, NULL),
+(51, 'OP', 4, 'GARDIEN PRINCIPAL', 51, NULL, NULL, NULL, NULL),
+(52, 'OP', 4, 'GARDIEN PRINCIPAL', 52, NULL, NULL, NULL, NULL),
+(53, 'OP', 4, 'GARDIEN PRINCIPAL', 53, NULL, NULL, NULL, NULL),
+(54, 'OP', 4, 'GARDIEN PRINCIPAL', 54, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grade`
+--
+
+CREATE TABLE `grade` (
+  `id_grade` double DEFAULT NULL COMMENT 'TRIAL',
+  `code_grade` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `nom_grade` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `bonification` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grades`
+--
+
+CREATE TABLE `grades` (
+  `id_grade` bigint(20) UNSIGNED NOT NULL,
+  `code_grade` varchar(50) NOT NULL,
+  `nom_grade` varchar(150) NOT NULL,
+  `bonification` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `grades`
+--
+
+INSERT INTO `grades` (`id_grade`, `code_grade`, `nom_grade`, `bonification`) VALUES
+(1, '10', 'Directeur', 27000),
+(2, '20', 'Chef de service', 9000),
+(3, '30', 'Chef de section', 4000),
+(4, '40', 'Regisseur', 610);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grille`
+--
+
+CREATE TABLE `grille` (
+  `niveau` double DEFAULT NULL COMMENT 'TRIAL',
+  `valeur_indiciere` double DEFAULT NULL COMMENT 'TRIAL',
+  `1` double DEFAULT NULL COMMENT 'TRIAL',
+  `2` double DEFAULT NULL COMMENT 'TRIAL',
+  `3` double DEFAULT NULL COMMENT 'TRIAL',
+  `4` double DEFAULT NULL COMMENT 'TRIAL',
+  `5` double DEFAULT NULL COMMENT 'TRIAL',
+  `6` double DEFAULT NULL COMMENT 'TRIAL',
+  `7` double DEFAULT NULL COMMENT 'TRIAL',
+  `8` double DEFAULT NULL COMMENT 'TRIAL',
+  `9` double DEFAULT NULL COMMENT 'TRIAL',
+  `10` double DEFAULT NULL COMMENT 'TRIAL',
+  `11` double DEFAULT NULL COMMENT 'TRIAL',
+  `12` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial739` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `irg`
+--
+
+CREATE TABLE `irg` (
+  `mensuel_soumis` double DEFAULT NULL COMMENT 'TRIAL',
+  `irg` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `media`
+--
+
+CREATE TABLE `media` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) DEFAULT NULL,
+  `collection_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `file_name` text NOT NULL,
+  `mime_type` varchar(255) DEFAULT NULL,
+  `disk` varchar(255) NOT NULL,
+  `conversions_disk` varchar(255) DEFAULT NULL,
+  `size` bigint(20) UNSIGNED NOT NULL,
+  `manipulations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`manipulations`)),
+  `custom_properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`custom_properties`)),
+  `generated_conversions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`generated_conversions`)),
+  `responsive_images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`responsive_images`)),
+  `order_column` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `dateDefie` date DEFAULT NULL,
+  `NumDocs` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `media`
+--
+
+INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`, `dateDefie`, `NumDocs`) VALUES
+(1, 'App\\Models\\Fonctionnaire', 1, 'fc325554-b48a-490c-89cf-4268f1cf406d', 'Doosier_initial', 'Doosier_initial-2025-09-02-1.pdf', 'certfct-mdc-fares.pdf', 'application/pdf', 'public', 'public', 278390, '[]', '{\"datedifie\":\"2025-09-02\",\"NumDocs\":\"1\"}', '[]', '[]', 1, '2025-09-24 13:44:43', '2025-09-24 13:44:43', '2025-09-02', '1'),
+(4, 'App\\Models\\Fonctionnaire', 1, '7f368982-aa81-4302-a40b-36075f2c4c49', 'photo', '20250813_142054', '20250813_142054.jpg', 'image/jpeg', 'public', 'public', 1558643, '[]', '[]', '[]', '[]', 2, '2025-09-28 11:49:08', '2025-09-28 11:49:08', NULL, NULL),
+(6, 'App\\Models\\Fonctionnaire', 13, '265a0d9b-64e6-44f2-b40c-c94ea6d3f211', 'photo', '491998424_3292556687553433_3006253476985525804_n', '491998424_3292556687553433_3006253476985525804_n.jpg', 'image/jpeg', 'public', 'public', 4739, '[]', '[]', '[]', '[]', 1, '2025-09-28 11:51:17', '2025-09-28 11:51:17', NULL, NULL),
+(7, 'App\\Models\\Fonctionnaire', 1, '1b75ae74-c818-4593-b09d-c0d284aed109', 'Decision_promotion', 'Decision_promotion-2025-09-28-111.pdf', 'عيد-الاضحئ.PDF---MJS-iDARA.pdf', 'application/pdf', 'public', 'public', 3214358, '[]', '{\"datedifie\":\"2025-09-28\",\"NumDocs\":\"111\"}', '[]', '[]', 3, '2025-09-28 12:07:30', '2025-09-28 12:07:30', '2025-09-28', '111'),
+(12, 'App\\Models\\Fonctionnaire', 2, '1ca3a3b8-ef8d-46aa-a707-af77e520f7de', 'photo', '491998424_3292556687553433_3006253476985525804_n', '491998424_3292556687553433_3006253476985525804_n.jpg', 'image/jpeg', 'public', 'public', 4739, '[]', '[]', '[]', '[]', 1, '2025-09-28 13:22:12', '2025-09-28 13:22:12', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2022_03_23_163443_create_sessions_table', 1),
+(6, '2022_05_11_154250_create_datafeeds_table', 1),
+(7, '2024_11_04_092144_create_odej_table', 1),
+(8, '2024_11_06_202652_create_corps_table', 1),
+(9, '2024_11_11_133811_create_alocation_table', 1),
+(10, '2024_11_11_133811_create_articls_table', 1),
+(11, '2024_11_11_133811_create_categoriefonctionnaire_table', 1),
+(12, '2024_11_11_133811_create_compte_table', 1),
+(13, '2024_11_11_133811_create_disqueccp_table', 1),
+(14, '2024_11_11_133811_create_etat_fonctionaire_table', 1),
+(15, '2024_11_11_133811_create_fonction_table', 1),
+(16, '2024_11_11_133811_create_fonctionnaire_table', 1),
+(17, '2024_11_11_133811_create_grade_table', 1),
+(18, '2024_11_11_133811_create_grille_table', 1),
+(19, '2024_11_11_133811_create_irg_table', 1),
+(20, '2024_11_11_133811_create_paiemensuel_5heures_table', 1),
+(21, '2024_11_11_133811_create_paiemensuel_table', 1),
+(22, '2024_11_11_133811_create_prime_rendement_table', 1),
+(23, '2024_11_11_133811_create_rappel_table', 1),
+(24, '2024_11_11_133811_create_rebrique_categorie_table', 1),
+(25, '2024_11_11_133811_create_retenus_table', 1),
+(26, '2024_11_11_133811_create_rubrique_table', 1),
+(27, '2024_11_11_133811_create_rubriquefonctionnaire_table', 1),
+(28, '2024_11_11_133811_create_service_table', 1),
+(29, '2024_11_11_133811_create_situationfamiliale_table', 1),
+(30, '2024_11_11_133811_create_typecompte_table', 1),
+(31, '2024_11_11_133811_create_utilisateur_table', 1),
+(32, '2024_11_28_143906_create_media_table', 1),
+(33, '2024_12_01_202530_rename_id_fonctionaire_to_id_fonctionnaire', 1),
+(34, '2024_12_05_231143_add_date_defie_and_num_docs_to_media_table', 1),
+(35, '2025_08_24_121536_create_services_table', 1),
+(36, '2025_08_24_135625_create_grades_table', 1),
+(37, '2025_08_25_094544_create_etablissements_table', 1),
+(38, '2025_09_23_100505_create_categoriefonctionnaires_table', 1),
+(39, '2025_09_23_124353_create_comptes_table', 1),
+(41, '2025_09_24_121102_create_etablissements_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `odej`
+--
+
+CREATE TABLE `odej` (
+  `nom` varchar(25) NOT NULL,
+  `prenom` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paiemensuel`
+--
+
+CREATE TABLE `paiemensuel` (
+  `id_paiemensuel` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `annee` double DEFAULT NULL COMMENT 'TRIAL',
+  `mois` double DEFAULT NULL COMMENT 'TRIAL',
+  `i_f_s_p` double DEFAULT NULL COMMENT 'TRIAL',
+  `indemnite_nuisance` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_resp` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_mutuelle` double DEFAULT NULL COMMENT 'TRIAL',
+  `panier` double DEFAULT NULL COMMENT 'TRIAL',
+  `transport` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_irg` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_os` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_terr_spe` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `prime_cont` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_delegation` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_iscp_con` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_docu` double DEFAULT NULL COMMENT 'TRIAL',
+  `ifc` double DEFAULT NULL COMMENT 'TRIAL',
+  `idr` double DEFAULT NULL COMMENT 'TRIAL',
+  `guiche` double DEFAULT NULL COMMENT 'TRIAL',
+  `isac_istc` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `prime_risque` double DEFAULT NULL COMMENT 'TRIAL',
+  `iep` double DEFAULT NULL COMMENT 'TRIAL',
+  `taux_iep` double DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_base` double DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_unique` double DEFAULT NULL COMMENT 'TRIAL',
+  `allocation_familiale` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenu_s_soc` double DEFAULT NULL COMMENT 'TRIAL',
+  `ind_10` double DEFAULT NULL COMMENT 'TRIAL',
+  `ifs` double DEFAULT NULL COMMENT 'TRIAL',
+  `rigisseur` double DEFAULT NULL COMMENT 'TRIAL',
+  `fils_chahid` double DEFAULT NULL COMMENT 'TRIAL',
+  `nb_jours` double DEFAULT NULL COMMENT 'TRIAL',
+  `categorie` double DEFAULT NULL COMMENT 'TRIAL',
+  `echelon` double DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_brut` double DEFAULT NULL COMMENT 'TRIAL',
+  `sal_imp` double DEFAULT NULL COMMENT 'TRIAL',
+  `net_a_payer` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paiemensuel_5heures`
+--
+
+CREATE TABLE `paiemensuel_5heures` (
+  `id_paiemensuel_5heures` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `annee` double DEFAULT NULL COMMENT 'TRIAL',
+  `mois` double DEFAULT NULL COMMENT 'TRIAL',
+  `i_f_s_p` double DEFAULT NULL COMMENT 'TRIAL',
+  `indemnite_nuisance` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `prime_resp` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_mutuelle` double DEFAULT NULL COMMENT 'TRIAL',
+  `panier` double DEFAULT NULL COMMENT 'TRIAL',
+  `transport` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_irg` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenue_os` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_terr_spe` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_cont` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_delegation` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_iscp_con` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_docu` double DEFAULT NULL COMMENT 'TRIAL',
+  `ifc` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `idr` datetime DEFAULT NULL COMMENT 'TRIAL',
+  `guiche` double DEFAULT NULL COMMENT 'TRIAL',
+  `isac_istc` double DEFAULT NULL COMMENT 'TRIAL',
+  `prime_risque` double DEFAULT NULL COMMENT 'TRIAL',
+  `iep` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_base` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_unique` double DEFAULT NULL COMMENT 'TRIAL',
+  `allocation_familiale` double DEFAULT NULL COMMENT 'TRIAL',
+  `retenu_s_soc` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `ind_10` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `ifs` double DEFAULT NULL COMMENT 'TRIAL',
+  `rigisseur` double DEFAULT NULL COMMENT 'TRIAL',
+  `diff_smig` double DEFAULT NULL COMMENT 'TRIAL',
+  `taux_horaire` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `fils_chahid` double DEFAULT NULL COMMENT 'TRIAL',
+  `nb_jours` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `categorie` double DEFAULT NULL COMMENT 'TRIAL',
+  `echelon` double DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_brut` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `sal_imp` double DEFAULT NULL COMMENT 'TRIAL',
+  `net_a_payer` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `prime-rendement`
+--
+
+CREATE TABLE `prime-rendement` (
+  `n°` int(11) NOT NULL COMMENT 'TRIAL',
+  `champ1` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ2` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ3` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ4` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ5` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ6` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ7` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ8` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ9` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ10` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ11` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ12` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ13` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ14` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rappel`
+--
+
+CREATE TABLE `rappel` (
+  `champ1` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ2` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ3` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ4` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ5` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ6` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ7` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ8` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ9` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ10` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ11` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ12` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ13` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ14` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rebrique_categorie`
+--
+
+CREATE TABLE `rebrique_categorie` (
+  `id_rebrique_categorie` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_categorie` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_rubrique` double DEFAULT NULL COMMENT 'TRIAL',
+  `id_fonctionnaire` double DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `retenus`
+--
+
+CREATE TABLE `retenus` (
+  `id_fonctionnaire` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `anneeretenu` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `moisretenu` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `nbrjour` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `trial743` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rubrique`
+--
+
+CREATE TABLE `rubrique` (
+  `id_rubrique` double DEFAULT NULL COMMENT 'TRIAL',
+  `coderubrique` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `titre` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `description` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `typevaleur` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `formule` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `valeur` double DEFAULT NULL COMMENT 'TRIAL',
+  `naturerubrique` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rubriquefonctionnaire`
+--
+
+CREATE TABLE `rubriquefonctionnaire` (
+  `id_fonctionnaire` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `salaire_de_base` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `iep` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `salaide_principal` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `nombre_echlon` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `istc` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `isac` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `isaa351` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `isaa352` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `nuis` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `irg` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `brut` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `brut_avec_retenu` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `retenu` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `typr_retenu` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `retenumutuel` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `retenuavances` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `ss` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `qped` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `doc` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `iexppedag` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `ispg` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `ifc` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `af` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `bounification` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `regi` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `poste_specifique` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `net_a_payer` decimal(19,4) DEFAULT NULL COMMENT 'TRIAL',
+  `mois` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `annee` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `service`
+--
+
+CREATE TABLE `service` (
+  `id_service` double DEFAULT NULL COMMENT 'TRIAL',
+  `code_service` int(11) DEFAULT NULL COMMENT 'TRIAL',
+  `nom_service` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `services`
+--
+
+CREATE TABLE `services` (
+  `id_service` bigint(20) UNSIGNED NOT NULL,
+  `nom_service` varchar(150) NOT NULL,
+  `code_service` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` text NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('i98KiieUkm5GIacFAa0kCs9Qq7ylEMLKp5JsvBFP', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidHp0RUppVjBOcGR2ZXUwcXRENDVEdHR6ODExVXJnWVFOODIyZWZxbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mb25jdGlvbmFpcmVzLzEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1759137804),
+('jN63ddeDho72I2fzD1vUhu71lKjTtcVWNGvHIwwC', NULL, '192.168.1.1', '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYjlnbm9Xa3ZackFRQ0lNZlFVSVExTjZFTjJXR0pWS1RMOWNiT0tFeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjA6Imh0dHA6Ly8xOTIuMTY4LjEuMTE5Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1759141124),
+('SlfkmWE6zosb2vN62AbusImBEkhgqfgOHfl9OJhl', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ0Z4WUJUdjlHUVZhWGxVa3BUQ1M0WWkxbnduRHZpY09LUmJpYmlaYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mb25jdGlvbmFpcmVzLzIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1759069332),
+('WpWYJ5Exo3EqduSpfJwMPJ7v89cGYdoCCO7dGpYa', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNmxHT0Ryc2VSc0hEY0lJdHhKTHNLeTZIeExUcE15eHN4NjhvRTVXVCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZm9uY3Rpb25haXJlcz9jb3JwPTIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1759156216);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `situationfamiliale`
+--
+
+CREATE TABLE `situationfamiliale` (
+  `id_situationfamiliale` double DEFAULT NULL COMMENT 'TRIAL',
+  `nomsituationfamiliale` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typecompte`
+--
+
+CREATE TABLE `typecompte` (
+  `id_type_compte` double DEFAULT NULL COMMENT 'TRIAL',
+  `nom_type_compte` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `two_factor_secret` text DEFAULT NULL,
+  `two_factor_recovery_codes` text DEFAULT NULL,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_photo_path` varchar(2048) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
+(1, 'bal', 'athmanbal@gmail.com', NULL, '$2y$12$EpJ3xAfpg0fEfojU87f8SuMWLRNawZ082gVu1ncGVIUdhYc0VeVaS', NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-24 11:43:47', '2025-09-24 11:43:47');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
+  `champ1` double DEFAULT NULL COMMENT 'TRIAL',
+  `champ2` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ3` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ4` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `champ5` varchar(255) DEFAULT NULL COMMENT 'TRIAL',
+  `trial746` char(1) DEFAULT NULL COMMENT 'TRIAL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='TRIAL';
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `alocation`
+--
+ALTER TABLE `alocation`
+  ADD UNIQUE KEY `primarykey` (`id_enfant`);
+
+--
+-- Index pour la table `categoriefonctionnaire`
+--
+ALTER TABLE `categoriefonctionnaire`
+  ADD UNIQUE KEY `primarykey` (`id_categoriefonctionnaire`);
+
+--
+-- Index pour la table `categoriefonctionnaires`
+--
+ALTER TABLE `categoriefonctionnaires`
+  ADD PRIMARY KEY (`Id_CategorieFonctionnaire`);
+
+--
+-- Index pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD UNIQUE KEY `primarykey` (`id_compte`);
+
+--
+-- Index pour la table `comptes`
+--
+ALTER TABLE `comptes`
+  ADD PRIMARY KEY (`Id_Compte`);
+
+--
+-- Index pour la table `corps`
+--
+ALTER TABLE `corps`
+  ADD PRIMARY KEY (`Id_Corps`);
+
+--
+-- Index pour la table `datafeeds`
+--
+ALTER TABLE `datafeeds`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `disqueccp`
+--
+ALTER TABLE `disqueccp`
+  ADD UNIQUE KEY `primarykey` (`id_disquetteccp`);
+
+--
+-- Index pour la table `etablissements`
+--
+ALTER TABLE `etablissements`
+  ADD PRIMARY KEY (`id_etablissement`);
+
+--
+-- Index pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Index pour la table `fonctionnaires`
+--
+ALTER TABLE `fonctionnaires`
+  ADD UNIQUE KEY `primarykey` (`id_fonctionnaire`),
+  ADD KEY `fonctionnaireid_sexe` (`sexe`),
+  ADD KEY `fonctionnaireid_fonction` (`id_fonction`),
+  ADD KEY `id_fonction` (`id_fonction`),
+  ADD KEY `id_fonction_2` (`id_fonction`);
+
+--
+-- Index pour la table `fonctions`
+--
+ALTER TABLE `fonctions`
+  ADD UNIQUE KEY `primarykey` (`id_fonction`),
+  ADD KEY `code fonction` (`code_fonction`),
+  ADD KEY `corpsfonction` (`id_corps`);
+
+--
+-- Index pour la table `grade`
+--
+ALTER TABLE `grade`
+  ADD UNIQUE KEY `primarykey` (`id_grade`),
+  ADD KEY `codegrade` (`code_grade`);
+
+--
+-- Index pour la table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`id_grade`),
+  ADD UNIQUE KEY `grades_code_grade_unique` (`code_grade`);
+
+--
+-- Index pour la table `grille`
+--
+ALTER TABLE `grille`
+  ADD UNIQUE KEY `idx_niveau` (`niveau`);
+
+--
+-- Index pour la table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `media_model_type_model_id_index` (`model_type`,`model_id`);
+
+--
+-- Index pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `paiemensuel`
+--
+ALTER TABLE `paiemensuel`
+  ADD UNIQUE KEY `primarykey` (`id_paiemensuel`),
+  ADD KEY `paiemensuelid_fonctionnaire` (`id_fonctionnaire`);
+
+--
+-- Index pour la table `paiemensuel_5heures`
+--
+ALTER TABLE `paiemensuel_5heures`
+  ADD UNIQUE KEY `primarykey` (`id_paiemensuel_5heures`);
+
+--
+-- Index pour la table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Index pour la table `prime-rendement`
+--
+ALTER TABLE `prime-rendement`
+  ADD UNIQUE KEY `primarykey` (`n°`);
+
+--
+-- Index pour la table `rappel`
+--
+ALTER TABLE `rappel`
+  ADD UNIQUE KEY `primarykey` (`champ1`);
+
+--
+-- Index pour la table `rebrique_categorie`
+--
+ALTER TABLE `rebrique_categorie`
+  ADD UNIQUE KEY `primarykey` (`id_rebrique_categorie`);
+
+--
+-- Index pour la table `retenus`
+--
+ALTER TABLE `retenus`
+  ADD UNIQUE KEY `primarykey` (`id_fonctionnaire`,`anneeretenu`,`moisretenu`);
+
+--
+-- Index pour la table `rubrique`
+--
+ALTER TABLE `rubrique`
+  ADD UNIQUE KEY `idx_id_rubrique` (`id_rubrique`),
+  ADD KEY `idx_coderubrique` (`coderubrique`);
+
+--
+-- Index pour la table `rubriquefonctionnaire`
+--
+ALTER TABLE `rubriquefonctionnaire`
+  ADD UNIQUE KEY `primarykey` (`id_fonctionnaire`,`mois`,`annee`),
+  ADD KEY `rubrique_fonctionnaireid_fonctionnaire` (`id_fonctionnaire`);
+
+--
+-- Index pour la table `service`
+--
+ALTER TABLE `service`
+  ADD UNIQUE KEY `primarykey` (`id_service`),
+  ADD KEY `codeservice` (`code_service`);
+
+--
+-- Index pour la table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id_service`),
+  ADD UNIQUE KEY `services_code_service_unique` (`code_service`);
+
+--
+-- Index pour la table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Index pour la table `situationfamiliale`
+--
+ALTER TABLE `situationfamiliale`
+  ADD UNIQUE KEY `primarykey` (`id_situationfamiliale`);
+
+--
+-- Index pour la table `typecompte`
+--
+ALTER TABLE `typecompte`
+  ADD UNIQUE KEY `primarykey` (`id_type_compte`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD UNIQUE KEY `primarykey` (`champ1`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `categoriefonctionnaires`
+--
+ALTER TABLE `categoriefonctionnaires`
+  MODIFY `Id_CategorieFonctionnaire` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `comptes`
+--
+ALTER TABLE `comptes`
+  MODIFY `Id_Compte` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `datafeeds`
+--
+ALTER TABLE `datafeeds`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `etablissements`
+--
+ALTER TABLE `etablissements`
+  MODIFY `id_etablissement` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `grades`
+--
+ALTER TABLE `grades`
+  MODIFY `id_grade` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT pour la table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id_service` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
