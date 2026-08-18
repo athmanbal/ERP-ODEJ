@@ -94,7 +94,7 @@
                  dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white
                  ">
 
-                <i class="fa-solid fa-user-plus fa-lg" style="color: #74C0FC;"></i>Ajouter
+                <i class="fa-solid fa-user-plus fa-lg" style="color: #74C0FC;"></i>Ajouter un fonctionaire
 
             </button>
 

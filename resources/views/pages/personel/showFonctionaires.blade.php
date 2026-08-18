@@ -58,14 +58,24 @@
                     </div>
                 </div>
         </div>
-        <div
-            class="flex items-center bg-blue-600  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg   w-1/4  py-1">
+        <div class="flex justify-between items-center m-0 b-0 w-full">
+            <div
+                class="flex items-center bg-blue-600  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg   w-1/4  py-1">
 
-            <h2 class="uppercase text-xl md:text-xl  text-white dark:text-gray-100"
-                style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
-                </i><i class="fa-solid fa-file-lines"></i>
-                <span>Fiche personel</span>
-            </h2>
+                <h2 class="uppercase text-xl md:text-xl  text-white dark:text-gray-100"
+                    style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
+                    </i><i class="fa-solid fa-file-lines"></i>
+                    <span>Fiche personel</span>
+                </h2>
+            </div>
+            <button id="showFormEditBtn"
+                class="flex right  btn m-1   bg-gray-900 h-8 w-auto  text-gray-100 hover:bg-gray-800
+                 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white
+                 ">
+
+                <i class="fa-solid fa-user-plus fa-lg" style="color: #74C0FC;"></i>:Modifier informations
+
+            </button>
 
 
         </div>
@@ -83,10 +93,8 @@
                         Modifier
                     </label>
                     @forelse($Fonct->getMedia('photo') as $mediaItem)
-                        <img class="w-full h-full object-cover"
-                             src="{{ $mediaItem->getUrl() }}"
-                             alt="{{ $mediaItem->name }}"
-                        />
+                        <img class="w-full h-full object-cover" src="{{ $mediaItem->getUrl() }}"
+                            alt="{{ $mediaItem->name }}" />
                     @empty
                         <span class="text-gray-400 text-xs flex items-center justify-center w-full h-full">Aucune
                             photo
@@ -128,7 +136,7 @@
                 </div>
                 <div>
                     <span class="text-gray-500 text-xs">Date de recrutement :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->date_recretement->format('Y-m-d')  }}</span>
+                    <span class="font-bold text-gray-800">{{ $Fonct->date_recretement->format('Y-m-d') }}</span>
                 </div>
                 <div>
                     <span class="text-gray-500 text-xs">Nombre d'échelon :</span><br>
@@ -184,13 +192,13 @@
 
             </div>
             <button id="showFormBtn"
-                class="flex items-center  btn m-0   bg-gray-900 h-8 w-24  text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                class="flex items-center  btn m-0   bg-gray-900 h-8 w-64  text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 16 16">
                     <path
                         d="M0 1a.75.75 0 0 1 .75.75V7.25H14a.75.75 0 0 1 0 1.5H8.75V14a.75.75 0 0 1-1.5 0V8.75H2a.75.75 0 0 1 0-1.5h5.25V1.75A.75.75 0 0 1 8 1z" />
                 </svg>
                 <i class="fa-solid fa-file-lines mr-2"></i>
-                Ajouter
+                Ajouter Un document
             </button>
         </div>
 
@@ -247,7 +255,7 @@
                                                 class="btn p-1 border-0 border-b-2 border-blue-700 text-blue-900 hover:bg-blue-700 hover:text-white transition-colors rounded"
                                                 title="Voir PDF">
                                                 <i class="fa-solid fa-eye"></i>
-                                           </button>
+                                            </button>
 
 
 
@@ -350,9 +358,12 @@
                                 class="mt-1  pl-8 pr-12 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="photo">Photos--صورة شمسية</option>
                                 <option value="Doosier_initial">Doosier_initial -- ملف التوظيف</option>
-                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion--  مقررات الترقية </option>
-                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon--  مقررات ترقية في الدرجة</option>
-                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين</option>
+                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات
+                                    الترقية </option>
+                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات
+                                    ترقية في الدرجة</option>
+                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين
+                                </option>
                                 <option value="مقرر التنصيب">مقرر التنصيب</option>
                                 <option value="مقرر الادماج">مقرر الادماج</option>
                                 <option value="Decision_مقرر تعيين في منصب عالي">مقرر تعيين في منصب عالي</option>
@@ -423,7 +434,66 @@
 
 
     </div>
+    <!-- ===========================================================================Formulaire d'ajout fonctionaire caché par défaut -->
 
+    <div id="sidePanelFonctionaire"
+        class="fixed inset-0 flex items-center justify-center
+            opacity-0 scale-0 pointer-events-none
+            transition-all duration-500 ease-out">
+
+
+        <div class="p-4">
+            <div class="p-4 flex justify-between items-center bg-gray-200">
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640">
+                    <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path
+                        d="M280 88C280 57.1 254.9 32 224 32C193.1 32 168 57.1 168 88C168 118.9 193.1 144 224 144C254.9 144 280 118.9 280 88zM304 300.7L341 350.6C353.8 333.1 369.5 317.9 387.3 305.6L331.1 229.9C306 196 266.3 176 224 176C181.7 176 142 196 116.8 229.9L46.3 324.9C35.8 339.1 38.7 359.1 52.9 369.7C67.1 380.3 87.1 377.3 97.7 363.1L144 300.7L144 576C144 593.7 158.3 608 176 608C193.7 608 208 593.7 208 576L208 416C208 407.2 215.2 400 224 400C232.8 400 240 407.2 240 416L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 300.7zM496 608C575.5 608 640 543.5 640 464C640 384.5 575.5 320 496 320C416.5 320 352 384.5 352 464C352 543.5 416.5 608 496 608zM512 400L512 448L560 448C568.8 448 576 455.2 576 464C576 472.8 568.8 480 560 480L512 480L512 528C512 536.8 504.8 544 496 544C487.2 544 480 536.8 480 528L480 480L432 480C423.2 480 416 472.8 416 464C416 455.2 423.2 448 432 448L480 448L480 400C480 391.2 487.2 384 496 384C504.8 384 512 391.2 512 400z" />
+                </svg>
+                <h2 class="uppercase text-xl md:text-xl  text-blue-900 dark:text-gray-600"
+                    style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
+                    Mise à jour de
+                    <label
+                        class="uppercase text-2xl md:text-3xl border-solide border-gray-900 border-b-2  text-blue-900 dark:text-gray-400  "
+                        style="text-shadow: 1px 2px 4px rgba(24, 7, 132, 0.5);">
+                        {{ $Fonct->nom_fonctionnaire }}
+                        {{ $Fonct->prenom_fonctionnaire }}
+                    </label>
+                </h2>
+                <button id="closeFormBtnEditFonctionnaire"
+                    class="text-gray-600 text-4xl hover:text-red-600">&times;</button>
+            </div>
+
+            <div class="  shadow-lg  bg-white">
+
+                <form action="{{ route('update.fonctionaires', $Fonct->id_fonctionnaire) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- ajouter une formulaire de fonctionnaire  -->
+
+                    @include('pages.personel.Modifier_Fonctionnaire')
+
+
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ================================================= Boîte de confirmation suppressin personnalisée d'un fonctionaire -->
+    <div id="customConfirmFonctionaire"
+        class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p class="text-lg text-red-400 font-semibold mb-4">Êtes-vous sûr de
+                vouloir supprimer ce fonctionnaire ?</p>
+            <div class="flex justify-center gap-4">
+                <button id="confirmYes" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Oui</button>
+                <button id="confirmNo" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Annuler</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================================================================================== apercu PDF -->
     <script>
@@ -466,7 +536,7 @@
             });
         });
     </script>
-    <!-- =================================================================== Script pour afficher/masquer le formulaire -->
+    <!-- =================================================================== Script pour afficher/masquer le formulaire ajouter docs -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let showFormBtn = document.getElementById("showFormBtn");
@@ -482,6 +552,36 @@
             closeFormBtn.addEventListener("click", function() {
                 sidePanel.classList.add("translate-x-full");
             });
+        });
+    </script>
+    <!-- =================================================================== Script pour afficher/masquer le formulaire Modifier information fonctionaire -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let showFormEditBtn = document.getElementById("showFormEditBtn");
+            let closeFormBtn = document.getElementById("closeFormBtnEditFonctionnaire");
+            let sidePanelFonctionaire = document.getElementById("sidePanelFonctionaire");
+
+            if (showFormEditBtn && closeFormBtn && sidePanelFonctionaire) {
+                // Afficher au milieu avec effet zoom
+                showFormEditBtn.addEventListener("click", function() {
+                    sidePanelFonctionaire.classList.remove("opacity-0", "scale-0", "pointer-events-none");
+                    sidePanelFonctionaire.classList.add("opacity-100", "scale-100");
+                });
+
+                // Cacher avec effet zoom inverse
+                closeFormBtn.addEventListener("click", function() {
+                    sidePanelFonctionaire.classList.remove("opacity-100", "scale-100");
+                    sidePanelFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
+                });
+
+                // Fermer avec Escape
+                document.addEventListener("keydown", function(e) {
+                    if (e.key === "Escape") {
+                        sidePanelFonctionaire.classList.remove("opacity-100", "scale-100");
+                        sidePanelFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
+                    }
+                });
+            }
         });
     </script>
     <!-- =================================================================== confirmation supprission file -->

@@ -42,6 +42,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/personel', [PersonnelController::class, 'index'])->name('personel');
     Route::get('/fonctionaires', [PersonnelController::class, 'liste'])->name('fonctionaires');
     Route::post('/fonctionaires', [PersonnelController::class, 'store'])->name('store.fonctionaires');
+    Route::put('/fonctionnaires/{id_fonctionnaire}', [PersonnelController::class, 'update'])->name('update.fonctionaires');
+
+
 
 
     Route::delete('/fonctionaires/{id_fonctionnaire}', [PersonnelController::class, 'deleteFonctionaie'])->name('delete.fonctionaires');

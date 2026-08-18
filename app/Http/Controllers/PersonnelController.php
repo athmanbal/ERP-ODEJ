@@ -88,7 +88,12 @@ class PersonnelController extends Controller
         // Récupérer toutes les CORPS
 
         $corps = Corps::all();
+        $comptes = Compte::all();
+        $services = Service::all();
+        $grades = Grade::all();
+        $fonctions = Fonction::all();
         $etablisssemnts = Etablissement::all();
+        $categoriefonctionnaires = Categoriefonctionnaire::all();
 
         //// Récupérer l'identifiant de fonctionnaire selectionée
 
@@ -104,7 +109,16 @@ class PersonnelController extends Controller
             ->get();
 
 
-        return view('pages/personel/showFonctionaires', compact('Fonctionnaire'));
+        return view('pages/personel/showFonctionaires', compact(
+                        'corps',
+                        'comptes',
+                        'Fonctionnaire',
+                        'services',
+                        'grades',
+                        'fonctions',
+                        'etablisssemnts',
+                        'categoriefonctionnaires'
+            ));
     }
 
     // ----------------------------------------------------------------------------------------------Modifier photo de fonctionaire
@@ -130,9 +144,6 @@ class PersonnelController extends Controller
 public function store(Request $request)
 {
 
-    
-
-   
     $validated = $request->validate([
         'nom_fonctionnaire'    => 'required|string|max:255',
         'prenom_fonctionnaire' => 'required|string|max:255',
@@ -152,7 +163,7 @@ public function store(Request $request)
         'id_compte'            => 'nullable|integer|exists:comptes,Id_Compte',
         'id_etablissement'     => 'required|integer|exists:etablissements,id_etablissement',
     ]);
-    
+
 
     $fonctionnaire = DB::transaction(function () use ($validated) {
 
@@ -177,7 +188,7 @@ public function store(Request $request)
             'telephone'                  => $validated['Telephone'],
             'id_grade'                   => $validated['id_grade'],
             'id_fonction'                => $validated['id_fonction'],
-            'id_echelon'                 => $validated['id_echelon'],            
+            'id_echelon'                 => $validated['id_echelon'],
             'id_service'                 => $validated['id_service'] ?? null,
             'id_categoriefonctionnaire'  => $validated['id_categorie'],
             'id_compte'                  => $validated['id_compte'] ?? null,
@@ -189,7 +200,81 @@ public function store(Request $request)
         return redirect()
             ->route('fonctionaires')
             ->with('message', 'Fonctionnaire ajouté avec succès.');
+
+
+
+
     }
+    // -------------------------------------------------update---------------------------------------------
+// Modification de fonctionnaire
+public function update(Request $request, $id_fonctionnaire)
+{
+    $employee = Fonctionnaire::findOrFail($id_fonctionnaire);
+
+    $request->merge([
+        'id_service' => $request->id_service ?: null,
+        'id_compte'  => $request->id_compte ?: null,
+        'dateSortie' => $request->dateSortie ?: null,
+    ]);
+
+    $validated = $request->validate([
+        'nom_fonctionnaire'    => 'required|string|max:255',
+        'prenom_fonctionnaire' => 'required|string|max:255',
+        'dateNaissance'        => 'required|date',
+        'dateRecrutement'      => 'required|date',
+        'dateSortie'           => 'nullable|date|after_or_equal:dateRecrutement',
+        'sexe'                 => 'required|in:M,F',
+        'NSS'                  => 'nullable|digits:11|unique:fonctionnaires,n_ss,' . $id_fonctionnaire . ',id_fonctionnaire',
+        'NombreEnfants'        => 'nullable|integer|min:0',
+        'Telephone'            => 'nullable|regex:/^0\d{9}$/',
+
+        'id_grade'             => 'nullable|integer|exists:grades,id_grade',
+        'id_fonction'          => 'required|integer|exists:fonctions,id_fonction',
+        'id_service'           => 'nullable|integer|exists:services,id_service',
+        'id_categorie'         => 'required|integer|exists:categoriefonctionnaires,Id_CategorieFonctionnaire',
+        'id_compte'            => 'nullable|integer|exists:comptes,Id_Compte',
+        'id_etablissement'     => 'required|integer|exists:etablissements,id_etablissement',
+        'id_echelon'           => 'nullable|integer|min:0',
+    ]);
+
+    $employee->update([
+        'nom_fonctionnaire'          => $validated['nom_fonctionnaire'],
+        'prenom_fonctionnaire'       => $validated['prenom_fonctionnaire'],
+        'date_naissance'             => $validated['dateNaissance'],
+        'date_recretement'           => $validated['dateRecrutement'],
+        'date_sortie'                => $validated['dateSortie'] ?? null,
+        'sexe'                       => $validated['sexe'],
+        'n_ss'                       => $validated['NSS'] ?? null,
+        'nb_enfant'                  => $validated['NombreEnfants'] ?? 0,
+        'telephone'                  => $validated['Telephone'] ?? null,
+        'id_grade'                   => $validated['id_grade'] ?? null,
+        'id_fonction'                => $validated['id_fonction'],
+        'id_service'                 => $validated['id_service'] ?? null,
+        'id_categoriefonctionnaire'  => $validated['id_categorie'],
+        'id_compte'                  => $validated['id_compte'] ?? null,
+        'id_etablissement'           => $validated['id_etablissement'],
+        'id_echelon'                 => $validated['id_echelon'] ?? null,
+    ]);
+
+    return redirect()
+        ->back()
+        ->with('message', 'Fonctionnaire modifié avec succès.');
+
+        /*
+       return view('pages/personel/showFonctionaires', compact(
+                        'corps',
+            'comptes',
+            'Fonctionnaire',
+            'services',
+            'grades',
+            'fonctions',
+            'etablisssemnts',
+            'categoriefonctionnaires'
+            ));
+
+*/
+        }
+
     // ----------------------------------------------------------------------------------------------SUPPRESSION de fonctionaire
     public function deleteFonctionaie($id_fonctionnaire)
     {

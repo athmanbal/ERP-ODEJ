@@ -1,1 +1,4 @@
 *.sqlite*
+git token.txt
+*.sql
+*.txt
