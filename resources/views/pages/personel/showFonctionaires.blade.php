@@ -116,7 +116,7 @@
 
                 <!-- Matricule -->
                 <span class="mt-1 px-2 py-1 bg-blue-700 text-white text-xs rounded font-bold">
-                    {{ $Fonct->matricule_fonctionnaire }}
+                    {{ $Fonct->id_fonctionnaire }}
                 </span>
             </div>
 
@@ -158,11 +158,17 @@
         hover:border-solid hover:border-gray-100 hover:border-2">
             <ul class="flex flex-row items-center justify-center gap-0"
                 style="text-shadow: 2px 2px 4px rgba(24, 7, 132, 0.5);">
-                <li class="flex-1 ">
-                    <a href="#"
+
+
+                <li class="flex-1">
+                    <a href="{{ route('fonctionnaire.attestation', $Fonct->id_fonctionnaire ) }}" target="_blank"
                         class="block text-center px-6 py-3 transition-all duration-200 font-medium text-blue-800 border-r border-gray-200 last:border-r-0 hover:bg-blue-100 hover:text-blue-900 rounded-t-lg">
-                        Attestation de travail </i><i class="fa-solid fa-file-lines"></i></a>
+                        Attestation de travail <i class="fa-solid fa-file-lines"></i>
+                    </a>
                 </li>
+
+
+
                 <li class="flex-1">
                     <a href="#"
                         class="block text-center px-6 py-3 transition-all duration-200 font-medium text-blue-800 border-r border-gray-200 last:border-r-0 hover:bg-blue-100 hover:text-blue-900 rounded-t-lg">

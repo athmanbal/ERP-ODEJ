@@ -7,12 +7,14 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^3.0",
+        "carlos-meneses/laravel-mpdf": "^1.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.2",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
+        "mpdf/mpdf": "^6.1",
         "spatie/laravel-medialibrary": "^11.11",
         "unisharp/laravel-filemanager": "^2.9"
     },
