@@ -15,6 +15,7 @@ use App\Models\Service;
 use App\Models\Grade;
 use App\Models\Categoriefonctionnaire;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -562,10 +563,28 @@ public function update(Request $request, $id_fonctionnaire)
         $employee = Fonctionnaire::find($id_fonctionnaire);
 
 
-        $request->validate([
-            'file' => 'required|file|mimes:jpeg,png,pdf|max:10240',  // Exemple de validation
-            'file-colllectios' => 'required|string|in:Decision_échelon,photo,Decision_promotion,Pévé,Doosier_initial',  // Exemple de validation
-        ]);
+
+
+        $validated = $request->validate([
+    'file-colllectios' => [
+        'required',
+        Rule::in([
+            'photo',
+            'Doosier_initial',
+            'Decision_promotion--  مقررات الترقية ',
+            'Decision_échelon--  مقررات ترقية في الدرجة',
+            "Pévé d'instalation محضر التعيين",
+            'مقرر التنصيب',
+            'مقرر الادماج',
+            'Decision_مقرر تعيين في منصب عالي',
+            'Decision_قرار التحويل',
+            'Decision_مقرر الوكيل الداخيل',
+            'Decision_تثمين الخبرة',
+            'Decision_Maladies-- العطل المرضية',
+            'Pévé',
+        ]),
+    ],
+]);
 
         $fileCollection = $request->input('file-colllectios');
         $dateDefie = $request->input('dateDefie');

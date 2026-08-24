@@ -364,12 +364,9 @@
                                 class="mt-1  pl-8 pr-12 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="photo">Photos--صورة شمسية</option>
                                 <option value="Doosier_initial">Doosier_initial -- ملف التوظيف</option>
-                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات
-                                    الترقية </option>
-                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات
-                                    ترقية في الدرجة</option>
-                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين
-                                </option>
+                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات                                    الترقية </option>
+                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات                                    ترقية في الدرجة</option>
+                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين                                </option>
                                 <option value="مقرر التنصيب">مقرر التنصيب</option>
                                 <option value="مقرر الادماج">مقرر الادماج</option>
                                 <option value="Decision_مقرر تعيين في منصب عالي">مقرر تعيين في منصب عالي</option>
