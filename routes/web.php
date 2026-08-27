@@ -12,6 +12,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FonctionController;
 use KitLoong\MigrationsGenerator\Schema\Models\Index;
 use UniSharp\LaravelFilemanager\Lfm;
 
@@ -51,14 +52,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/fonctionaires/{id_fonctionnaire}', [PersonnelController::class, 'deleteFonctionaie'])->name('delete.fonctionaires');
 
     Route::get('/fonctionaires/{id_fonctionaire}', [PersonnelController::class, 'show'])->name('fonctionaires.show');
-   // Route::delete('/fonctionaires/{id_fonctionaire}/{id_media}', [PersonnelController::class, 'deleteMedia'])->name('suppMedia');
-   Route::put('/fonctionnaires/{id}/photo', [PersonnelController::class, 'updatePhoto'])
-    ->name('fonctionnaire.updatePhoto');
+    // Route::delete('/fonctionaires/{id_fonctionaire}/{id_media}', [PersonnelController::class, 'deleteMedia'])->name('suppMedia');
+    Route::put('/fonctionnaires/{id}/photo', [PersonnelController::class, 'updatePhoto'])
+        ->name('fonctionnaire.updatePhoto');
 
     Route::delete('/fonctionaires/{id_fonctionnaire}/media/{id}', [PersonnelController::class, 'deleteMedia'])->name('fonctionnaires.deleteMedia');
 
 
-
+    //------------------------------------------------------------------------- Route for the getting the data FONCTION
+    Route::get('/fonctions', [FonctionController::class, 'index'])->name('fonctions');
+    Route::post('/fonctions', [FonctionController::class, 'store'])->name('store.fonctions');
+    Route::get('/fonctions/{id_fonction}/edit', [FonctionController::class, 'edit'])->name('fonctions.edit');
+    Route::put('/fonctions/{id_fonction}', [FonctionController::class, 'update'])->name('fonctions.update');
+    Route::delete('/fonctions/{id_fonction}', [FonctionController::class, 'destroy'])->name('fonctions.destroy');
 
 
     //------------------------------------------------------------------------- Route for the LARAVEL file manager PERSONEL
@@ -70,14 +76,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/employees/stream/{id}/{filename}', [PersonnelController::class, 'streamFile'])->name('pdf.stream');
 
 
-//----------------------------------------------------------------------------------Route pour services
-// routes/web.php
-Route::resource('/services', ServiceController::class);
+    //----------------------------------------------------------------------------------Route pour services
+    // routes/web.php
+    Route::resource('/services', ServiceController::class);
 
 
-//----------------------------------------------------------------------------------Route pour Etablissements
-// routes/web.php
-Route::resource('etablissements', EtablissementController::class);
+    //----------------------------------------------------------------------------------Route pour Etablissements
+    // routes/web.php
+    Route::resource('etablissements', EtablissementController::class);
 
 
 
