@@ -13,8 +13,10 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\FonctionController;
+use App\Http\Controllers\GradeController;
 use KitLoong\MigrationsGenerator\Schema\Models\Index;
 use UniSharp\LaravelFilemanager\Lfm;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +67,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/fonctions/{id_fonction}/edit', [FonctionController::class, 'edit'])->name('fonctions.edit');
     Route::put('/fonctions/{id_fonction}', [FonctionController::class, 'update'])->name('fonctions.update');
     Route::delete('/fonctions/{id_fonction}', [FonctionController::class, 'destroy'])->name('fonctions.destroy');
+
+
+
+    //------------------------------------------------------------------------- Route for the getting the data GRADES
+
+Route::get('/grades', [GradeController::class, 'index'])->name('grades');
+Route::post('/grades', [GradeController::class, 'store'])->name('store.grades');
+Route::get('/grades/{id_grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
+Route::put('/grades/{id_grade}', [GradeController::class, 'update'])->name('grades.update');
+Route::delete('/grades/{id_grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
 
 
     //------------------------------------------------------------------------- Route for the LARAVEL file manager PERSONEL

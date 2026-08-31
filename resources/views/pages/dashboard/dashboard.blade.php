@@ -99,7 +99,7 @@
                 class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1  hover:bg-blue-50  hover:shadow-2xl hover:bg-blue-200 uppercase relative">
 
 
-                <a href="#" class="h-full flex items-center justify-center ">
+                <a href="{{ route('grades') }}" class="h-full flex items-center justify-center ">
                     <svg class="absolute  left-0  fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
                         height="48" viewBox="0 0 24 24">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />

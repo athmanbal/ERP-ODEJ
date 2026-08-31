@@ -7,64 +7,58 @@ use Illuminate\Http\Request;
 
 class GradeController extends Controller
 {
-    /**
-     * Affiche la liste des grades.
-     */
+    // -------------------------------------------------index---------------------------------------------
     public function index()
     {
         $grades = Grade::all();
-        return view('grades.index', compact('grades'));
+
+        return view('pages.grade.grades', compact('grades'));
     }
 
-    /**
-     * Affiche le formulaire de création.
-     */
-    public function create()
-    {
-        return view('grades.create');
-    }
-
-    /**
-     * Enregistre un nouveau grade.
-     */
+    // -------------------------------------------------store---------------------------------------------
     public function store(Request $request)
     {
-        $request->validate([
-            'code_grade' => 'required|unique:grades,code_grade',
-            'nom_grade' => 'required|string|max:150',
-            'bonification' => 'nullable|integer'
+        $validated = $request->validate([
+            'code_grade'    => 'required|string|max:50|unique:grades,code_grade',
+            'nom_grade'     => 'required|string|max:255',
+            'bonification'  => 'nullable|numeric|min:0',
         ]);
 
-        Grade::create($request->all());
+        Grade::create($validated);
 
-        return redirect()->route('grades.index')->with('success', 'Grade ajouté avec succès');
+        return redirect()->route('grades')->with('message', 'Grade ajouté avec succès.');
     }
 
-    /**
-     * Affiche un grade spécifique.
-     */
-    public function show(Grade $grade)
+    // -------------------------------------------------edit---------------------------------------------
+    public function edit($id_grade)
     {
-        return view('grades.show', compact('grade'));
+        $grade = Grade::findOrFail($id_grade);
+
+        return view('pages.grade.Modefier_Grade', compact('grade'));
     }
 
-    /**
-     * Affiche le formulaire d’édition.
-     */
-    public function edit(Grade $grade)
+    // -------------------------------------------------update---------------------------------------------
+    public function update(Request $request, $id_grade)
     {
-        return view('grades.edit', compact('grade'));
-    }
+        $grade = Grade::findOrFail($id_grade);
 
-    /**
-     * Met à jour un grade.
-     */
-    public function update(Request $request, Grade $grade)
-    {
-        $request->validate([
-            'code_grade' => 'required|unique:grades,code_grade,' . $grade->id_grade . ',id_grade',
-            'nom_grade' => 'required|string|max:150',
-            'bonification' => 'nullable|integer'
+        $validated = $request->validate([
+            'code_grade'    => 'required|string|max:50|unique:grades,code_grade,' . $id_grade . ',id_grade',
+            'nom_grade'     => 'required|string|max:255',
+            'bonification'  => 'nullable|numeric|min:0',
         ]);
 
-        $grad
+        $grade->update($validated);
+
+        return redirect()->route('grades')->with('message', 'Grade modifié avec succès.');
+    }
+
+    // -------------------------------------------------destroy---------------------------------------------
+    public function destroy($id_grade)
+    {
+        $grade = Grade::findOrFail($id_grade);
+        $grade->delete();
+
+        return redirect()->route('grades')->with('message', 'Grade supprimé avec succès.');
+    }
+}
