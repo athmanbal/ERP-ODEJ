@@ -443,12 +443,12 @@
      DOCUMENTS ADMINISTRATIFS
 ========================================================= -->
 
-<nav class="mt-3 mb-6
+<nav class="mt-1 mb-4
             w-full
-            bg-blue-200
+            bg-white
             border border-gray-200
             rounded-2xl
-            p-2
+            p-1
             shadow-sm
             hover:shadow-md
             hover:border-blue-200
@@ -471,7 +471,7 @@
                        flex items-center
                        justify-center
                        gap-3
-                       px-4 py-3
+                       px-1 py-1
                        rounded-xl
                        text-blue-800
                        font-medium
@@ -519,7 +519,7 @@
                        flex items-center
                        justify-center
                        gap-3
-                       px-4 py-3
+                       px-1 py-1
                        rounded-xl
                        text-blue-800
                        font-medium
@@ -567,7 +567,7 @@
                        flex items-center
                        justify-center
                        gap-3
-                       px-4 py-3
+                       px-1 py-1
                        rounded-xl
                        text-blue-800
                        font-medium
