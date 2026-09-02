@@ -689,7 +689,7 @@
                                inline-flex items-center gap-2
                                px-4 py-2.5
                                rounded-xl
-                               border
+                               border-2
                                border-gray-200
                                bg-white
                                text-gray-600
