@@ -80,107 +80,536 @@
 
         </div>
 
-        <div class="grid grid-cols-12 gap-2 bg-white  shadow-md hover:shadow-lg transition-all rounded-lg  w-full">
-            <!-- Photo -->
-            <div class="col-span-1 flex flex-col items-center justify-center">
-                <!-- bloc photo de fonctionnaire -->
-                <div class="relative group rounded-md overflow-hidden w-20 h-20 bg-gray-50">
-                    <label for="photoInput_{{ $Fonct->id_fonctionnaire }}"
-                        class="absolute inset-0 flex items-center justify-center
-                                  bg-black/50 text-white text-sm font-semibold
-                                  opacity-0 group-hover:opacity-100 transition duration-300
-                                  cursor-pointer z-10">
-                        Modifier
-                    </label>
-                    @forelse($Fonct->getMedia('photo') as $mediaItem)
-                        <img class="w-full h-full object-cover" src="{{ $mediaItem->getUrl() }}"
-                            alt="{{ $mediaItem->name }}" />
-                    @empty
-                        <span class="text-gray-400 text-xs flex items-center justify-center w-full h-full">Aucune
-                            photo
-                        </span>
-                    @endforelse
 
-                    <!-- Overlay au survol -->
+<!-- =========================================================
+     FICHE FONCTIONNAIRE
+========================================================= -->
+
+<div class="group relative overflow-hidden
+            grid grid-cols-12
+            gap-4
+            w-full
+            bg-white
+            border border-gray-200
+            rounded-2xl
+            p-5
+            shadow-sm
+            hover:shadow-xl
+            hover:-translate-y-1
+            hover:border-blue-700
+            transition-all duration-300">
 
 
-                    <!-- Input file caché -->
-                    <form action="{{ route('fonctionnaire.updatePhoto', $Fonct->id_fonctionnaire) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <input type="file" name="photo" id="photoInput_{{ $Fonct->id_fonctionnaire }}"
-                            class="hidden" onchange="this.form.submit()">
-                    </form>
-                </div>
+    <!-- =====================================================
+         PHOTO + MATRICULE
+    ====================================================== -->
 
-                <!-- Matricule -->
-                <span class="mt-1 px-2 py-1 bg-blue-700 text-white text-xs rounded font-bold">
-                    {{ $Fonct->id_fonctionnaire }}
+    <div class="col-span-12 md:col-span-2
+                flex flex-col items-center justify-center">
+
+        <!-- Photo -->
+        <div class="relative group/photo
+                    w-46 h-64
+                    rounded-2xl
+                    overflow-hidden
+                    bg-gray-100
+                    border-2 border-gray-200
+                    shadow-sm
+                    hover:border-blue-600
+                    transition-all duration-300">
+
+            <!-- Overlay -->
+            <label
+                for="photoInput_{{ $Fonct->id_fonctionnaire }}"
+                class="absolute inset-0
+                       flex items-center justify-center
+                       bg-blue-900/70
+                       text-white text-xs font-semibold
+                       opacity-0
+                       group-hover/photo:opacity-100
+                       transition-all duration-300
+                       cursor-pointer
+                       z-10">
+
+                <span class="flex flex-col items-center gap-1">
+
+                    <i class="fa-solid fa-camera text-lg"></i>
+
+                    Modifier
+
                 </span>
-            </div>
+
+            </label>
 
 
-            <div class="col-span-10 grid grid-cols-3 gap-2 text-sm">
-                <div class="col-span-3 mb-1 pl-24 my-4">
-                    <span
-                        class="uppercase text-base  text-black px-2 py-2  rounded font-bold">{{ $Fonct->nom_fonction }}</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs">Date de naissance :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->date_naissance->format('Y-m-d') }}</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs">Téléphone :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->telephone }}</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs">Date de recrutement :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->date_recretement->format('Y-m-d') }}</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs">Nombre d'échelon :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->id_echelon }}</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs">Établissement :</span><br>
-                    <span class="font-bold text-gray-800">{{ $Fonct->nom_etablissement }}</span>
-                </div>
-            </div>
+            <!-- Image -->
+            @forelse($Fonct->getMedia('photo') as $mediaItem)
 
+                <img
+                    class="w-full h-full object-cover"
+                    src="{{ $mediaItem->getUrl() }}"
+                    alt="{{ $mediaItem->name }}"
+                />
+
+            @empty
+
+                <div class="w-full h-full
+                            flex flex-col
+                            items-center justify-center
+                            text-gray-400">
+
+                    <i class="fa-solid fa-user text-3xl mb-1"></i>
+
+                    <span class="text-xs">
+                        Aucune photo
+                    </span>
+
+                </div>
+
+            @endforelse
+
+
+            <!-- Upload -->
+            <form
+                action="{{ route('fonctionnaire.updatePhoto', $Fonct->id_fonctionnaire) }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+                @csrf
+                @method('PUT')
+
+                <input
+                    type="file"
+                    name="photo"
+                    id="photoInput_{{ $Fonct->id_fonctionnaire }}"
+                    class="hidden"
+                    onchange="this.form.submit()"
+                >
+
+            </form>
 
         </div>
-        <!-------------------------------------------------------------Listes des fonctionnaires grouper par corps -->
-
-        <!-- Menu horizontal des documents administratifs -->
-        <nav
-            class="w-full bg-white border-t border-gray-300 shadow-sm mb-6  rounded-lg
-        hover:border-solid hover:border-gray-100 hover:border-2">
-            <ul class="flex flex-row items-center justify-center gap-0"
-                style="text-shadow: 2px 2px 4px rgba(24, 7, 132, 0.5);">
 
 
-                <li class="flex-1">
-                    <a href="{{ route('fonctionnaire.attestation', $Fonct->id_fonctionnaire ) }}" target="_blank"
-                        class="block text-center px-6 py-3 transition-all duration-200 font-medium text-blue-800 border-r border-gray-200 last:border-r-0 hover:bg-blue-100 hover:text-blue-900 rounded-t-lg">
-                        Attestation de travail <i class="fa-solid fa-file-lines"></i>
-                    </a>
-                </li>
+        <!-- Matricule -->
+        <span class="mt-3
+                     inline-flex
+                     items-center
+                     gap-1
+                     px-3 py-1
+                     bg-blue-700
+                     text-white
+                     text-xs
+                     rounded-full
+                     font-bold
+                     shadow-sm">
 
 
 
-                <li class="flex-1">
-                    <a href="#"
-                        class="block text-center px-6 py-3 transition-all duration-200 font-medium text-blue-800 border-r border-gray-200 last:border-r-0 hover:bg-blue-100 hover:text-blue-900 rounded-t-lg">
-                        Congé <i class="fa-solid fa-file-lines"></i></a>
-                </li>
-                <li class="flex-1">
-                    <a href="#"
-                        class="block text-center px-6 py-3 transition-all duration-200 font-medium text-blue-800 hover:bg-blue-100 hover:text-blue-900 rounded-t-lg">
-                        Carte professionnelle <i class="fa-solid fa-file-lines"></i></a>
-                </li>
-            </ul>
-        </nav>
+            {{ $Fonct->id_fonctionnaire }}
+
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         INFORMATIONS
+    ====================================================== -->
+
+    <div class="col-span-12 md:col-span-10">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row
+                    md:items-center
+                    md:justify-between
+                    gap-2
+                    pb-4
+                    mb-4
+                    border-b border-gray-100">
+
+
+            <!-- Nom / Fonction -->
+            <div>
+
+                <span class="text-xs
+                             uppercase
+                             tracking-wider
+                             text-blue-600
+                             font-semibold">
+
+                    Fonctionnaire
+
+                </span>
+
+                <h2 class="mt-1
+                           text-xl md:text-2xl
+                           uppercase
+                           font-bold
+                           text-blue-950
+                           group-hover:text-blue-700
+                           transition-colors duration-300">
+
+                    {{ $Fonct->nom_fonction }}
+
+                </h2>
+
+            </div>
+
+
+            <!-- Status -->
+            <span class="inline-flex
+                         items-center
+                         gap-2
+                         w-fit
+                         px-3 py-1
+                         rounded-full
+                         bg-green-50
+                         text-green-700
+                         text-xs
+                         font-semibold">
+
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+
+                Actif
+
+            </span>
+
+        </div>
+
+
+
+        <!-- Informations Grid -->
+        <div class="grid grid-cols-1
+                    sm:grid-cols-2
+                    lg:grid-cols-3
+                    gap-3">
+
+
+            <!-- Date naissance -->
+            <div class="p-3
+                        rounded-xl
+                        bg-gray-50
+                        border border-gray-100
+                        hover:bg-blue-50
+                        hover:border-blue-100
+                        transition-all">
+
+                <span class="flex items-center gap-2
+                             text-gray-500 text-xs">
+
+                    <i class="fa-solid fa-cake-candles text-blue-500"></i>
+
+                    Date de naissance
+
+                </span>
+
+                <span class="block mt-1
+                             font-semibold
+                             text-gray-800">
+
+                    {{ $Fonct->date_naissance->format('Y-m-d') }}
+
+                </span>
+
+            </div>
+
+
+            <!-- Téléphone -->
+            <div class="p-3
+                        rounded-xl
+                        bg-gray-50
+                        border border-gray-100
+                        hover:bg-blue-50
+                        hover:border-blue-100
+                        transition-all">
+
+                <span class="flex items-center gap-2
+                             text-gray-500 text-xs">
+
+                    <i class="fa-solid fa-phone text-blue-500"></i>
+
+                    Téléphone
+
+                </span>
+
+                <span class="block mt-1
+                             font-semibold
+                             text-gray-800">
+
+                    {{ $Fonct->telephone }}
+
+                </span>
+
+            </div>
+
+
+            <!-- Recrutement -->
+            <div class="p-3
+                        rounded-xl
+                        bg-gray-50
+                        border border-gray-100
+                        hover:bg-blue-50
+                        hover:border-blue-100
+                        transition-all">
+
+                <span class="flex items-center gap-2
+                             text-gray-500 text-xs">
+
+                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+
+                    Date de recrutement
+
+                </span>
+
+                <span class="block mt-1
+                             font-semibold
+                             text-gray-800">
+
+                    {{ $Fonct->date_recretement->format('Y-m-d') }}
+
+                </span>
+
+            </div>
+
+
+            <!-- Échelon -->
+            <div class="p-3
+                        rounded-xl
+                        bg-gray-50
+                        border border-gray-100
+                        hover:bg-blue-50
+                        hover:border-blue-100
+                        transition-all">
+
+                <span class="flex items-center gap-2
+                             text-gray-500 text-xs">
+
+                    <i class="fa-solid fa-layer-group text-blue-500"></i>
+
+                    Nombre d'échelon
+
+                </span>
+
+                <span class="block mt-1
+                             font-semibold
+                             text-gray-800">
+
+                    {{ $Fonct->id_echelon }}
+
+                </span>
+
+            </div>
+
+
+            <!-- Établissement -->
+            <div class="sm:col-span-2 p-3
+                        rounded-xl
+                        bg-gray-50
+                        border border-gray-100
+                        hover:bg-blue-50
+                        hover:border-blue-100
+                        transition-all">
+
+                <span class="flex items-center gap-2
+                             text-gray-500 text-xs">
+
+                    <i class="fa-solid fa-building text-blue-500"></i>
+
+                    Établissement
+
+                </span>
+
+                <span class="block mt-1
+                             font-semibold
+                             text-gray-800">
+
+                    {{ $Fonct->nom_etablissement }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     DOCUMENTS ADMINISTRATIFS
+========================================================= -->
+
+<nav class="mt-3 mb-6
+            w-full
+            bg-white
+            border border-gray-200
+            rounded-2xl
+            p-2
+            shadow-sm
+            hover:shadow-md
+            hover:border-blue-200
+            transition-all duration-300">
+
+
+    <ul class="grid
+               grid-cols-1
+               md:grid-cols-3
+               gap-2">
+
+
+        <!-- Attestation -->
+        <li>
+
+            <a
+                href="{{ route('fonctionnaire.attestation', $Fonct->id_fonctionnaire) }}"
+                target="_blank"
+                class="group/doc
+                       flex items-center
+                       justify-center
+                       gap-3
+                       px-4 py-3
+                       rounded-xl
+                       text-blue-800
+                       font-medium
+                       text-sm
+                       bg-blue-50
+                       hover:bg-blue-700
+                       hover:text-white
+                       transition-all duration-300">
+
+                <span class="w-9 h-9
+                             flex items-center justify-center
+                             rounded-lg
+                             bg-white
+                             text-blue-600
+                             group-hover/doc:bg-blue-600
+                             group-hover/doc:text-white
+                             transition-all">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                </span>
+
+                <span>
+                    Attestation de travail
+                </span>
+
+                <i class="fa-solid fa-arrow-up-right-from-square
+                          text-xs
+                          opacity-50
+                          group-hover/doc:opacity-100">
+                </i>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- Congé -->
+        <li>
+
+            <a
+                href="#"
+                class="group/doc
+                       flex items-center
+                       justify-center
+                       gap-3
+                       px-4 py-3
+                       rounded-xl
+                       text-blue-800
+                       font-medium
+                       text-sm
+                       bg-gray-50
+                       hover:bg-blue-700
+                       hover:text-white
+                       transition-all duration-300">
+
+                <span class="w-9 h-9
+                             flex items-center justify-center
+                             rounded-lg
+                             bg-white
+                             text-blue-600
+                             group-hover/doc:bg-blue-600
+                             group-hover/doc:text-white
+                             transition-all">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                </span>
+
+                <span>
+                    Congé
+                </span>
+
+                <i class="fa-solid fa-chevron-right
+                          text-xs
+                          opacity-40
+                          group-hover/doc:opacity-100">
+                </i>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- Carte professionnelle -->
+        <li>
+
+            <a
+                href="#"
+                class="group/doc
+                       flex items-center
+                       justify-center
+                       gap-3
+                       px-4 py-3
+                       rounded-xl
+                       text-blue-800
+                       font-medium
+                       text-sm
+                       bg-gray-50
+                       hover:bg-blue-700
+                       hover:text-white
+                       transition-all duration-300">
+
+                <span class="w-9 h-9
+                             flex items-center justify-center
+                             rounded-lg
+                             bg-white
+                             text-blue-600
+                             group-hover/doc:bg-blue-600
+                             group-hover/doc:text-white
+                             transition-all">
+
+                    <i class="fa-solid fa-id-badge"></i>
+
+                </span>
+
+                <span>
+                    Carte professionnelle
+                </span>
+
+                <i class="fa-solid fa-chevron-right
+                          text-xs
+                          opacity-40
+                          group-hover/doc:opacity-100">
+                </i>
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+</nav>
+
+
         <!-------------------------------------------------------------Listes des fonctionnaires grouper par corps -->
 
 
@@ -188,13 +617,14 @@
         <div class="flex justify-between items-center m-0 b-0 w-full">
 
             <div
-                class="flex items-center bg-blue-600  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg   w-2/4  py-0">
+                class="flex items-center bg-blue-600  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg   w-2/6  py-0">
 
                 <h2 class="uppercase text-xl md:text-xl  text-white dark:text-gray-100"
                     style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
                     </i><i class="fa-solid fa-file-lines"></i>
-                    <span>liste des docs administratifs</span>
+                    <span>Carierre Proffesionel</span>
                 </h2>
+
 
             </div>
             <button id="showFormBtn"
@@ -207,7 +637,7 @@
                 Ajouter Un document
             </button>
         </div>
-
+        liste des docs administratifs
         <div class="bg-white  shadow-md hover:shadow-lg transition-all rounded-lg  w-full">
 
             <!-- fichier de fonctionaire actives -->
