@@ -47,112 +47,451 @@
 
 
         <!-- Cards graphres-->
-        <div class="grid grid-cols-12  gap-2 mb-10 ">
-            <!-- carré  des fonctionaire -->
-            <div class="col-span-12 bg-white border-b-blue-500 border-b-2 text-3xl text-blue-900 h-8 uppercase  flex items-center justify-center  m-1 "
-                style="text-shadow: 2px 2px 4px rgba(24, 7, 132, 0.5);">
-                Gestion du personnel</div>
 
-            <div
-                class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1 hover:bg-blue-50  hover:shadow-2xl uppercase relative">
-                <div class="flex  h-full items-center justify-center text-center">
-                    <a href="{{ route('fonctionaires') }}" class="h-full flex items-center justify-center ">
-                        <svg class="absolute  left-0 fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
-                            height="48" viewBox="0 0 24 24">
-                            <!-- Circle for the head -->
-                            <circle cx="12" cy="8" r="4" />
-                            <!-- Path for the body -->
-                            <path d="M12 14c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z" />
-                        </svg>
-                         FONCTIONAIRES
-                        <div class="absolute top-0 right-0 w-0 h-0  border-transparent border-t-blue-500 border-r-blue-500 "
-                            style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                        </div>
-                        <div class="absolute bottom-0 right-0 w-0 h-0  border-transparent border-b-blue-500 border-r-blue-500 "
-                            style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                        </div>
-                    </a>
+
+
+        <!-- ================================
+     GESTION DU PERSONNEL
+================================= -->
+
+        <section class="mb-10">
+
+            <!-- Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1.5 h-8 bg-blue-600 rounded-full"></div>
+
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-blue-950">
+                        Gestion du personnel
+                    </h2>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        Gestion des fonctionnaires et des informations administratives
+                    </p>
                 </div>
             </div>
 
-            <div
-                class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1  hover:bg-blue-50  hover:shadow-2xl hover:bg-blue-200 uppercase relative">
+
+            <!-- Categories Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 
 
-                <a href="{{ route('fonctions') }}" class="h-full flex items-center justify-center ">
-                    <svg class="absolute  left-0  fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
-                        height="48" viewBox="0 0 24 24">
-                        <!-- Outer gear teeth -->
-                        <path
-                            d="M19.14 12.94c.03-.3.06-.6.06-.94s-.03-.64-.06-.94l2.11-1.65a1 1 0 0 0 .25-1.3l-2-3.46a1 1 0 0 0-1.2-.46l-2.49 1a7.02 7.02 0 0 0-1.62-.94l-.38-2.65A1 1 0 0 0 12 2h-4a1 1 0 0 0-1 .84l-.38 2.65a7.02 7.02 0 0 0-1.62.94l-2.49-1a1 1 0 0 0-1.2.46l-2 3.46a1 1 0 0 0 .25 1.3l2.11 1.65c-.03.3-.06.6-.06.94s.03.64.06.94l-2.11 1.65a1 1 0 0 0-.25 1.3l2 3.46a1 1 0 0 0 1.2.46l2.49-1c.47.39 1 .72 1.62.94l.38 2.65A1 1 0 0 0 8 22h4a1 1 0 0 0 1-.84l.38-2.65c.62-.22 1.15-.55 1.62-.94l2.49 1a1 1 0 0 0 1.2-.46l2-3.46a1 1 0 0 0-.25-1.3l-2.11-1.65ZM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                    </svg>
-                   FONCTIONs
-                    <div class="absolute top-0 right-0 w-0 h-0  border-transparent border-t-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
+                <!-- ================= FONCTIONNAIRES ================= -->
+                <a href="{{ route('fonctionaires') }}"
+                    class="group relative overflow-hidden
+                            bg-white rounded-2xl
+                            border-2 border-gray-200
+                            p-6
+                            shadow-sm
+                            hover:shadow-2xl
+                            hover:border-blue-500
+                            hover:-translate-y-1
+                            hover:border-blue-700
+                            transition-all duration-300">
+
+                    <!-- Decorative background -->
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-blue-50
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
                     </div>
-                    <div class="absolute bottom-0 right-0 w-0 h-0  border-transparent border-b-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
+
+                    <div class="relative flex items-center gap-5">
+
+                        <!-- Icon -->
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-blue-50
+                            flex items-center justify-center
+                            group-hover:bg-blue-600
+                            transition-colors duration-300">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-blue-600
+                                group-hover:fill-white
+                                transition-colors duration-300"
+                                viewBox="0 0 24 24">
+
+                                <circle cx="12" cy="8" r="4" />
+
+                                <path d="M12 14c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z" />
+                            </svg>
+
+                        </div>
+
+
+                        <!-- Content -->
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-blue-600
+                               transition-colors">
+
+                                Fonctionnaires
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion du personnel
+                            </p>
+
+                        </div>
+
+
+                        <!-- Arrow -->
+                        <div
+                            class="text-gray-300
+                            group-hover:text-blue-600
+                            group-hover:translate-x-1
+                            transition-all">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+
+                            </svg>
+
+                        </div>
+
                     </div>
+
                 </a>
+
+
+
+                <!-- ================= FONCTIONS ================= -->
+                <a href="{{ route('fonctions') }}"
+                    class="group relative overflow-hidden
+                  bg-white rounded-2xl
+                  border-2 border-gray-200
+                  p-6
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  hover:border-violet-500
+                  transition-all duration-300">
+
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-violet-50
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
+                    </div>
+
+
+                    <div class="relative flex items-center gap-5">
+
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-violet-50
+                            flex items-center justify-center
+                            group-hover:bg-violet-600
+                            transition-colors duration-300">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-violet-600
+                                group-hover:fill-white
+                                transition-colors duration-300"
+                                viewBox="0 0 24 24">
+
+                                <path
+                                    d="M19.14 12.94c.03-.3.06-.6.06-.94s-.03-.64-.06-.94l2.11-1.65a1 1 0 0 0 .25-1.3l-2-3.46a1 1 0 0 0-1.2-.46l-2.49 1a7.02 7.02 0 0 0-1.62-.94l-.38-2.65A1 1 0 0 0 12 2H8a1 1 0 0 0-1 .84l-.38 2.65a7.02 7.02 0 0 0-1.62.94l-2.49-1a1 1 0 0 0-1.2.46l-2 3.46a1 1 0 0 0 .25 1.3l2.11 1.65c-.03.3-.06.6-.06.94s.03.64.06.94l-2.11 1.65a1 1 0 0 0-.25 1.3l2 3.46a1 1 0 0 0 1.2.46l2.49-1c.47.39 1 .72 1.62.94l.38 2.65A1 1 0 0 0 8 22h4a1 1 0 0 0 1-.84l.38-2.65c.62-.22 1.15-.55 1.62-.94l2.49 1a1 1 0 0 0 1.2-.46l2-3.46a1 1 0 0 0-.25-1.3l-2.11-1.65ZM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                            </svg>
+
+                        </div>
+
+
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-violet-600
+                               transition-colors">
+
+                                Fonctions
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion des fonctions
+                            </p>
+
+                        </div>
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 text-gray-300
+                            group-hover:text-violet-600
+                            group-hover:translate-x-1
+                            transition-all"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                        </svg>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ================= GRADES ================= -->
+                <a href="{{ route('grades') }}"
+                    class="group relative overflow-hidden
+                  bg-white rounded-2xl
+                  border-2 border-gray-200
+                  p-6
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  hover:border-amber-500
+                  transition-all duration-300">
+
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-amber-50
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
+                    </div>
+
+
+                    <div class="relative flex items-center gap-5">
+
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-amber-50
+                            flex items-center justify-center
+                            group-hover:bg-amber-500
+                            transition-colors duration-300">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-amber-500
+                                group-hover:fill-white
+                                transition-colors"
+                                viewBox="0 0 24 24">
+
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-amber-500
+                               transition-colors">
+
+                                Grades
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion des grades
+                            </p>
+
+                        </div>
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 text-gray-300
+                            group-hover:text-amber-500
+                            group-hover:translate-x-1
+                            transition-all"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                        </svg>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ================= POSTES SUPERIEURS ================= -->
+                <a href="#"
+                    class="group relative overflow-hidden
+                  bg-white rounded-2xl
+                  border-2 border-gray-200
+                  p-6
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  hover:border-emerald-500
+                  transition-all duration-300">
+
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-emerald-50
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
+                    </div>
+
+
+                    <div class="relative flex items-center gap-5">
+
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-emerald-50
+                            flex items-center justify-center
+                            group-hover:bg-emerald-600
+                            transition-colors">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-emerald-600
+                                group-hover:fill-white"
+                                viewBox="0 0 24 24">
+
+                                <path d="M12 2l6 6h-4v8h-4V8H6l6-6z" />
+                                <rect x="5" y="18" width="14" height="4" rx="1" />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-emerald-600">
+
+                                Postes supérieurs
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion des postes
+                            </p>
+
+                        </div>
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 text-gray-300
+                            group-hover:text-emerald-600
+                            group-hover:translate-x-1
+                            transition-all"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                        </svg>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ================= ETABLISSEMENTS ================= -->
+                <a href="#"
+                    class="group relative overflow-hidden
+                  bg-white rounded-2xl
+                  border-2 border-gray-200
+                  p-6
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  hover:border-emerald-500                  transition-all duration-300">
+
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-cyan-50
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
+                    </div>
+
+
+                    <div class="relative flex items-center gap-5">
+
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-cyan-50
+                            flex items-center justify-center
+                            group-hover:bg-cyan-600
+                            transition-colors">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-cyan-600
+                                group-hover:fill-white"
+                                viewBox="0 0 24 24">
+
+                                <path d="M3 21h18v-2H3v2z" />
+                                <path d="M5 19V5l7-3 7 3v14h-2V7l-5-2-5 2v12H5z" />
+                                <path d="M9 9h2v2H9V9zm4 0h2v2h-2V9zM9 13h2v2H9v-2zm4 0h2v2h-2v-2z" />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-cyan-600">
+
+                                Établissements
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion des établissements
+                            </p>
+
+                        </div>
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 text-gray-300
+                            group-hover:text-cyan-600
+                            group-hover:translate-x-1
+                            transition-all"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                        </svg>
+
+                    </div>
+
+                </a>
+
+
             </div>
-            <div
-                class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1  hover:bg-blue-50  hover:shadow-2xl hover:bg-blue-200 uppercase relative">
 
-
-                <a href="{{ route('grades') }}" class="h-full flex items-center justify-center ">
-                    <svg class="absolute  left-0  fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
-                        height="48" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                      </svg>
-                    GRADES
-                    <div class="absolute top-0 right-0 w-0 h-0  border-transparent border-t-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                    <div class="absolute bottom-0 right-0 w-0 h-0  border-transparent border-b-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                </a>
-            </div>
-            <div
-                class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1  hover:bg-blue-50  hover:shadow-2xl hover:bg-blue-200 uppercase relative">
-
-
-                <a href="#" class="h-full flex items-center justify-center ">
-                    <svg class="absolute  left-0  fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
-                        height="48" viewBox="0 0 24 24">
-                        <!-- Outer gear teeth -->
-                        <path d="M12 2l6 6h-4v8h-4V8H6l6-6z" />
-                        <rect x="5" y="18" width="14" height="4" rx="1" />
-                    </svg>
-                    POSTE SUPERIEURES
-                    <div class="absolute top-0 right-0 w-0 h-0  border-transparent border-t-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                    <div class="absolute bottom-0 right-0 w-0 h-0  border-transparent border-b-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                </a>
-            </div>
-            <div
-                class="col-span-4 flex  border-b-blue-500 border-b-2 items-center justify-center bg-white text-center text-2xl text-blue-900 h-32 m-1  hover:bg-blue-50  hover:shadow-2xl hover:bg-blue-200 uppercase relative">
-
-
-                <a href="#" class="h-full flex items-center justify-center ">
-                    <svg class="absolute  left-0  fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="48"
-                        height="48" viewBox="0 0 24 24">
-                        <!-- Outer gear teeth -->
-                        <path d="M10 22v-6h4v6h-4z" />
-                        <path d="M6 10h2v4H6zM16 10h2v4h-2z" />
-                    </svg>
-                    ETABLISSEMENTS
-                    <div class="absolute top-0 right-0 w-0 h-0  border-transparent border-t-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                    <div class="absolute bottom-0 right-0 w-0 h-0  border-transparent border-b-blue-500 border-r-blue-500 "
-                        style="border-bottom-width: 34px;border-top-width: 34px; border-left-width:34px ;border-right-width:34px;">
-                    </div>
-                </a>
-        </div>
+        </section>
 
 
 
@@ -160,49 +499,49 @@
 
 
 
-        <!-- Cards graphres-->
-        <div class="grid grid-cols-12 gap-6">
+    <!-- Cards graphres-->
+    <div class="grid grid-cols-12 gap-6">
 
-            <!-- Line chart (Acme Plus) -->
-            <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" />
+        <!-- Line chart (Acme Plus) -->
+        <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" />
 
-            <!-- Line chart (Acme Advanced) -->
-            <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" />
+        <!-- Line chart (Acme Advanced) -->
+        <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" />
 
-            <!-- Line chart (Acme Professional) -->
-            <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" />
+        <!-- Line chart (Acme Professional) -->
+        <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" />
 
-            <!-- Bar chart (Direct vs Indirect) -->
-            <x-dashboard.dashboard-card-04 />
+        <!-- Bar chart (Direct vs Indirect) -->
+        <x-dashboard.dashboard-card-04 />
 
-            <!-- Line chart (Real Time Value) -->
-            <x-dashboard.dashboard-card-05 />
+        <!-- Line chart (Real Time Value) -->
+        <x-dashboard.dashboard-card-05 />
 
-            <!-- Doughnut chart (Top Countries) -->
-            <x-dashboard.dashboard-card-06 />
+        <!-- Doughnut chart (Top Countries) -->
+        <x-dashboard.dashboard-card-06 />
 
-            <!-- Table (Top Channels) -->
-            <x-dashboard.dashboard-card-07 />
+        <!-- Table (Top Channels) -->
+        <x-dashboard.dashboard-card-07 />
 
-            <!-- Line chart (Sales Over Time) -->
-            <x-dashboard.dashboard-card-08 />
+        <!-- Line chart (Sales Over Time) -->
+        <x-dashboard.dashboard-card-08 />
 
-            <!-- Stacked bar chart (Sales VS Refunds) -->
-            <x-dashboard.dashboard-card-09 />
+        <!-- Stacked bar chart (Sales VS Refunds) -->
+        <x-dashboard.dashboard-card-09 />
 
-            <!-- Card (Customers) -->
-            <x-dashboard.dashboard-card-10 />
+        <!-- Card (Customers) -->
+        <x-dashboard.dashboard-card-10 />
 
-            <!-- Card (Reasons for Refunds) -->
-            <x-dashboard.dashboard-card-11 />
+        <!-- Card (Reasons for Refunds) -->
+        <x-dashboard.dashboard-card-11 />
 
-            <!-- Card (Recent Activity) -->
-            <x-dashboard.dashboard-card-12 />
+        <!-- Card (Recent Activity) -->
+        <x-dashboard.dashboard-card-12 />
 
-            <!-- Card (Income/Expenses) -->
-            <x-dashboard.dashboard-card-13 />
+        <!-- Card (Income/Expenses) -->
+        <x-dashboard.dashboard-card-13 />
 
-        </div>
+    </div>
 
     </div>
 </x-app-layout>
