@@ -445,7 +445,7 @@
 
 <nav class="mt-3 mb-6
             w-full
-            bg-white
+            bg-blue-200
             border border-gray-200
             rounded-2xl
             p-2
@@ -645,7 +645,7 @@
 <div class="mt-6 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
 
     {{-- ===================== HEADER ===================== --}}
-    <div class="px-6 py-5 border-b border-gray-200">
+    <div class="px-2 py-2 border-b border-gray-200">
 
         <div class="flex items-center justify-between gap-4">
 
@@ -670,7 +670,7 @@
         </div>
 
         {{-- ===================== COLLECTION TABS ===================== --}}
-        <div class="mt-5 relative">
+        <div class="mt-2 relative">
 
             <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin bg-blue-200 scrollbar-thumb-blue-300 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
 
@@ -687,7 +687,7 @@
                         data-tab="{{ $loop->index }}"
                         class="collection-tab flex-shrink-0
                                inline-flex items-center gap-2
-                               px-4 py-2.5
+                               px-2 py-2
                                rounded-xl
                                border-2
                                border-gray-200
@@ -788,22 +788,22 @@
 
                             <tr>
 
-                                <th class="px-5 py-4 text-left
+                                <th class=" px-2 py-2 text-left
                                            font-semibold text-gray-600">
                                     Document
                                 </th>
 
-                                <th class="px-5 py-4 text-left
+                                <th class=" px-2 py-2 text-left
                                            font-semibold text-gray-600">
                                     Date
                                 </th>
 
-                                <th class="px-5 py-4 text-center
+                                <th class=" px-2 py-2 text-center
                                            font-semibold text-gray-600">
                                     Taille
                                 </th>
 
-                                <th class="px-5 py-4 text-center
+                                <th class=" px-2 py-2 text-center
                                            font-semibold text-gray-600">
                                     Actions
                                 </th>
@@ -820,7 +820,7 @@
                                 <tr class="hover:bg-blue-50/40 transition-colors">
 
                                     {{-- DOCUMENT --}}
-                                    <td class="px-5 py-4">
+                                    <td class=" px-2 py-2">
 
                                         <div class="flex items-center gap-3">
 
@@ -852,7 +852,7 @@
 
 
                                     {{-- DATE --}}
-                                    <td class="px-5 py-4 text-gray-600">
+                                    <td class=" px-2 py-2 text-gray-600">
 
                                         <div class="flex items-center gap-2">
 
@@ -866,7 +866,7 @@
 
 
                                     {{-- SIZE --}}
-                                    <td class="px-5 py-4 text-center text-gray-600">
+                                    <td class=" px-2 py-2 text-center text-gray-600">
 
                                         {{ number_format($media->size / 1024, 0) }} Ko
 
@@ -874,7 +874,7 @@
 
 
                                     {{-- ACTIONS --}}
-                                    <td class="px-5 py-4">
+                                    <td class=" px-2 py-2">
 
                                         <div class="flex justify-center items-center gap-2">
 
