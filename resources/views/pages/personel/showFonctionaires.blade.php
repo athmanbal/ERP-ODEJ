@@ -858,7 +858,7 @@
 
                                             <i class="fa-regular fa-calendar text-gray-400"></i>
 
-                                            {{ $media->created_at->format('d/m/Y') }}
+                                            {{ $media->dateDefie }}
 
                                         </div>
 
