@@ -1163,13 +1163,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <option value="مقرر التنصيب">مقرر التنصيب</option>
                                 <option value="مقرر الادماج">مقرر الادماج</option>
                                 <option value="Decision_مقرر تعيين في منصب عالي">مقرر تعيين في منصب عالي</option>
+                                <option value="Decision_مقرر انهاء التعيين في منصب عالي">مقرر انهاء التعيين في منصب عالي</option>
+                                <option value="Decision_مقرر استداع">مقرر استداع</option>
                                 <option value="Decision_قرار التحويل">قرار التحويل</option>
                                 <option value="Decision_مقرر الوكيل الداخيل">مقرر الوكيل الداخيل</option>
                                 <option value="Decision_تثمين الخبرة">تثمين الخبرة</option>
                                 <option value="Decision_Maladies-- العطل المرضية"> Maladies-- العطل المرضية</option>
                                 <option value="Decision_تثمين الخبرة">تثمين الخبرة</option>
 
-                                <option value="Pévé">Pévé</option>
+                                <option value="Pévé">محاضـــر</option>
                             </select>
                         </div>
                         <button type="submit"
