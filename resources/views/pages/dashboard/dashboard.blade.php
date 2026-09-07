@@ -249,7 +249,7 @@
 
 
                 <!-- ================= GRADES ================= -->
-                <a href="{{ route('grades') }}"
+                <a href="#"
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200
@@ -331,7 +331,7 @@
 
 
                 <!-- ================= POSTES SUPERIEURS ================= -->
-                <a href="#"
+                <a href="{{ route('grades') }}"
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200

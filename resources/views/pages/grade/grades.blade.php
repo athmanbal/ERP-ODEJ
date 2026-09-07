@@ -46,7 +46,7 @@
         <div class="flex justify-between items-center">
             <h1 class="bg-blue-600 text-xl text-white bg-opacity-50 shadow-2xl hover:shadow-lg transition-all rounded-lg p-1"
                 style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
-                Liste des Grades
+                Liste des Postes Supérieurs
             </h1>
             <button id="showFormBtnGrade"
                 class="flex right btn m-1 bg-gray-900 h-8 w-auto text-gray-100 hover:bg-gray-800
@@ -75,7 +75,7 @@
                 </svg>
                 <h2 class="uppercase text-xl md:text-xl text-blue-900 dark:text-gray-100"
                     style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
-                    Créer un nouveau grade</h2>
+                    Créer un nouveau Poste Supérieur</h2>
                 <button id="closeFormBtnGrade" class="text-gray-600 text-4xl hover:text-red-600">&times;</button>
             </div>
 
@@ -85,14 +85,14 @@
                     @csrf
 
                     <div class="flex items-center space-x-2">
-                        <label for="code_grade" class="mr-4 w-2/6">Code grade :</label>
+                        <label for="code_grade" class="mr-4 w-2/6">Code Poste Supérieur :</label>
                         <input type="text" id="code_grade" name="code_grade"
                             value="{{ old('code_grade') }}"
                             class="border rounded px-2 py-1 text-sm" required>
                     </div>
 
                     <div class="flex items-center space-x-2">
-                        <label for="nom_grade" class="mr-4 w-2/6">Nom du grade :</label>
+                        <label for="nom_grade" class="mr-4 w-2/6">Nom du Poste Supérieur :</label>
                         <input type="text" id="nom_grade" name="nom_grade"
                             value="{{ old('nom_grade') }}"
                             class="border rounded px-2 py-1 ml-10 text-sm" required>
@@ -119,7 +119,7 @@
         class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
             <p class="text-lg text-red-400 font-semibold mb-4">Êtes-vous sûr de
-                vouloir supprimer ce grade ?</p>
+                vouloir supprimer ce Poste Supérieur ?</p>
             <div class="flex justify-center gap-4">
                 <button id="confirmYesGrade" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Oui</button>
                 <button id="confirmNoGrade" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Annuler</button>

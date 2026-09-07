@@ -81,11 +81,12 @@
         </div>
 
 
-<!-- =========================================================
+        <!-- =========================================================
      FICHE FONCTIONNAIRE
 ========================================================= -->
 
-<div class="group relative overflow-hidden
+        <div
+            class="group relative overflow-hidden
             grid grid-cols-12
             gap-4
             w-full
@@ -100,15 +101,16 @@
             transition-all duration-300">
 
 
-    <!-- =====================================================
+            <!-- =====================================================
          PHOTO + MATRICULE
     ====================================================== -->
 
-    <div class="col-span-12 md:col-span-2
+            <div class="col-span-12 md:col-span-2
                 flex flex-col items-center justify-center">
 
-        <!-- Photo -->
-        <div class="relative group/photo
+                <!-- Photo -->
+                <div
+                    class="relative group/photo
                     w-46 h-64
                     rounded-2xl
                     overflow-hidden
@@ -118,10 +120,9 @@
                     hover:border-blue-600
                     transition-all duration-300">
 
-            <!-- Overlay -->
-            <label
-                for="photoInput_{{ $Fonct->id_fonctionnaire }}"
-                class="absolute inset-0
+                    <!-- Overlay -->
+                    <label for="photoInput_{{ $Fonct->id_fonctionnaire }}"
+                        class="absolute inset-0
                        flex items-center justify-center
                        bg-blue-900/70
                        text-white text-xs font-semibold
@@ -131,68 +132,70 @@
                        cursor-pointer
                        z-10">
 
-                <span class="flex flex-col items-center gap-1">
+                        <span class="flex flex-col items-center gap-1">
 
-                    <i class="fa-solid fa-camera text-lg"></i>
+                            <i class="fa-solid fa-camera text-lg"></i>
 
-                    Modifier
+                            Modifier
 
-                </span>
+                        </span>
 
-            </label>
+                    </label>
 
 
-            <!-- Image -->
-            @forelse($Fonct->getMedia('photo') as $mediaItem)
+                    <!-- Image -->
+                    @forelse($Fonct->getMedia('photo') as $mediaItem)
+                        <img class="w-full h-full object-cover" src="{{ $mediaItem->getUrl() }}"
+                            alt="{{ $mediaItem->name }}" />
 
-                <img
-                    class="w-full h-full object-cover"
-                    src="{{ $mediaItem->getUrl() }}"
-                    alt="{{ $mediaItem->name }}"
-                />
+                    @empty
 
-            @empty
-
-                <div class="w-full h-full
+                        <div
+                            class="w-full h-full
                             flex flex-col
                             items-center justify-center
                             text-gray-400">
 
-                    <i class="fa-solid fa-user text-3xl mb-1"></i>
+                            <i class="fa-solid fa-user text-3xl mb-1"></i>
 
-                    <span class="text-xs">
-                        Aucune photo
-                    </span>
+                            <span class="text-xs">
+                                Aucune photo
+                            </span>
+
+                        </div>
+                    @endforelse
+
+
+                    <!-- Upload -->
+                    <form action="{{ route('fonctionnaire.updatePhoto', $Fonct->id_fonctionnaire) }}" method="POST"
+                        enctype="multipart/form-data">
+
+                        @csrf
+                        @method('PUT')
+
+                        <input type="file" name="photo" id="photoInput_{{ $Fonct->id_fonctionnaire }}"
+                            class="hidden" onchange="this.form.submit()">
+
+                    </form>
 
                 </div>
-
-            @endforelse
-
-
-            <!-- Upload -->
-            <form
-                action="{{ route('fonctionnaire.updatePhoto', $Fonct->id_fonctionnaire) }}"
-                method="POST"
-                enctype="multipart/form-data">
-
-                @csrf
-                @method('PUT')
-
-                <input
-                    type="file"
-                    name="photo"
-                    id="photoInput_{{ $Fonct->id_fonctionnaire }}"
-                    class="hidden"
-                    onchange="this.form.submit()"
-                >
-
-            </form>
-
-        </div>
-
-
-        <!-- Matricule -->
-        <span class="mt-3
+                <span
+                    class="mt-3
+                     inline-flex
+                     items-center
+                     gap-1
+                     bg-blue-50
+                     text-blue-800
+                     text-xs
+                     rounded-full
+                     font-bold
+                     ">
+                    {{ $Fonct->nom_fonctionnaire }}
+                    {{ $Fonct->prenom_fonctionnaire }}
+                </span>
+                <!-- Matricule -->
+                <span
+                    class="mt-3
                      inline-flex
                      items-center
                      gap-1
@@ -206,22 +209,25 @@
 
 
 
-            {{ $Fonct->id_fonctionnaire }}
-
-        </span>
-
-    </div>
+                    {{ $Fonct->id_fonctionnaire }}
 
 
+                </span>
 
-    <!-- =====================================================
+            </div>
+
+
+
+            <!-- =====================================================
          INFORMATIONS
     ====================================================== -->
 
-    <div class="col-span-12 md:col-span-10">
+            <div class="col-span-12 md:col-span-10">
 
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row
+                <!-- Header -->
+
+                <div
+                    class="flex flex-col md:flex-row
                     md:items-center
                     md:justify-between
                     gap-2
@@ -230,20 +236,14 @@
                     border-b border-gray-100">
 
 
-            <!-- Nom / Fonction -->
-            <div>
+                    <!-- Nom / Fonction -->
 
-                <span class="text-xs
-                             uppercase
-                             tracking-wider
-                             text-blue-600
-                             font-semibold">
+                    <div>
 
-                    Fonctionnaire
 
-                </span>
 
-                <h2 class="mt-1
+                        <h2
+                            class="mt-1
                            text-xl md:text-2xl
                            uppercase
                            font-bold
@@ -251,15 +251,27 @@
                            group-hover:text-blue-700
                            transition-colors duration-300">
 
-                    {{ $Fonct->nom_fonction }}
+                            {{ $Fonct->nom_fonction }}
 
-                </h2>
+                        </h2>
+                        Fonction:
 
-            </div>
+                        @if (!empty($nomGrade))
+                            <span class="text-md uppercase tracking-wider text-blue-600 font-semibold">
+                                {{ $nomGrade }}
+                            </span>
+                        @else
+                            <span class="text-md  tracking-wider bg-red-500 text-red-100 font-semibold">
+                                pas de fonction attribuée
+                            </span>
+                        @endif
+
+                    </div>
 
 
-            <!-- Status -->
-            <span class="inline-flex
+                    <!-- Status -->
+                    <span
+                        class="inline-flex
                          items-center
                          gap-2
                          w-fit
@@ -270,25 +282,27 @@
                          text-xs
                          font-semibold">
 
-                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
 
-                Actif
+                        Actif
 
-            </span>
+                    </span>
 
-        </div>
+                </div>
 
 
 
-        <!-- Informations Grid -->
-        <div class="grid grid-cols-1
+                <!-- Informations Grid -->
+                <div
+                    class="grid grid-cols-1
                     sm:grid-cols-2
                     lg:grid-cols-3
                     gap-3">
 
 
-            <!-- Date naissance -->
-            <div class="p-3
+                    <!-- Date naissance -->
+                    <div
+                        class="p-3
                         rounded-xl
                         bg-gray-50
                         border border-gray-100
@@ -296,28 +310,30 @@
                         hover:border-blue-100
                         transition-all">
 
-                <span class="flex items-center gap-2
+                        <span class="flex items-center gap-2
                              text-gray-500 text-xs">
 
-                    <i class="fa-solid fa-cake-candles text-blue-500"></i>
+                            <i class="fa-solid fa-cake-candles text-blue-500"></i>
 
-                    Date de naissance
+                            Date de naissance
 
-                </span>
+                        </span>
 
-                <span class="block mt-1
+                        <span
+                            class="block mt-1
                              font-semibold
                              text-gray-800">
 
-                    {{ $Fonct->date_naissance->format('Y-m-d') }}
+                            {{ $Fonct->date_naissance->format('Y-m-d') }}
 
-                </span>
+                        </span>
 
-            </div>
+                    </div>
 
 
-            <!-- Téléphone -->
-            <div class="p-3
+                    <!-- Téléphone -->
+                    <div
+                        class="p-3
                         rounded-xl
                         bg-gray-50
                         border border-gray-100
@@ -325,28 +341,30 @@
                         hover:border-blue-100
                         transition-all">
 
-                <span class="flex items-center gap-2
+                        <span class="flex items-center gap-2
                              text-gray-500 text-xs">
 
-                    <i class="fa-solid fa-phone text-blue-500"></i>
+                            <i class="fa-solid fa-phone text-blue-500"></i>
 
-                    Téléphone
+                            Téléphone
 
-                </span>
+                        </span>
 
-                <span class="block mt-1
+                        <span
+                            class="block mt-1
                              font-semibold
                              text-gray-800">
 
-                    {{ $Fonct->telephone }}
+                            {{ $Fonct->telephone }}
 
-                </span>
+                        </span>
 
-            </div>
+                    </div>
 
 
-            <!-- Recrutement -->
-            <div class="p-3
+                    <!-- Recrutement -->
+                    <div
+                        class="p-3
                         rounded-xl
                         bg-gray-50
                         border border-gray-100
@@ -354,28 +372,30 @@
                         hover:border-blue-100
                         transition-all">
 
-                <span class="flex items-center gap-2
+                        <span class="flex items-center gap-2
                              text-gray-500 text-xs">
 
-                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                            <i class="fa-solid fa-calendar-check text-blue-500"></i>
 
-                    Date de recrutement
+                            Date de recrutement
 
-                </span>
+                        </span>
 
-                <span class="block mt-1
+                        <span
+                            class="block mt-1
                              font-semibold
                              text-gray-800">
 
-                    {{ $Fonct->date_recretement->format('Y-m-d') }}
+                            {{ $Fonct->date_recretement->format('Y-m-d') }}
 
-                </span>
+                        </span>
 
-            </div>
+                    </div>
 
 
-            <!-- Échelon -->
-            <div class="p-3
+                    <!-- Échelon -->
+                    <div
+                        class="p-3
                         rounded-xl
                         bg-gray-50
                         border border-gray-100
@@ -383,28 +403,30 @@
                         hover:border-blue-100
                         transition-all">
 
-                <span class="flex items-center gap-2
+                        <span class="flex items-center gap-2
                              text-gray-500 text-xs">
 
-                    <i class="fa-solid fa-layer-group text-blue-500"></i>
+                            <i class="fa-solid fa-layer-group text-blue-500"></i>
 
-                    Nombre d'échelon
+                            Nombre d'échelon
 
-                </span>
+                        </span>
 
-                <span class="block mt-1
+                        <span
+                            class="block mt-1
                              font-semibold
                              text-gray-800">
 
-                    {{ $Fonct->id_echelon }}
+                            {{ $Fonct->id_echelon }}
 
-                </span>
+                        </span>
 
-            </div>
+                    </div>
 
 
-            <!-- Établissement -->
-            <div class="sm:col-span-2 p-3
+                    <!-- Établissement -->
+                    <div
+                        class="sm:col-span-2 p-3
                         rounded-xl
                         bg-gray-50
                         border border-gray-100
@@ -412,38 +434,40 @@
                         hover:border-blue-100
                         transition-all">
 
-                <span class="flex items-center gap-2
+                        <span class="flex items-center gap-2
                              text-gray-500 text-xs">
 
-                    <i class="fa-solid fa-building text-blue-500"></i>
+                            <i class="fa-solid fa-building text-blue-500"></i>
 
-                    Établissement
+                            Établissement
 
-                </span>
+                        </span>
 
-                <span class="block mt-1
+                        <span
+                            class="block mt-1
                              font-semibold
                              text-gray-800">
 
-                    {{ $Fonct->nom_etablissement }}
+                            {{ $Fonct->nom_etablissement }}
 
-                </span>
+                        </span>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</div>
 
 
-
-<!-- =========================================================
+        <!-- =========================================================
      DOCUMENTS ADMINISTRATIFS
 ========================================================= -->
 
-<nav class="mt-1 mb-4
+        <nav
+            class="mt-1 mb-4
             w-full
             bg-white
             border border-gray-200
@@ -455,19 +479,17 @@
             transition-all duration-300">
 
 
-    <ul class="grid
+            <ul class="grid
                grid-cols-1
                md:grid-cols-3
                gap-2">
 
 
-        <!-- Attestation -->
-        <li>
+                <!-- Attestation -->
+                <li>
 
-            <a
-                href="{{ route('fonctionnaire.attestation', $Fonct->id_fonctionnaire) }}"
-                target="_blank"
-                class="group/doc
+                    <a href="{{ route('fonctionnaire.attestation', $Fonct->id_fonctionnaire) }}" target="_blank"
+                        class="group/doc
                        flex items-center
                        justify-center
                        gap-3
@@ -481,7 +503,8 @@
                        hover:text-white
                        transition-all duration-300">
 
-                <span class="w-9 h-9
+                        <span
+                            class="w-9 h-9
                              flex items-center justify-center
                              rounded-lg
                              bg-white
@@ -490,32 +513,32 @@
                              group-hover/doc:text-white
                              transition-all">
 
-                    <i class="fa-solid fa-file-lines"></i>
+                            <i class="fa-solid fa-file-lines"></i>
 
-                </span>
+                        </span>
 
-                <span>
-                    Attestation de travail
-                </span>
+                        <span>
+                            Attestation de travail
+                        </span>
 
-                <i class="fa-solid fa-arrow-up-right-from-square
+                        <i
+                            class="fa-solid fa-arrow-up-right-from-square
                           text-xs
                           opacity-50
                           group-hover/doc:opacity-100">
-                </i>
+                        </i>
 
-            </a>
+                    </a>
 
-        </li>
+                </li>
 
 
 
-        <!-- Congé -->
-        <li>
+                <!-- Congé -->
+                <li>
 
-            <a
-                href="#"
-                class="group/doc
+                    <a href="#"
+                        class="group/doc
                        flex items-center
                        justify-center
                        gap-3
@@ -529,7 +552,8 @@
                        hover:text-white
                        transition-all duration-300">
 
-                <span class="w-9 h-9
+                        <span
+                            class="w-9 h-9
                              flex items-center justify-center
                              rounded-lg
                              bg-white
@@ -538,32 +562,32 @@
                              group-hover/doc:text-white
                              transition-all">
 
-                    <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-calendar-days"></i>
 
-                </span>
+                        </span>
 
-                <span>
-                    Congé
-                </span>
+                        <span>
+                            Congé
+                        </span>
 
-                <i class="fa-solid fa-chevron-right
+                        <i
+                            class="fa-solid fa-chevron-right
                           text-xs
                           opacity-40
                           group-hover/doc:opacity-100">
-                </i>
+                        </i>
 
-            </a>
+                    </a>
 
-        </li>
+                </li>
 
 
 
-        <!-- Carte professionnelle -->
-        <li>
+                <!-- Carte professionnelle -->
+                <li>
 
-            <a
-                href="#"
-                class="group/doc
+                    <a href="#"
+                        class="group/doc
                        flex items-center
                        justify-center
                        gap-3
@@ -577,7 +601,8 @@
                        hover:text-white
                        transition-all duration-300">
 
-                <span class="w-9 h-9
+                        <span
+                            class="w-9 h-9
                              flex items-center justify-center
                              rounded-lg
                              bg-white
@@ -586,28 +611,29 @@
                              group-hover/doc:text-white
                              transition-all">
 
-                    <i class="fa-solid fa-id-badge"></i>
+                            <i class="fa-solid fa-id-badge"></i>
 
-                </span>
+                        </span>
 
-                <span>
-                    Carte professionnelle
-                </span>
+                        <span>
+                            Carte professionnelle
+                        </span>
 
-                <i class="fa-solid fa-chevron-right
+                        <i
+                            class="fa-solid fa-chevron-right
                           text-xs
                           opacity-40
                           group-hover/doc:opacity-100">
-                </i>
+                        </i>
 
-            </a>
+                    </a>
 
-        </li>
+                </li>
 
 
-    </ul>
+            </ul>
 
-</nav>
+        </nav>
 
 
         <!-------------------------------------------------------------carierre profesionnel -->
@@ -638,54 +664,52 @@
             </button>
         </div>
 
-{{-- ============================================================
+        {{-- ============================================================
      DOCUMENTS DU FONCTIONNAIRE
 ============================================================ --}}
 
-<div class="mt-6 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="mt-6 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
 
-    {{-- ===================== HEADER ===================== --}}
-    <div class="px-2 py-2 border-b border-gray-200">
+            {{-- ===================== HEADER ===================== --}}
+            <div class="px-2 py-2 border-b border-gray-200">
 
-        <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center justify-between gap-4">
 
-            <div>
-                <h3 class="text-lg font-bold text-gray-800">
-                    Documents du fonctionnaire
-                </h3>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">
+                            Documents du fonctionnaire
+                        </h3>
 
-                <p class="text-sm text-gray-500 mt-1">
-                    Consultez et gérez les documents administratifs
-                </p>
-            </div>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Consultez et gérez les documents administratifs
+                        </p>
+                    </div>
 
-            <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
-                <i class="fa-solid fa-folder-open text-blue-700"></i>
+                    <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
+                        <i class="fa-solid fa-folder-open text-blue-700"></i>
 
-                <span>
-                    {{ $Fonct->media->count() }} document(s)
-                </span>
-            </div>
+                        <span>
+                            {{ $Fonct->media->count() }} document(s)
+                        </span>
+                    </div>
 
-        </div>
+                </div>
 
-        {{-- ===================== COLLECTION TABS ===================== --}}
-        <div class="mt-2 relative">
+                {{-- ===================== COLLECTION TABS ===================== --}}
+                <div class="mt-2 relative">
 
-            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin bg-blue-200 scrollbar-thumb-blue-300 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+                    <div
+                        class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin bg-blue-200 scrollbar-thumb-blue-300 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
 
-                @foreach($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
+                        @foreach ($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
+                            @php
+                                $tabId = 'collection-' . $loop->index;
+                                $contentId = 'content-' . $loop->index;
+                            @endphp
 
-                    @php
-                        $tabId = 'collection-' . $loop->index;
-                        $contentId = 'content-' . $loop->index;
-                    @endphp
-
-                    <button
-                        type="button"
-                        onclick="showCollection('{{ $loop->index }}')"
-                        data-tab="{{ $loop->index }}"
-                        class="collection-tab flex-shrink-0
+                            <button type="button" onclick="showCollection('{{ $loop->index }}')"
+                                data-tab="{{ $loop->index }}"
+                                class="collection-tab flex-shrink-0
                                inline-flex items-center gap-2
                                px-2 py-2
                                rounded-xl
@@ -698,211 +722,208 @@
                                hover:text-blue-700
                                transition-all duration-200">
 
-                        {{-- Icône --}}
-                        <i class="fa-solid fa-folder text-blue-600"></i>
+                                {{-- Icône --}}
+                                <i class="fa-solid fa-folder text-blue-600"></i>
 
-                        {{-- Nom collection --}}
-                        <span>
-                            {{ $collectionName }}
-                        </span>
+                                {{-- Nom collection --}}
+                                <span>
+                                    {{ $collectionName }}
+                                </span>
 
-                        {{-- Nombre --}}
-                        <span
-                            class="ml-1 min-w-[24px] h-6
+                                {{-- Nombre --}}
+                                <span
+                                    class="ml-1 min-w-[24px] h-6
                                    flex items-center justify-center
                                    rounded-full
                                    bg-gray-100
                                    text-gray-600
                                    text-xs font-bold">
 
-                            {{ $mediaItems->count() }}
+                                    {{ $mediaItems->count() }}
 
-                        </span>
+                                </span>
 
-                    </button>
-
-                @endforeach
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    {{-- ===================== TABLES ===================== --}}
-
-    <div class="p-6">
-
-        @forelse($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
-
-            @php
-                $contentId = 'content-' . $loop->index;
-            @endphp
-
-            <div
-                id="{{ $contentId }}"
-                data-content="{{ $loop->index }}"
-                class="collection-content hidden">
-
-                {{-- ===================== TABLE HEADER ===================== --}}
-                <div class="flex items-center justify-between mb-4">
-
-                    <div class="flex items-center gap-3">
-
-                        <div class="w-10 h-10
-                                    rounded-xl
-                                    bg-blue-50
-                                    text-blue-700
-                                    flex items-center justify-center">
-
-                            <i class="fa-solid fa-folder-open"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h4 class="font-bold text-gray-800">
-                                {{ $collectionName }}
-                            </h4>
-
-                            <p class="text-xs text-gray-500">
-                                {{ $mediaItems->count() }} document(s)
-                            </p>
-
-                        </div>
+                            </button>
+                        @endforeach
 
                     </div>
 
                 </div>
 
+            </div>
 
-                {{-- ===================== TABLE ===================== --}}
-                <div class="overflow-x-auto
+
+            {{-- ===================== TABLES ===================== --}}
+
+            <div class="p-6">
+
+                @forelse($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
+                    @php
+                        $contentId = 'content-' . $loop->index;
+                    @endphp
+
+                    <div id="{{ $contentId }}" data-content="{{ $loop->index }}"
+                        class="collection-content hidden">
+
+                        {{-- ===================== TABLE HEADER ===================== --}}
+                        <div class="flex items-center justify-between mb-4">
+
+                            <div class="flex items-center gap-3">
+
+                                <div
+                                    class="w-10 h-10
+                                    rounded-xl
+                                    bg-blue-50
+                                    text-blue-700
+                                    flex items-center justify-center">
+
+                                    <i class="fa-solid fa-folder-open"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h4 class="font-bold text-gray-800">
+                                        {{ $collectionName }}
+                                    </h4>
+
+                                    <p class="text-xs text-gray-500">
+                                        {{ $mediaItems->count() }} document(s)
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- ===================== TABLE ===================== --}}
+                        <div
+                            class="overflow-x-auto
                             rounded-xl
                             border border-gray-200">
 
-                    <table class="w-full text-sm">
+                            <table class="w-full text-sm">
 
-                        <thead class="bg-gray-50 border-b border-gray-200">
+                                <thead class="bg-gray-50 border-b border-gray-200">
 
-                            <tr>
+                                    <tr>
 
-                                <th class=" px-2 py-2 text-left
+                                        <th
+                                            class=" px-2 py-2 text-left
                                            font-semibold text-gray-600">
-                                    Document
-                                </th>
+                                            Document
+                                        </th>
 
-                                <th class=" px-2 py-2 text-left
+                                        <th
+                                            class=" px-2 py-2 text-left
                                            font-semibold text-gray-600">
-                                    Date
-                                </th>
+                                            Date
+                                        </th>
 
-                                <th class=" px-2 py-2 text-center
+                                        <th
+                                            class=" px-2 py-2 text-center
                                            font-semibold text-gray-600">
-                                    Taille
-                                </th>
+                                            Taille
+                                        </th>
 
-                                <th class=" px-2 py-2 text-center
+                                        <th
+                                            class=" px-2 py-2 text-center
                                            font-semibold text-gray-600">
-                                    Actions
-                                </th>
+                                            Actions
+                                        </th>
 
-                            </tr>
+                                    </tr>
 
-                        </thead>
+                                </thead>
 
 
-                        <tbody class="divide-y divide-gray-100">
+                                <tbody class="divide-y divide-gray-100">
 
-                            @foreach($mediaItems as $media)
+                                    @foreach ($mediaItems as $media)
+                                        <tr class="hover:bg-blue-50/40 transition-colors">
 
-                                <tr class="hover:bg-blue-50/40 transition-colors">
+                                            {{-- DOCUMENT --}}
+                                            <td class=" px-2 py-2">
 
-                                    {{-- DOCUMENT --}}
-                                    <td class=" px-2 py-2">
+                                                <div class="flex items-center gap-3">
 
-                                        <div class="flex items-center gap-3">
-
-                                            <div class="w-10 h-10
+                                                    <div
+                                                        class="w-10 h-10
                                                         rounded-lg
                                                         bg-red-50
                                                         text-red-600
                                                         flex items-center justify-center">
 
-                                                <i class="fa-solid fa-file-pdf text-lg"></i>
+                                                        <i class="fa-solid fa-file-pdf text-lg"></i>
 
-                                            </div>
+                                                    </div>
 
-                                            <div>
+                                                    <div>
 
-                                                <p class="font-semibold text-gray-800">
-                                                    {{ $media->name }}
-                                                </p>
+                                                        <p class="font-semibold text-gray-800">
+                                                            {{ $media->name }}
+                                                        </p>
 
-                                                <p class="text-xs text-gray-400">
-                                                    PDF
-                                                </p>
+                                                        <p class="text-xs text-gray-400">
+                                                            PDF
+                                                        </p>
 
-                                            </div>
+                                                    </div>
 
-                                        </div>
+                                                </div>
 
-                                    </td>
-
-
-                                    {{-- DATE --}}
-                                    <td class=" px-2 py-2 text-gray-600">
-
-                                        <div class="flex items-center gap-2">
-
-                                            <i class="fa-regular fa-calendar text-gray-400"></i>
-
-                                            {{ $media->dateDefie }}
-
-                                        </div>
-
-                                    </td>
+                                            </td>
 
 
-                                    {{-- SIZE --}}
-                                    <td class=" px-2 py-2 text-center text-gray-600">
+                                            {{-- DATE --}}
+                                            <td class=" px-2 py-2 text-gray-600">
 
-                                        {{ number_format($media->size / 1024, 0) }} Ko
+                                                <div class="flex items-center gap-2">
 
-                                    </td>
+                                                    <i class="fa-regular fa-calendar text-gray-400"></i>
+
+                                                    {{ $media->dateDefie }}
+
+                                                </div>
+
+                                            </td>
 
 
-                                    {{-- ACTIONS --}}
-                                    <td class=" px-2 py-2">
+                                            {{-- SIZE --}}
+                                            <td class=" px-2 py-2 text-center text-gray-600">
 
-                                        <div class="flex justify-center items-center gap-2">
+                                                {{ number_format($media->size / 1024, 0) }} Ko
 
-                                            {{-- VOIR --}}
-                                            <button
-                                                type="button"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#pdfModal"
-                                                data-pdf="{{ $media->getUrl() }}"
-                                                class="w-9 h-9
+                                            </td>
+
+
+                                            {{-- ACTIONS --}}
+                                            <td class=" px-2 py-2">
+
+                                                <div class="flex justify-center items-center gap-2">
+
+                                                    {{-- VOIR --}}
+                                                    <button type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#pdfModal" data-pdf="{{ $media->getUrl() }}"
+                                                        class="w-9 h-9
                                                        rounded-lg
                                                        bg-blue-50
                                                        text-blue-700
                                                        hover:bg-blue-700
                                                        hover:text-white
                                                        transition"
-                                                title="Visualiser">
+                                                        title="Visualiser">
 
-                                                <i class="fa-solid fa-eye"></i>
+                                                        <i class="fa-solid fa-eye"></i>
 
-                                            </button>
+                                                    </button>
 
 
-                                            {{-- TÉLÉCHARGER --}}
-                                            <a
-                                                href="{{ $media->getUrl() }}"
-                                                download
-                                                class="w-9 h-9
+                                                    {{-- TÉLÉCHARGER --}}
+                                                    <a href="{{ $media->getUrl() }}" download
+                                                        class="w-9 h-9
                                                        rounded-lg
                                                        bg-green-50
                                                        text-green-700
@@ -910,185 +931,184 @@
                                                        hover:text-white
                                                        flex items-center justify-center
                                                        transition"
-                                                title="Télécharger">
+                                                        title="Télécharger">
 
-                                                <i class="fa-solid fa-download"></i>
+                                                        <i class="fa-solid fa-download"></i>
 
-                                            </a>
-
-
-                                            {{-- SUPPRIMER --}}
+                                                    </a>
 
 
-                        <form action="{{  route('fonctionnaires.deleteMedia', [
-                                                    'id_fonctionnaire' => $Fonct->id_fonctionnaire,
-                                                    'id' => $media->id
-                                                ])  }}"
-                            method="POST" onsubmit="return openCustomConfirm(event, this);">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="btn p-1 border-0 border-b-2 border-red-800  text-red-900 hover:bg-red-500 hover:text-red-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
-                                <i class="fa-solid fa-trash"></i>
-
-                            </button>
-                        </form>
+                                                    {{-- SUPPRIMER --}}
 
 
-                                        </div>
+                                                    <form
+                                                        action="{{ route('fonctionnaires.deleteMedia', [
+                                                            'id_fonctionnaire' => $Fonct->id_fonctionnaire,
+                                                            'id' => $media->id,
+                                                        ]) }}"
+                                                        method="POST"
+                                                        onsubmit="return openCustomConfirm(event, this);">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn p-1 border-0 border-b-2 border-red-800  text-red-900 hover:bg-red-500 hover:text-red-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                                                            <i class="fa-solid fa-trash"></i>
 
-                                    </td>
+                                                        </button>
+                                                    </form>
 
-                                </tr>
 
-                            @endforeach
+                                                </div>
 
-                        </tbody>
+                                            </td>
 
-                    </table>
+                                        </tr>
+                                    @endforeach
 
-                </div>
+                                </tbody>
 
-            </div>
+                            </table>
 
-        @empty
+                        </div>
 
-            {{-- Aucun document --}}
-            <div class="py-12 text-center">
+                    </div>
 
-                <div class="mx-auto w-16 h-16
+                @empty
+
+                    {{-- Aucun document --}}
+                    <div class="py-12 text-center">
+
+                        <div
+                            class="mx-auto w-16 h-16
                             rounded-2xl
                             bg-gray-100
                             text-gray-400
                             flex items-center justify-center">
 
-                    <i class="fa-solid fa-folder-open text-2xl"></i>
+                            <i class="fa-solid fa-folder-open text-2xl"></i>
 
-                </div>
+                        </div>
 
-                <h4 class="mt-4 font-semibold text-gray-700">
-                    Aucun document
-                </h4>
+                        <h4 class="mt-4 font-semibold text-gray-700">
+                            Aucun document
+                        </h4>
 
-                <p class="mt-1 text-sm text-gray-400">
-                    Aucun document n'est disponible pour ce fonctionnaire.
-                </p>
+                        <p class="mt-1 text-sm text-gray-400">
+                            Aucun document n'est disponible pour ce fonctionnaire.
+                        </p>
+
+                    </div>
+                @endforelse
 
             </div>
 
-        @endforelse
-
-    </div>
-
-</div>
+        </div>
 
 
-{{-- ============================================================
+        {{-- ============================================================
      JAVASCRIPT : GESTION DES COLLECTIONS
 ============================================================ --}}
 
-<script>
+        <script>
+            function showCollection(collectionIndex) {
 
-function showCollection(collectionIndex) {
+                /* ==========================================
+                   CACHER TOUS LES TABLEAUX
+                ========================================== */
 
-    /* ==========================================
-       CACHER TOUS LES TABLEAUX
-    ========================================== */
+                document.querySelectorAll('.collection-content')
+                    .forEach(function(content) {
 
-    document.querySelectorAll('.collection-content')
-        .forEach(function(content) {
+                        content.classList.add('hidden');
 
-            content.classList.add('hidden');
-
-        });
-
-
-    /* ==========================================
-       REMETTRE TOUS LES ONGLETS EN ÉTAT NORMAL
-    ========================================== */
-
-    document.querySelectorAll('.collection-tab')
-        .forEach(function(tab) {
-
-            tab.classList.remove(
-                'bg-blue-700',
-                'text-white',
-                'border-blue-700',
-                'shadow-md'
-            );
-
-            tab.classList.add(
-                'bg-white',
-                'text-gray-600',
-                'border-gray-200'
-            );
-
-        });
+                    });
 
 
-    /* ==========================================
-       AFFICHER LE TABLEAU SÉLECTIONNÉ
-    ========================================== */
+                /* ==========================================
+                   REMETTRE TOUS LES ONGLETS EN ÉTAT NORMAL
+                ========================================== */
 
-    const selectedContent =
-        document.querySelector(
-            '[data-content="' + collectionIndex + '"]'
-        );
+                document.querySelectorAll('.collection-tab')
+                    .forEach(function(tab) {
 
-    if (selectedContent) {
+                        tab.classList.remove(
+                            'bg-blue-700',
+                            'text-white',
+                            'border-blue-700',
+                            'shadow-md'
+                        );
 
-        selectedContent.classList.remove('hidden');
+                        tab.classList.add(
+                            'bg-white',
+                            'text-gray-600',
+                            'border-gray-200'
+                        );
 
-    }
-
-
-    /* ==========================================
-       ACTIVER L'ONGLET
-    ========================================== */
-
-    const selectedTab =
-        document.querySelector(
-            '[data-tab="' + collectionIndex + '"]'
-        );
-
-    if (selectedTab) {
-
-        selectedTab.classList.remove(
-            'bg-white',
-            'text-gray-600',
-            'border-gray-200'
-        );
-
-        selectedTab.classList.add(
-            'bg-blue-700',
-            'text-white',
-            'border-blue-700',
-            'shadow-md'
-        );
-
-    }
-
-}
+                    });
 
 
-/* ==========================================
-   PREMIER ONGLET ACTIF AU CHARGEMENT
-========================================== */
+                /* ==========================================
+                   AFFICHER LE TABLEAU SÉLECTIONNÉ
+                ========================================== */
 
-document.addEventListener('DOMContentLoaded', function() {
+                const selectedContent =
+                    document.querySelector(
+                        '[data-content="' + collectionIndex + '"]'
+                    );
 
-    const firstTab =
-        document.querySelector('.collection-tab');
+                if (selectedContent) {
 
-    if (firstTab) {
+                    selectedContent.classList.remove('hidden');
 
-        showCollection(firstTab.dataset.tab);
+                }
 
-    }
 
-});
+                /* ==========================================
+                   ACTIVER L'ONGLET
+                ========================================== */
 
-</script>
+                const selectedTab =
+                    document.querySelector(
+                        '[data-tab="' + collectionIndex + '"]'
+                    );
+
+                if (selectedTab) {
+
+                    selectedTab.classList.remove(
+                        'bg-white',
+                        'text-gray-600',
+                        'border-gray-200'
+                    );
+
+                    selectedTab.classList.add(
+                        'bg-blue-700',
+                        'text-white',
+                        'border-blue-700',
+                        'shadow-md'
+                    );
+
+                }
+
+            }
+
+
+            /* ==========================================
+               PREMIER ONGLET ACTIF AU CHARGEMENT
+            ========================================== */
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                const firstTab =
+                    document.querySelector('.collection-tab');
+
+                if (firstTab) {
+
+                    showCollection(firstTab.dataset.tab);
+
+                }
+
+            });
+        </script>
 
 
 
@@ -1154,13 +1174,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                 class="mt-1  pl-8 pr-12 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="photo">Photos--صورة شمسية</option>
                                 <option value="Doosier_initial">Doosier_initial -- ملف التوظيف</option>
-                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات                                    الترقية </option>
-                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات                                    ترقية في الدرجة</option>
-                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين                                </option>
+                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات
+                                    الترقية </option>
+                                <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات
+                                    ترقية في الدرجة</option>
+                                <option value="Pévé d'instalation محضر التعيين"> Pévé d'instalation محضر التعيين
+                                </option>
                                 <option value="مقرر التنصيب">مقرر التنصيب</option>
                                 <option value="مقرر الادماج">مقرر الادماج</option>
                                 <option value="Decision_مقرر تعيين في منصب عالي">مقرر تعيين في منصب عالي</option>
-                                <option value="Decision_مقرر انهاء التعيين في منصب عالي">مقرر انهاء التعيين في منصب عالي</option>
+                                <option value="Decision_مقرر انهاء التعيين في منصب عالي">مقرر انهاء التعيين في منصب
+                                    عالي</option>
                                 <option value="Decision_مقرر استداع">مقرر استداع</option>
                                 <option value="Decision_قرار التحويل">قرار التحويل</option>
                                 <option value="Decision_مقرر الوكيل الداخيل">مقرر الوكيل الداخيل</option>
@@ -1223,7 +1247,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     </div>
-    @endforeach
+
 
 
 
@@ -1288,7 +1312,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
     </div>
-
+    @endforeach
     <!-- ==================================================================================== apercu PDF -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

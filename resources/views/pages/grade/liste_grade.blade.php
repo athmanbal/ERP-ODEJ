@@ -2,7 +2,7 @@
     <thead class="bg-gray-50">
         <tr class="uppercase underline underline-offset-8">
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Code</th>
-            <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nom du grade</th>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nom du Poste Supérieur</th>
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Bonification</th>
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Actions</th>
         </tr>

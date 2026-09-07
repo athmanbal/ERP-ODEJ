@@ -70,13 +70,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
 
-    //------------------------------------------------------------------------- Route for the getting the data GRADES
+    //------------------------------------------------------------------------- Route for the getting the data POSTES SUPPERIEUR SHANT QUE le LE MODELE EST GRADES
 
-Route::get('/grades', [GradeController::class, 'index'])->name('grades');
-Route::post('/grades', [GradeController::class, 'store'])->name('store.grades');
-Route::get('/grades/{id_grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
-Route::put('/grades/{id_grade}', [GradeController::class, 'update'])->name('grades.update');
-Route::delete('/grades/{id_grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
+Route::get('/PostesSup', [GradeController::class, 'index'])->name('grades');
+Route::post('/PostesSup', [GradeController::class, 'store'])->name('store.grades');
+Route::get('/PostesSup/{id_grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
+Route::put('/PostesSup/{id_grade}', [GradeController::class, 'update'])->name('grades.update');
+Route::delete('/PostesSup/{id_grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
 
 
     //------------------------------------------------------------------------- Route for the LARAVEL file manager PERSONEL
