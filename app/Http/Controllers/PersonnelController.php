@@ -663,6 +663,7 @@ public function update(Request $request, $id_fonctionnaire)
     // ----------------------------------------------------------------------------------------------SUPPRESSION de fichier
     public function deleteMedia($id_fonctionnaire, $id_media)
     {
+
         // Récupérer l'employé
         $employee = Fonctionnaire::findOrFail($id_fonctionnaire);
         // Récupérer l'media

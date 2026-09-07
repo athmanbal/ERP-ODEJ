@@ -918,25 +918,22 @@
 
 
                                             {{-- SUPPRIMER --}}
-                                            <button
-                                                type="button"
-                                                onclick="openCustomConfirm(event, this)"
-                                                data-url="{{ route('fonctionnaires.deleteMedia', [
+
+
+                        <form action="{{  route('fonctionnaires.deleteMedia', [
                                                     'id_fonctionnaire' => $Fonct->id_fonctionnaire,
                                                     'id' => $media->id
-                                                ]) }}"
-                                                class="w-9 h-9
-                                                       rounded-lg
-                                                       bg-red-50
-                                                       text-red-600
-                                                       hover:bg-red-600
-                                                       hover:text-white
-                                                       transition"
-                                                title="Supprimer">
+                                                ])  }}"
+                            method="POST" onsubmit="return openCustomConfirm(event, this);">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn p-1 border-0 border-b-2 border-red-800  text-red-900 hover:bg-red-500 hover:text-red-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                                <i class="fa-solid fa-trash"></i>
 
-                                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
 
-                                            </button>
 
                                         </div>
 
