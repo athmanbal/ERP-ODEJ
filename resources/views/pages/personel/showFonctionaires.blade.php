@@ -1170,8 +1170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <option value="Decision_تثمين الخبرة">تثمين الخبرة</option>
                                 <option value="Decision_Maladies-- العطل المرضية"> Maladies-- العطل المرضية</option>
                                 <option value="Decision_تثمين الخبرة">تثمين الخبرة</option>
-
-                                <option value="Pévé">محاضـــر</option>
+                                <option value="Pevé">محاضـــر</option>
                             </select>
                         </div>
                         <button type="submit"
