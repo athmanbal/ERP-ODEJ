@@ -45,44 +45,54 @@ class PersonnelController extends Controller
 
     // ----------------------------------------------------------------------------------------------recuperer tout les fonctionaire
 
-    public function liste(Request $request)
-    {
-        // Récupérer toutes les CORPS
-        //$categories = Categorie::all();
-        $corps = Corps::all();
-        $comptes = Compte::all();
-        $services = Service::all();
-        $grades = Grade::all();
-        $fonctions = Fonction::all();
-        $etablisssemnts = Etablissement::all();
-        $categoriefonctionnaires = Categoriefonctionnaire::all();
+  public function liste(Request $request)
+{
+    $corps = Corps::all();
+    $comptes = Compte::all();
+    $services = Service::all();
+    $grades = Grade::all();
+    $fonctions = Fonction::all();
+    $etablisssemnts = Etablissement::all();
+    $categoriefonctionnaires = Categoriefonctionnaire::all();
 
-        // Récupérer l'identifiant de la catégorie actuelle, par défaut la première catégorie
-        //$activeCategoryId = $request->query('category', $categories->first()->id);
-        $activeCorpId = $request->query('corp', $corps->first()->Id_Corps);
+    $activeCorpId = $request->query('corp', $corps->first()?->Id_Corps);
+    $search = $request->query('search');
 
-        // Charger les personnels pour la catégorie active avec pagination
-        // $personnels = Personnel::where('categorie_id', $activeCategoryId)->paginate(10);
-        $Fonctionnaires = Fonctionnaire::with('media')
-            ->join('Fonctions', 'Fonctions.id_Fonction', '=', 'Fonctionnaires.id_fonction')
-            ->join('corps', 'Fonctions.id_corps', '=', 'corps.Id_Corps')
-            ->where('corps.Id_Corps', $activeCorpId)
-            ->select('Fonctionnaires.*') // important pour éviter les conflits de colonnes
-            ->get();
+    $query = Fonctionnaire::with('media')
+        ->join('Fonctions', 'Fonctions.id_Fonction', '=', 'Fonctionnaires.id_fonction')
+        ->join('corps', 'Fonctions.id_corps', '=', 'corps.Id_Corps')
+        ->select('Fonctionnaires.*');
 
-        return view('pages/personel/personel', compact(
-            'corps',
-            'comptes',
-            'Fonctionnaires',
-            'activeCorpId',
-            'services',
-            'grades',
-            'fonctions',
-            'etablisssemnts',
-            'categoriefonctionnaires'
-
-        ));
+    if (!empty($search)) {
+        $query->where(function($q) use ($search) {
+            $q->where('Fonctionnaires.nom_fonctionnaire', 'LIKE', "%{$search}%")
+              ->orWhere('Fonctionnaires.prenom_fonctionnaire', 'LIKE', "%{$search}%")
+              ->orWhere('Fonctionnaires.id_fonctionnaire', 'LIKE', "%{$search}%");
+        });
+    } else {
+        $query->where('corps.Id_Corps', $activeCorpId);
     }
+
+    $Fonctionnaires = $query->get();
+
+    // ⚡ Si la requête provient d'un appel AJAX JavaScript
+    if ($request->ajax()) {
+        return view('pages.personel.partials.tablefonctionnaires', compact('Fonctionnaires'))->render();
+    }
+
+    return view('pages.personel.personel', compact(
+        'corps',
+        'comptes',
+        'Fonctionnaires',
+        'activeCorpId',
+        'services',
+        'grades',
+        'fonctions',
+        'etablisssemnts',
+        'categoriefonctionnaires',
+        'search'
+    ));
+}
 
 
 

@@ -78,8 +78,17 @@
         </div>
         <!-------------------------------------------------------------Filtre et recherche des fonctionnaires-->
 
-
-
+{{-- Input de recherche temps réel --}}
+<div class="mb-4 relative w-full max-w-md">
+    <input
+        type="text"
+        id="search-input"
+        value="{{ request('search') }}"
+        placeholder="Rechercher par nom, prénom ou matricule en temps réel..."
+        class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+        autocomplete="off"
+    >
+</div>
 
 
         <!-------------------------------------------------------------Listes des fonctionnaires grouper par corps -->
@@ -239,4 +248,44 @@
             });
         });
     </script>
+
 </x-app-layout>
+{{-- Script JS AJAX --}}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search-input');
+    const tableBody = document.getElementById('TableFonctionaires');
+    let debounceTimer;
+
+    searchInput.addEventListener('input', function () {
+        const query = this.value;
+
+        // Attendre 300ms après la dernière frappe avant d'envoyer la requête (Debounce)
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+
+            // Construire l'URL avec les paramètres actuels
+            const url = new URL("{{ route('fonctionaires') }}");
+            if (query.trim() !== '') {
+                url.searchParams.set('search', query);
+            } else {
+                url.searchParams.set('corp', "{{ $activeCorpId }}");
+            }
+
+            // Exécution de la requête AJAX via fetch
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                // Remplacer le contenu du tableau dynamiquement
+                tableBody.innerHTML = html;
+            })
+            .catch(error => console.error('Erreur lors de la recherche:', error));
+
+        }, 300); // 300ms de délai
+    });
+});
+</script>
