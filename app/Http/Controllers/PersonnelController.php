@@ -632,9 +632,11 @@ class PersonnelController extends Controller
 
 
         $validated = $request->validate([
+             'file' => 'required|file|max:51200', // le fichier uploadé (50 Mo max
             'file-colllectios' => [
                 'required',
-                Rule::in([
+
+                 Rule::in([
                     'photo',
                     'Doosier_initial',
                     'Decision_promotion مقررات الترقية',
