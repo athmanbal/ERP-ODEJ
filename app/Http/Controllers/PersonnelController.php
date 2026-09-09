@@ -657,11 +657,13 @@ class PersonnelController extends Controller
         $fileCollection = $request->input('file-colllectios');
         $dateDefie = $request->input('dateDefie');
         $NumDocs = $request->input('NumDocs');
-        //nommer le file selon la collection et numeros
-        $NomFile = $fileCollection . '-' . $dateDefie . '-' . $NumDocs . '.pdf';
+
+
 
         $media = $employee->addMedia($request->file('file'))
             ->toMediaCollection($fileCollection);
+        //nommer le file selon la collection et numeros
+        $NomFile = $fileCollection . '---' . $media->name . '.pdf';
         // Ajouter des propriétés personnalisées
         $media->setCustomProperty('datedifie', $dateDefie);
         $media->setCustomProperty('NumDocs', $NumDocs);
