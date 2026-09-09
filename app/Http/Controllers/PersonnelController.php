@@ -637,7 +637,7 @@ class PersonnelController extends Controller
                 Rule::in([
                     'photo',
                     'Doosier_initial',
-                    'Decision_promotion--  مقررات الترقية ',
+                    'Decision_promotion مقررات الترقية',
                     'Decision_échelon--  مقررات ترقية في الدرجة',
                     'Pévé d\'instalation محضر التعيين',
                     'مقرر التنصيب',

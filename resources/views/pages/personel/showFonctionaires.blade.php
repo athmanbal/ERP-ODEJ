@@ -304,7 +304,7 @@
                     <div
                         class="p-3
                         rounded-xl
-                        bg-gray-50
+                        bg-white
                         border border-gray-100
                         hover:bg-blue-50
                         hover:border-blue-100
@@ -335,7 +335,7 @@
                     <div
                         class="p-3
                         rounded-xl
-                        bg-gray-50
+                        bg-white
                         border border-gray-100
                         hover:bg-blue-50
                         hover:border-blue-100
@@ -366,7 +366,7 @@
                     <div
                         class="p-3
                         rounded-xl
-                        bg-gray-50
+                        bg-white
                         border border-gray-100
                         hover:bg-blue-50
                         hover:border-blue-100
@@ -397,7 +397,7 @@
                     <div
                         class="p-3
                         rounded-xl
-                        bg-gray-50
+                        bg-white
                         border border-gray-100
                         hover:bg-blue-50
                         hover:border-blue-100
@@ -428,7 +428,7 @@
                     <div
                         class="sm:col-span-2 p-3
                         rounded-xl
-                        bg-gray-50
+                        bg-white
                         border border-gray-100
                         hover:bg-blue-50
                         hover:border-blue-100
@@ -1174,7 +1174,7 @@
                                 class="mt-1  pl-8 pr-12 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="photo">Photos--صورة شمسية</option>
                                 <option value="Doosier_initial">Doosier_initial -- ملف التوظيف</option>
-                                <option value="Decision_promotion--  مقررات الترقية ">Decision_promotion-- مقررات
+                                <option value="Decision_promotion مقررات الترقية">Decision_promotion-- مقررات
                                     الترقية </option>
                                 <option value="Decision_échelon--  مقررات ترقية في الدرجة">Decision_échelon-- مقررات
                                     ترقية في الدرجة</option>
