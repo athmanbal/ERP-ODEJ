@@ -672,14 +672,11 @@
 
             {{-- ===================== HEADER ===================== --}}
             <div class="px-2 py-2 border-b border-gray-200">
-
                 <div class="flex items-center justify-between gap-4">
-
                     <div>
                         <h3 class="text-lg font-bold text-gray-800">
                             Documents du fonctionnaire
                         </h3>
-
                         <p class="text-sm text-gray-500 mt-1">
                             Consultez et gérez les documents administratifs
                         </p>
@@ -687,62 +684,166 @@
 
                     <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
                         <i class="fa-solid fa-folder-open text-blue-700"></i>
-
-                        <span>
-                            {{ $Fonct->media->count() }} document(s)
-                        </span>
+                        <span>{{ $Fonct->media->count() }} document(s)</span>
                     </div>
+                </div>
+            </div>
 
+            {{-- ===================== BODY : CONTENU (gauche) + TABS (droite) ===================== --}}
+            <div class="flex flex-col md:flex-row">
+
+                {{-- ===================== TABLES (à gauche) ===================== --}}
+                <div class="flex-1 p-6 order-2 md:order-1">
+
+                    @forelse($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
+                        @php
+                            $contentId = 'content-' . $loop->index;
+                        @endphp
+
+                        <div id="{{ $contentId }}" data-content="{{ $loop->index }}"
+                            class="collection-content hidden">
+
+                            {{-- ===================== TABLE HEADER ===================== --}}
+                            <div class="flex flex-col items-center justify-center gap-4 mb-1 text-center">
+
+                                <div
+                                    class="w-full h-10 rounded-xl bg-blue-50 text-blue-700 gap-4  flex items-center justify-center">
+                                    <i class="fa-solid fa-folder-open"></i>
+
+
+                                    <div class="gap-4 flex items-center justify-center">
+                                        <h4 class="font-bold text-gray-800">{{ $collectionName }}
+                                            <p class="text-xs text-gray-500">{{ $mediaItems->count() }} document(s)
+                                            </p>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {{-- ===================== TABLE ===================== --}}
+                            <div class="overflow-x-auto rounded-xl border border-gray-200">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-50 border-b border-gray-200">
+                                        <tr>
+                                            <th class="px-2 py-2 text-left font-semibold text-gray-600">Document</th>
+                                            <th class="px-2 py-2 text-left font-semibold text-gray-600">Date</th>
+                                            <th class="px-2 py-2 text-center font-semibold text-gray-600">Taille</th>
+                                            <th class="px-2 py-2 text-center font-semibold text-gray-600">Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="divide-y divide-gray-100">
+                                        @foreach ($mediaItems as $media)
+                                            <tr class="hover:bg-blue-50/40 transition-colors">
+                                                <td class="px-2 py-2">
+                                                    <div class="flex items-center gap-3">
+                                                        <div
+                                                            class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+                                                            <i class="fa-solid fa-file-pdf text-lg"></i>
+                                                        </div>
+                                                        <div>
+                                                            <p class="font-semibold text-gray-800">{{ $media->name }}
+                                                            </p>
+                                                            <p class="text-xs text-gray-400">PDF</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-2 py-2 text-gray-600">
+                                                    <div class="flex items-center gap-2">
+                                                        <i class="fa-regular fa-calendar text-gray-400"></i>
+                                                        {{ $media->dateDefie }}
+                                                    </div>
+                                                </td>
+
+                                                <td class="px-2 py-2 text-center text-gray-600">
+                                                    {{ number_format($media->size / 1024, 0) }} Ko
+                                                </td>
+
+                                                <td class="px-2 py-2">
+                                                    <div class="flex justify-center items-center gap-2">
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#pdfModal"
+                                                            data-pdf="{{ $media->getUrl() }}"
+                                                            class="w-9 h-9 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-700 hover:text-white transition"
+                                                            title="Visualiser">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </button>
+
+                                                        <a href="{{ $media->getUrl() }}" download
+                                                            class="w-9 h-9 rounded-lg bg-green-50 text-green-700 hover:bg-green-600 hover:text-white flex items-center justify-center transition"
+                                                            title="Télécharger">
+                                                            <i class="fa-solid fa-download"></i>
+                                                        </a>
+
+                                                        <form
+                                                            action="{{ route('fonctionnaires.deleteMedia', ['id_fonctionnaire' => $Fonct->id_fonctionnaire, 'id' => $media->id]) }}"
+                                                            method="POST"
+                                                            onsubmit="return openCustomConfirm(event, this);">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn p-1 border-0 border-b-2 border-red-800 text-red-900 hover:bg-red-500 hover:text-red-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    @empty
+                        <div class="py-12 text-center">
+                            <div
+                                class="mx-auto w-16 h-16 rounded-2xl bg-gray-100 text-gray-400 flex items-center justify-center">
+                                <i class="fa-solid fa-folder-open text-2xl"></i>
+                            </div>
+                            <h4 class="mt-4 font-semibold text-gray-700">Aucun document</h4>
+                            <p class="mt-1 text-sm text-gray-400">Aucun document n'est disponible pour ce
+                                fonctionnaire.</p>
+                        </div>
+                    @endforelse
                 </div>
 
-                {{-- ===================== COLLECTION TABS ===================== --}}
+                {{-- ===================== COLLECTION TABS (verticaux, à droite) ===================== --}}
+
                 <div class="mt-2 relative">
 
                     <div
-                        class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin bg-blue-200 scrollbar-thumb-blue-300 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+                        class="flex flex-col gap-2 overflow-y-auto max-h-96 pb-2
+                                scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100
+                              scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
 
                         @foreach ($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
-                            @php
-                                $tabId = 'collection-' . $loop->index;
-                                $contentId = 'content-' . $loop->index;
-                            @endphp
-
                             <button type="button" onclick="showCollection('{{ $loop->index }}')"
                                 data-tab="{{ $loop->index }}"
-                                class="collection-tab flex-shrink-0
-                               inline-flex items-center gap-2
-                               px-2 py-2
-                               rounded-xl
-                               border-2
-                               border-gray-200
-                               bg-white
-                               text-gray-600
-                               text-sm font-semibold
-                               hover:border-blue-700
-                               hover:text-blue-700
-                               transition-all duration-200">
+                                class="collection-tab w-full
+                       flex items-center justify-between gap-2
+                       px-2 py-2
+                       rounded-xl
+                       border-2 border-gray-200
+                       bg-white
+                       text-gray-600
+                       text-sm font-semibold text-left
+                       hover:border-blue-700
+                       hover:text-blue-700
+                       transition-all duration-200">
 
-                                {{-- Icône --}}
-                                <i class="fa-solid fa-folder text-blue-600"></i>
-
-                                {{-- Nom collection --}}
-                                <span>
-                                    {{ $collectionName }}
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-folder text-blue-600"></i>
+                                    <span>{{ $collectionName }}</span>
                                 </span>
 
-                                {{-- Nombre --}}
                                 <span
-                                    class="ml-1 min-w-[24px] h-6
-                                   flex items-center justify-center
-                                   rounded-full
-                                   bg-gray-100
-                                   text-gray-600
-                                   text-xs font-bold">
-
+                                    class="ml-1 min-w-[24px] h-6 flex items-center justify-center
+                             rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
                                     {{ $mediaItems->count() }}
-
                                 </span>
-
                             </button>
                         @endforeach
 
@@ -752,259 +853,7 @@
 
             </div>
 
-
-            {{-- ===================== TABLES ===================== --}}
-
-            <div class="p-6">
-
-                @forelse($Fonct->media->groupBy('collection_name') as $collectionName => $mediaItems)
-                    @php
-                        $contentId = 'content-' . $loop->index;
-                    @endphp
-
-                    <div id="{{ $contentId }}" data-content="{{ $loop->index }}"
-                        class="collection-content hidden">
-
-                        {{-- ===================== TABLE HEADER ===================== --}}
-                        <div class="flex items-center justify-between mb-4">
-
-                            <div class="flex items-center gap-3">
-
-                                <div
-                                    class="w-10 h-10
-                                    rounded-xl
-                                    bg-blue-50
-                                    text-blue-700
-                                    flex items-center justify-center">
-
-                                    <i class="fa-solid fa-folder-open"></i>
-
-                                </div>
-
-                                <div>
-
-                                    <h4 class="font-bold text-gray-800">
-                                        {{ $collectionName }}
-                                    </h4>
-
-                                    <p class="text-xs text-gray-500">
-                                        {{ $mediaItems->count() }} document(s)
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- ===================== TABLE ===================== --}}
-                        <div
-                            class="overflow-x-auto
-                            rounded-xl
-                            border border-gray-200">
-
-                            <table class="w-full text-sm">
-
-                                <thead class="bg-gray-50 border-b border-gray-200">
-
-                                    <tr>
-
-                                        <th
-                                            class=" px-2 py-2 text-left
-                                           font-semibold text-gray-600">
-                                            Document
-                                        </th>
-
-                                        <th
-                                            class=" px-2 py-2 text-left
-                                           font-semibold text-gray-600">
-                                            Date
-                                        </th>
-
-                                        <th
-                                            class=" px-2 py-2 text-center
-                                           font-semibold text-gray-600">
-                                            Taille
-                                        </th>
-
-                                        <th
-                                            class=" px-2 py-2 text-center
-                                           font-semibold text-gray-600">
-                                            Actions
-                                        </th>
-
-                                    </tr>
-
-                                </thead>
-
-
-                                <tbody class="divide-y divide-gray-100">
-
-                                    @foreach ($mediaItems as $media)
-                                        <tr class="hover:bg-blue-50/40 transition-colors">
-
-                                            {{-- DOCUMENT --}}
-                                            <td class=" px-2 py-2">
-
-                                                <div class="flex items-center gap-3">
-
-                                                    <div
-                                                        class="w-10 h-10
-                                                        rounded-lg
-                                                        bg-red-50
-                                                        text-red-600
-                                                        flex items-center justify-center">
-
-                                                        <i class="fa-solid fa-file-pdf text-lg"></i>
-
-                                                    </div>
-
-                                                    <div>
-
-                                                        <p class="font-semibold text-gray-800">
-                                                            {{ $media->name }}
-                                                        </p>
-
-                                                        <p class="text-xs text-gray-400">
-                                                            PDF
-                                                        </p>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </td>
-
-
-                                            {{-- DATE --}}
-                                            <td class=" px-2 py-2 text-gray-600">
-
-                                                <div class="flex items-center gap-2">
-
-                                                    <i class="fa-regular fa-calendar text-gray-400"></i>
-
-                                                    {{ $media->dateDefie }}
-
-                                                </div>
-
-                                            </td>
-
-
-                                            {{-- SIZE --}}
-                                            <td class=" px-2 py-2 text-center text-gray-600">
-
-                                                {{ number_format($media->size / 1024, 0) }} Ko
-
-                                            </td>
-
-
-                                            {{-- ACTIONS --}}
-                                            <td class=" px-2 py-2">
-
-                                                <div class="flex justify-center items-center gap-2">
-
-                                                    {{-- VOIR --}}
-                                                    <button type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#pdfModal" data-pdf="{{ $media->getUrl() }}"
-                                                        class="w-9 h-9
-                                                       rounded-lg
-                                                       bg-blue-50
-                                                       text-blue-700
-                                                       hover:bg-blue-700
-                                                       hover:text-white
-                                                       transition"
-                                                        title="Visualiser">
-
-                                                        <i class="fa-solid fa-eye"></i>
-
-                                                    </button>
-
-
-                                                    {{-- TÉLÉCHARGER --}}
-                                                    <a href="{{ $media->getUrl() }}" download
-                                                        class="w-9 h-9
-                                                       rounded-lg
-                                                       bg-green-50
-                                                       text-green-700
-                                                       hover:bg-green-600
-                                                       hover:text-white
-                                                       flex items-center justify-center
-                                                       transition"
-                                                        title="Télécharger">
-
-                                                        <i class="fa-solid fa-download"></i>
-
-                                                    </a>
-
-
-                                                    {{-- SUPPRIMER --}}
-
-
-                                                    <form
-                                                        action="{{ route('fonctionnaires.deleteMedia', [
-                                                            'id_fonctionnaire' => $Fonct->id_fonctionnaire,
-                                                            'id' => $media->id,
-                                                        ]) }}"
-                                                        method="POST"
-                                                        onsubmit="return openCustomConfirm(event, this);">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn p-1 border-0 border-b-2 border-red-800  text-red-900 hover:bg-red-500 hover:text-red-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
-                                                            <i class="fa-solid fa-trash"></i>
-
-                                                        </button>
-                                                    </form>
-
-
-                                                </div>
-
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                @empty
-
-                    {{-- Aucun document --}}
-                    <div class="py-12 text-center">
-
-                        <div
-                            class="mx-auto w-16 h-16
-                            rounded-2xl
-                            bg-gray-100
-                            text-gray-400
-                            flex items-center justify-center">
-
-                            <i class="fa-solid fa-folder-open text-2xl"></i>
-
-                        </div>
-
-                        <h4 class="mt-4 font-semibold text-gray-700">
-                            Aucun document
-                        </h4>
-
-                        <p class="mt-1 text-sm text-gray-400">
-                            Aucun document n'est disponible pour ce fonctionnaire.
-                        </p>
-
-                    </div>
-                @endforelse
-
-            </div>
-
         </div>
-
-
         {{-- ============================================================
      JAVASCRIPT : GESTION DES COLLECTIONS
 ============================================================ --}}
