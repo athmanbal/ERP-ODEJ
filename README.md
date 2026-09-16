@@ -1,4 +1,4 @@
-# Free Tailwind & Laravel admin dashboard template
+# ERP-Numeration
 
 ![Mosaic TailwindCSS template preview](https://github.com/cruip/laravel-tailwindcss-admin-dashboard-template/assets/2683512/68bf8c3d-6525-4565-b6f8-c81611b9c1eb)
 
@@ -9,11 +9,8 @@ Created and maintained with ❤️ by [Cruip.com](https://cruip.com/).
 
 ## Live demo
 
-Check a live demo here 👉️ [https://mosaic.cruip.com/](https://mosaic.cruip.com/?template=laravel)
+Check a live demo here 👉️ [https://mosaic.cruip.com/](http://192.168.100.119/)
 
-## Mosaic Pro
-
-[![Mosaic Tailwind Admin Template](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/2b4d0fae-bb07-4229-8a8a-48005f2f33cb)](https://cruip.com/mosaic/)
 
 ## Design files
 
@@ -95,7 +92,7 @@ in your browser and you'll be ready to test out your new mosaic laravel app.
 
 ## About Us
 
-We're an Italian developer/designer duo creating high-quality design/code resources for developers, makers, and startups.
+We're an Algerien developer/designer .
 
 ## Stay in the loop
 
