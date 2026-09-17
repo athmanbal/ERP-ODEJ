@@ -815,7 +815,7 @@
                 <div class="mt-2 relative">
 
                     <div
-                        class="flex flex-col gap-2 overflow-y-auto max-h-96 pb-2
+                        class="flex flex-col gap-2 overflow-y-auto max-h-full pb-2
                                 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100
                               scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
 
