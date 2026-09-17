@@ -823,16 +823,17 @@
                             <button type="button" onclick="showCollection('{{ $loop->index }}')"
                                 data-tab="{{ $loop->index }}"
                                 class="collection-tab w-full
-                       flex items-center justify-between gap-2
-                       px-2 py-2
-                       rounded-xl
-                       border-2 border-gray-200
-                       bg-white
-                       text-gray-600
-                       text-sm font-semibold text-left
-                       hover:border-blue-700
-                       hover:text-blue-700
-                       transition-all duration-200">
+                            flex items-center justify-between gap-2
+                            px-2 py-2
+                            rounded-xl
+                            border-2 border-gray-200
+                            bg-white
+                            text-gray-600
+                            text-sm font-semibold text-left
+                            hover:border-blue-700
+                            hover:text-blue-700
+                            hover:ml-2
+                            transition-all duration-200">
 
                                 <span class="flex items-center gap-2">
                                     <i class="fa-solid fa-folder text-blue-600"></i>
@@ -841,7 +842,7 @@
 
                                 <span
                                     class="ml-1 min-w-[24px] h-6 flex items-center justify-center
-                             rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
+                                    rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
                                     {{ $mediaItems->count() }}
                                 </span>
                             </button>
@@ -884,7 +885,8 @@
                             'bg-blue-700',
                             'text-white',
                             'border-blue-700',
-                            'shadow-md'
+                            'shadow-md',
+                            'ml-4'
                         );
 
                         tab.classList.add(
@@ -927,13 +929,15 @@
                         'bg-white',
                         'text-gray-600',
                         'border-gray-200'
+
                     );
 
                     selectedTab.classList.add(
                         'bg-blue-700',
                         'text-white',
                         'border-blue-700',
-                        'shadow-md'
+                        'shadow-md',
+                        'ml-4'
                     );
 
                 }
