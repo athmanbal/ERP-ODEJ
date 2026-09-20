@@ -707,7 +707,7 @@
                             <div class="flex flex-col items-center justify-center gap-4 mb-1 text-center">
 
                                 <div
-                                    class="w-full h-10 rounded-xl bg-blue-50 text-blue-700 gap-4  flex items-center justify-center">
+                                    class="w-full h-10 rounded-xl bg-blue-200 text-blue-700 gap-4  flex items-center justify-center">
                                     <i class="fa-solid fa-folder-open"></i>
 
 
@@ -812,10 +812,10 @@
 
                 {{-- ===================== COLLECTION TABS (verticaux, à droite) ===================== --}}
 
-                <div class="mt-2 relative">
+                <div class="m-4 p-2 relative  w-full md:w-1/4 ">
 
                     <div
-                        class="flex flex-col gap-2 overflow-y-auto max-h-full pb-2
+                        class="flex flex-col gap-2 overflow-y-auto w-full max-h-full pb-2 px-4
                                 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100
                               scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
 
@@ -827,7 +827,7 @@
                             px-2 py-2
                             rounded-xl
                             border-2 border-gray-200
-                            bg-white
+                            bg-blue-200
                             text-gray-600
                             text-sm font-semibold text-left
                             hover:border-blue-700
@@ -840,11 +840,12 @@
                                     <span>{{ $collectionName }}</span>
                                 </span>
 
-                                <span
-                                    class="ml-1 min-w-[24px] h-6 flex items-center justify-center
-                                    rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
-                                    {{ $mediaItems->count() }}
-                                </span>
+
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 3L11 8L5 13" stroke="#222" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
                             </button>
                         @endforeach
 
@@ -886,13 +887,16 @@
                             'text-white',
                             'border-blue-700',
                             'shadow-md',
-                            'ml-4'
+                            'ml-4',
+                            'pr-4'
                         );
 
                         tab.classList.add(
                             'bg-white',
                             'text-gray-600',
                             'border-gray-200'
+
+
                         );
 
                     });
@@ -937,7 +941,8 @@
                         'text-white',
                         'border-blue-700',
                         'shadow-md',
-                        'ml-4'
+                        'ml-4',
+                        'pr-4'
                     );
 
                 }
