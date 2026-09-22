@@ -845,7 +845,7 @@
                                     rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
                                     {{ $mediaItems->count() }}
 
-                                </span>*/
+                                </span>
                                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 3L11 8L5 13" stroke="#222" stroke-width="2" stroke-linecap="round"

@@ -45,9 +45,9 @@ class PersonnelController extends Controller
 
     // ----------------------------------------------------------------------------------------------recuperer tout les fonctionaire
 
-  public function liste(Request $request)
+ public function liste(Request $request)
 {
-    $corps = Corps::all();
+    $corps = Corps::withCount('fonctionnaires')->get();
     $comptes = Compte::all();
     $services = Service::all();
     $grades = Grade::all();
@@ -75,7 +75,6 @@ class PersonnelController extends Controller
 
     $Fonctionnaires = $query->get();
 
-    // ⚡ Si la requête provient d'un appel AJAX JavaScript
     if ($request->ajax()) {
         return view('pages.personel.partials.tablefonctionnaires', compact('Fonctionnaires'))->render();
     }

@@ -115,6 +115,7 @@
             <!-- Contenu des Onglets -->
             <div class="mt-4">
                 <!-- Tableau pour la catégorie active -->
+                {{ $Fonctionnaires->count() > 0 ? ' (' . $Fonctionnaires->count() . ')' : '' }}
                 @include('pages.personel.liste_fonctionaire')
             </div>
         </div>
