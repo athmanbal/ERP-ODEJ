@@ -812,7 +812,7 @@
 
                 {{-- ===================== COLLECTION TABS (verticaux, à droite) ===================== --}}
 
-                <div class="m-4 p-2 relative  w-full md:w-1/4 ">
+                <div class="m-0 p-2 relative bg-blue-100 w-full md:w-1/4 ">
 
                     <div
                         class="flex flex-col gap-2 overflow-y-auto w-full max-h-full pb-2 px-4
@@ -841,7 +841,7 @@
                                 </span>
 
                                 <span
-                                    class="ml-1 min-w-[24px] h-6 flex items-center justify-center
+                                    class="ml-1 min-w-[24px] h-6 flex items-center justify-center px-2 py-1
                                     rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
                                     {{ $mediaItems->count() }}
 

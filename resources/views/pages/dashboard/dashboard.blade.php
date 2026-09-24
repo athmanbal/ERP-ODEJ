@@ -81,7 +81,8 @@
                     class="group relative overflow-hidden
                             bg-white rounded-2xl
                             border-2 border-gray-200
-                            p-6
+                            px-2
+                            py-6
                             shadow-sm
                             hover:shadow-2xl
                             hover:border-blue-500
@@ -93,7 +94,7 @@
                     <div
                         class="absolute -right-8 -top-8
                         w-24 h-24
-                        bg-blue-50
+                        bg-blue-100
                         rounded-full
                         group-hover:scale-150
                         transition-transform duration-500">
@@ -106,7 +107,7 @@
                             class="flex-shrink-0
                             w-16 h-16
                             rounded-2xl
-                            bg-blue-50
+                            bg-blue-100
                             flex items-center justify-center
                             group-hover:bg-blue-600
                             transition-colors duration-300">
@@ -129,17 +130,24 @@
                         <div class="flex-1">
 
                             <h3
-                                class="text-lg font-bold text-blue-950
-                               group-hover:text-blue-600
+                                class="text-md font-bold text-violet-950
+                               group-hover:text-violet-600
                                transition-colors">
 
-                                Fonctionnaires
+                                Gestion des Fonctionnaires
+
 
                             </h3>
 
-                            <p class="text-sm text-gray-500 mt-1">
-                                Gestion du personnel
-                            </p>
+                            <span
+                                class="my-2 min-w-[24px] h-6  flex items-center justify-center
+                                    rounded-full text-gray-600 text-md">
+                                {{ $totalFonctionnaires ?? 0 }} Fonctionnaires
+                                <!-- Affiche le nombre de fonctionnaires si disponible -->
+
+                            </span>
+
+
 
                         </div>
 
@@ -172,7 +180,8 @@
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200
-                  p-6
+                  px-2
+                  py-6
                   shadow-sm
                   hover:shadow-xl
                   hover:-translate-y-1
@@ -182,7 +191,7 @@
                     <div
                         class="absolute -right-8 -top-8
                         w-24 h-24
-                        bg-violet-50
+                        bg-violet-100
                         rounded-full
                         group-hover:scale-150
                         transition-transform duration-500">
@@ -195,7 +204,7 @@
                             class="flex-shrink-0
                             w-16 h-16
                             rounded-2xl
-                            bg-violet-50
+                            bg-violet-100
                             flex items-center justify-center
                             group-hover:bg-violet-600
                             transition-colors duration-300">
@@ -213,20 +222,29 @@
                         </div>
 
 
+                        <!-- Content -->
                         <div class="flex-1">
 
                             <h3
-                                class="text-lg font-bold text-blue-950
+                                class="text-md font-bold text-violet-950
                                group-hover:text-violet-600
                                transition-colors">
 
-                                Fonctions
+                                Gestion des Fonctions
+
 
                             </h3>
 
-                            <p class="text-sm text-gray-500 mt-1">
-                                Gestion des fonctions
-                            </p>
+                            <span
+                                class="my-2 min-w-[24px] h-6  flex items-center justify-center
+                                    rounded-full text-gray-600 text-md">
+                                {{ $totalFonctions ?? 0 }} Fonctions
+                                <!-- Affiche le nombre de fonctions si disponible -->
+
+                            </span>
+
+
+
 
                         </div>
 
@@ -253,7 +271,8 @@
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200
-                  p-6
+                  px-2
+                  py-6
                   shadow-sm
                   hover:shadow-xl
                   hover:-translate-y-1
@@ -263,7 +282,7 @@
                     <div
                         class="absolute -right-8 -top-8
                         w-24 h-24
-                        bg-amber-50
+                        bg-amber-100
                         rounded-full
                         group-hover:scale-150
                         transition-transform duration-500">
@@ -276,7 +295,7 @@
                             class="flex-shrink-0
                             w-16 h-16
                             rounded-2xl
-                            bg-amber-50
+                            bg-amber-100
                             flex items-center justify-center
                             group-hover:bg-amber-500
                             transition-colors duration-300">
@@ -306,9 +325,13 @@
 
                             </h3>
 
-                            <p class="text-sm text-gray-500 mt-1">
-                                Gestion des grades
-                            </p>
+                            <span
+                                class="my-2 min-w-[24px] h-6  flex items-center justify-center
+                                    rounded-full text-gray-600 text-md">
+                                {{ $totalGrades ?? 0 }} Grades
+                                <!-- Affiche le nombre de grades si disponible -->
+
+                            </span>
 
                         </div>
 
@@ -335,7 +358,8 @@
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200
-                  p-6
+                            px-2
+                            py-6
                   shadow-sm
                   hover:shadow-xl
                   hover:-translate-y-1
@@ -345,7 +369,7 @@
                     <div
                         class="absolute -right-8 -top-8
                         w-24 h-24
-                        bg-emerald-50
+                        bg-emerald-200
                         rounded-full
                         group-hover:scale-150
                         transition-transform duration-500">
@@ -358,7 +382,7 @@
                             class="flex-shrink-0
                             w-16 h-16
                             rounded-2xl
-                            bg-emerald-50
+                            bg-emerald-200
                             flex items-center justify-center
                             group-hover:bg-emerald-600
                             transition-colors">
@@ -387,8 +411,11 @@
                             </h3>
 
                             <p class="text-sm text-gray-500 mt-1">
-                                Gestion des postes
+                                {{ $totalPostes ?? 0 }} Grades
+                                <!-- Affiche le nombre de grades si disponible -->
                             </p>
+
+
 
                         </div>
 
@@ -415,7 +442,8 @@
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200
-                  p-6
+                  px-2
+                  py-6
                   shadow-sm
                   hover:shadow-xl
                   hover:-translate-y-1
@@ -424,7 +452,7 @@
                     <div
                         class="absolute -right-8 -top-8
                         w-24 h-24
-                        bg-cyan-50
+                        bg-cyan-300
                         rounded-full
                         group-hover:scale-150
                         transition-transform duration-500">
@@ -437,7 +465,7 @@
                             class="flex-shrink-0
                             w-16 h-16
                             rounded-2xl
-                            bg-cyan-50
+                            bg-cyan-300
                             flex items-center justify-center
                             group-hover:bg-cyan-600
                             transition-colors">
