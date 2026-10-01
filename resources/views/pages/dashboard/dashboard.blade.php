@@ -515,7 +515,84 @@
                     </div>
 
                 </a>
+                <!-- ================= Congés ================= -->
+                <a href="{{ route('conges.dashboard') }}"
+                    class="group relative overflow-hidden
+                  bg-white rounded-2xl
+                  border-2 border-gray-200
+                  px-2
+                  py-6
+                  shadow-sm
+                  hover:shadow-xl
+                  hover:-translate-y-1
+                  hover:border-emerald-500                  transition-all duration-300">
 
+                    <div
+                        class="absolute -right-8 -top-8
+                        w-24 h-24
+                        bg-cyan-300
+                        rounded-full
+                        group-hover:scale-150
+                        transition-transform duration-500">
+                    </div>
+
+
+                    <div class="relative flex items-center gap-5">
+
+                        <div
+                            class="flex-shrink-0
+                            w-16 h-16
+                            rounded-2xl
+                            bg-cyan-300
+                            flex items-center justify-center
+                            group-hover:bg-cyan-600
+                            transition-colors">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-9 h-9 fill-cyan-600
+                                group-hover:fill-white"
+                                viewBox="0 0 24 24">
+
+                                <path d="M3 21h18v-2H3v2z" />
+                                <path d="M5 19V5l7-3 7 3v14h-2V7l-5-2-5 2v12H5z" />
+                                <path d="M9 9h2v2H9V9zm4 0h2v2h-2V9zM9 13h2v2H9v-2zm4 0h2v2h-2v-2z" />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="flex-1">
+
+                            <h3
+                                class="text-lg font-bold text-blue-950
+                               group-hover:text-cyan-600">
+
+                                Gestion des Congés
+
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Gestion des congés
+                            </p>
+
+                        </div>
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 text-gray-300
+                            group-hover:text-cyan-600
+                            group-hover:translate-x-1
+                            transition-all"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+                        </svg>
+
+                    </div>
+
+                </a>
 
             </div>
 

@@ -49,7 +49,7 @@
                         <circle cx="12" cy="8" r="4" />
                         <path d="M12 14c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z" />
                     </svg>
-                    <span class="text-lg md:text-xl uppercase font-sans font-light tracking-wide">Fonctionnaires</span>
+                    <span class="text-lg md:text-xl uppercase font-sans font-light tracking-wide"> Gestion des Fonctionnaires</span>
                 </a>
             </div>
             <!-- Right: Actions -->
@@ -78,23 +78,19 @@
         </div>
         <!-------------------------------------------------------------Filtre et recherche des fonctionnaires-->
 
-{{-- Input de recherche temps réel --}}
-<div class="mb-4 relative w-full max-w-md">
-    <input
-        type="text"
-        id="search-input"
-        value="{{ request('search') }}"
-        placeholder="Rechercher par nom, prénom ou matricule en temps réel..."
-        class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-        autocomplete="off"
-    >
-</div>
+        {{-- Input de recherche temps réel --}}
+        <div class="mb-4 relative w-full max-w-md">
+            <input type="text" id="search-input" value="{{ request('search') }}"
+                placeholder="Rechercher par nom, prénom ou matricule en temps réel..."
+                class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                autocomplete="off">
+        </div>
 
 
         <!-------------------------------------------------------------Listes des fonctionnaires grouper par corps -->
         <div class="flex justify-between items-center">
-            <h1 class="bg-blue-600 text-xl text-white bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg p-1"
-                style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
+            <h1 class="bg-gray-100 text-xl  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg p-1"
+                ">
                 Liste Fonctionaires grouper par Corps
             </h1>
             <!-- ===========================================================================Bouton Ajouter fonctionaire -->
@@ -115,7 +111,6 @@
             <!-- Contenu des Onglets -->
             <div class="mt-4">
                 <!-- Tableau pour la catégorie active -->
-                {{ $Fonctionnaires->count() > 0 ? ' (' . $Fonctionnaires->count() . ')' : '' }}
                 @include('pages.personel.liste_fonctionaire')
             </div>
         </div>
@@ -131,22 +126,22 @@
 
 
         <div class="p-4">
-                   <div class="p-4 flex justify-between items-center bg-gray-200">
+            <div class="p-4 flex justify-between items-center bg-gray-200">
 
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640">
-                <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                <path
-                    d="M280 88C280 57.1 254.9 32 224 32C193.1 32 168 57.1 168 88C168 118.9 193.1 144 224 144C254.9 144 280 118.9 280 88zM304 300.7L341 350.6C353.8 333.1 369.5 317.9 387.3 305.6L331.1 229.9C306 196 266.3 176 224 176C181.7 176 142 196 116.8 229.9L46.3 324.9C35.8 339.1 38.7 359.1 52.9 369.7C67.1 380.3 87.1 377.3 97.7 363.1L144 300.7L144 576C144 593.7 158.3 608 176 608C193.7 608 208 593.7 208 576L208 416C208 407.2 215.2 400 224 400C232.8 400 240 407.2 240 416L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 300.7zM496 608C575.5 608 640 543.5 640 464C640 384.5 575.5 320 496 320C416.5 320 352 384.5 352 464C352 543.5 416.5 608 496 608zM512 400L512 448L560 448C568.8 448 576 455.2 576 464C576 472.8 568.8 480 560 480L512 480L512 528C512 536.8 504.8 544 496 544C487.2 544 480 536.8 480 528L480 480L432 480C423.2 480 416 472.8 416 464C416 455.2 423.2 448 432 448L480 448L480 400C480 391.2 487.2 384 496 384C504.8 384 512 391.2 512 400z" />
-            </svg>
-            <h2 class="uppercase text-xl md:text-xl  text-blue-900 dark:text-gray-100"
-                style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
-                Creer un nouveau fonctionnaire</h2>
-            <button id="closeFormBtn" class="text-gray-600 text-4xl hover:text-red-600">&times;</button>
-        </div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640">
+                    <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path
+                        d="M280 88C280 57.1 254.9 32 224 32C193.1 32 168 57.1 168 88C168 118.9 193.1 144 224 144C254.9 144 280 118.9 280 88zM304 300.7L341 350.6C353.8 333.1 369.5 317.9 387.3 305.6L331.1 229.9C306 196 266.3 176 224 176C181.7 176 142 196 116.8 229.9L46.3 324.9C35.8 339.1 38.7 359.1 52.9 369.7C67.1 380.3 87.1 377.3 97.7 363.1L144 300.7L144 576C144 593.7 158.3 608 176 608C193.7 608 208 593.7 208 576L208 416C208 407.2 215.2 400 224 400C232.8 400 240 407.2 240 416L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 300.7zM496 608C575.5 608 640 543.5 640 464C640 384.5 575.5 320 496 320C416.5 320 352 384.5 352 464C352 543.5 416.5 608 496 608zM512 400L512 448L560 448C568.8 448 576 455.2 576 464C576 472.8 568.8 480 560 480L512 480L512 528C512 536.8 504.8 544 496 544C487.2 544 480 536.8 480 528L480 480L432 480C423.2 480 416 472.8 416 464C416 455.2 423.2 448 432 448L480 448L480 400C480 391.2 487.2 384 496 384C504.8 384 512 391.2 512 400z" />
+                </svg>
+                <h2 class="uppercase text-xl md:text-xl  text-blue-900 dark:text-gray-100"
+                    style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
+                    Creer un nouveau fonctionnaire</h2>
+                <button id="closeFormBtn" class="text-gray-600 text-4xl hover:text-red-600">&times;</button>
+            </div>
 
             <div class="  shadow-lg  bg-white">
 
-                <form action="{{ route('store.fonctionaires')}} " method="POST" enctype="multipart/form-data"
+                <form action="{{ route('store.fonctionaires') }} " method="POST" enctype="multipart/form-data"
                     class="border rounded-lg shadow  space-y-2 text-sm ">
                     @csrf
 
@@ -253,40 +248,40 @@
 </x-app-layout>
 {{-- Script JS AJAX --}}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('search-input');
-    const tableBody = document.getElementById('TableFonctionaires');
-    let debounceTimer;
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-input');
+        const tableBody = document.getElementById('TableFonctionaires');
+        let debounceTimer;
 
-    searchInput.addEventListener('input', function () {
-        const query = this.value;
+        searchInput.addEventListener('input', function() {
+            const query = this.value;
 
-        // Attendre 300ms après la dernière frappe avant d'envoyer la requête (Debounce)
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
+            // Attendre 300ms après la dernière frappe avant d'envoyer la requête (Debounce)
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
 
-            // Construire l'URL avec les paramètres actuels
-            const url = new URL("{{ route('fonctionaires') }}");
-            if (query.trim() !== '') {
-                url.searchParams.set('search', query);
-            } else {
-                url.searchParams.set('corp', "{{ $activeCorpId }}");
-            }
-
-            // Exécution de la requête AJAX via fetch
-            fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                // Construire l'URL avec les paramètres actuels
+                const url = new URL("{{ route('fonctionaires') }}");
+                if (query.trim() !== '') {
+                    url.searchParams.set('search', query);
+                } else {
+                    url.searchParams.set('corp', "{{ $activeCorpId }}");
                 }
-            })
-            .then(response => response.text())
-            .then(html => {
-                // Remplacer le contenu du tableau dynamiquement
-                tableBody.innerHTML = html;
-            })
-            .catch(error => console.error('Erreur lors de la recherche:', error));
 
-        }, 300); // 300ms de délai
+                // Exécution de la requête AJAX via fetch
+                fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        // Remplacer le contenu du tableau dynamiquement
+                        tableBody.innerHTML = html;
+                    })
+                    .catch(error => console.error('Erreur lors de la recherche:', error));
+
+            }, 300); // 300ms de délai
+        });
     });
-});
 </script>

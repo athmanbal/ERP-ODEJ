@@ -15,11 +15,11 @@
 
 
     <tbody class="divide-y divide-gray-100 border-t border-gray-100 bg-gray-10 ">
-@include('pages.personel.partials.tablefonctionnaires')
+        @include('pages.personel.partials.tablefonctionnaires')
     </tbody>
 </table>
 
-    <!-- ================================================= Boîte de confirmation suppressin personnalisée -->
+<!-- ================================================= Boîte de confirmation suppressin personnalisée -->
 <div id="customConfirmFonct" class="hidden fixed inset-0 flex items-center justify-center bg-black/40 z-50">
     <div class="bg-white p-4 rounded shadow">
         <p>Voulez-vous vraiment supprimer ce fonctionnaire ?</p>

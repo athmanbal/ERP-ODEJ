@@ -34,11 +34,11 @@ class Fonctionnaire extends Model implements HasMedia
         'id_service',
         'id_categoriefonctionnaire',
         'id_compte',
-        'lieu_naissance',  
+        'lieu_naissance',
          // j’ai utilisé ce champ pour stocker l’établissement
         // ajoute ici d’autres colonnes que tu veux remplir via ton formulaire
-        'id_fonctionnaire', 
-        'telephone',  
+        'id_fonctionnaire',
+        'telephone',
         'id_etablissement',
     ];
 protected $casts = [
@@ -51,6 +51,29 @@ protected $casts = [
         return $this->belongsTo(Fonction::class, 'id_fonction');
 
     }
+
+public function conges()
+{
+    return $this->hasMany(Conge::class, 'id_fonctionnaire', 'id_fonctionnaire');
+}
+
+/**
+ * Solde de congé annuel restant pour une année donnée.
+ * Ajuste $droitAnnuel selon la réglementation applicable (ex: 30 jours).
+ */
+public function soldeConge($annee = null)
+{
+    $annee = $annee ?? now()->year;
+    $droitAnnuel = 30;
+
+    $joursUtilises = $this->conges()
+        ->approuves()
+        ->annee($annee)
+        ->where('type_conge', 'annuel')
+        ->sum('nombre_jours');
+
+    return max($droitAnnuel - $joursUtilises, 0);
+}
 }
 
 

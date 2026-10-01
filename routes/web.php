@@ -16,6 +16,7 @@ use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\GradeController;
 use KitLoong\MigrationsGenerator\Schema\Models\Index;
 use UniSharp\LaravelFilemanager\Lfm;
+use App\Http\Controllers\CongeController;
 
 
 /*
@@ -96,6 +97,40 @@ Route::delete('/PostesSup/{id_grade}', [GradeController::class, 'destroy'])->nam
     //----------------------------------------------------------------------------------Route pour Etablissements
     // routes/web.php
     Route::resource('etablissements', EtablissementController::class);
+
+
+
+
+    //--------------------------------------------------------------------------------- Route pour  Conges
+
+
+Route::prefix('conges')->name('conges.')->group(function () {
+    // Écran 1 : Tableau de bord
+    Route::get('/', [CongeController::class, 'dashboard'])->name('dashboard');
+
+    // Écran 2 : Nouveau congé (modal, soumis depuis n'importe quel écran)
+    Route::post('/', [CongeController::class, 'store'])->name('store');
+
+    // Écran 3 : Historique
+    Route::get('/historique/{id_fonctionnaire?}', [CongeController::class, 'historique'])->name('historique');
+
+    // Écran 4 : Calendrier
+    Route::get('/calendrier', [CongeController::class, 'calendrier'])->name('calendrier');
+    Route::get('/events', [CongeController::class, 'events'])->name('events');
+
+    // Actions communes
+    Route::patch('/{conge}/statut', [CongeController::class, 'updateStatut'])->name('statut');
+    Route::delete('/{conge}', [CongeController::class, 'destroy'])->name('destroy');
+});
+
+
+
+
+
+
+
+
+
 
 
 

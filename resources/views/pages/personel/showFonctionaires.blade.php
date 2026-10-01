@@ -482,7 +482,7 @@
             <ul class="grid
                grid-cols-1
                md:grid-cols-3
-               gap-2">
+               gap-5">
 
 
                 <!-- Attestation -->
@@ -547,7 +547,7 @@
                        text-blue-800
                        font-medium
                        text-sm
-                       bg-gray-50
+                       bg-gray-100
                        hover:bg-blue-700
                        hover:text-white
                        transition-all duration-300">
@@ -562,12 +562,24 @@
                              group-hover/doc:text-white
                              transition-all">
 
-                            <i class="fa-solid fa-calendar-days"></i>
+                            <i class="fa-solid fa-umbrella-beach fa-lg" style="color: #74C0FC;"></i>
 
                         </span>
 
                         <span>
-                            Congé
+
+                            <button id="showFormCongeBtn">
+
+                                Congé et Autorésation
+
+                            </button>
+
+
+
+                            <a href="{{ route('conges.dashboard') }}">
+                                <i class="fa-solid fa-arrow-up-right-from-square"> Congé et Autorésation
+                                </i>
+                            </a>
                         </span>
 
                         <i
@@ -1115,7 +1127,7 @@
 
 
     </div>
-    <!-- ===========================================================================Formulaire d'ajout fonctionaire caché par défaut -->
+    <!-- ===========================================================================Formulaire  MAJ fonctionaire caché par défaut -->
 
     <div id="sidePanelFonctionaire"
         class="fixed inset-0 flex items-center justify-center
@@ -1154,6 +1166,54 @@
                     <!-- ajouter une formulaire de fonctionnaire  -->
 
                     @include('pages.personel.Modifier_Fonctionnaire')
+
+
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ===========================================================================Formulaire  CONGE fonctionaire caché par défaut -->
+
+    <div id="sidePanelCongéFonctionaire"
+        class="fixed inset-0 flex items-center justify-center
+            opacity-0 scale-0 pointer-events-none
+            transition-all duration-500 ease-out">
+
+
+        <div class="p-4">
+            <div class="p-4 flex justify-between items-center bg-gray-200">
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 640">
+                    <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path
+                        d="M280 88C280 57.1 254.9 32 224 32C193.1 32 168 57.1 168 88C168 118.9 193.1 144 224 144C254.9 144 280 118.9 280 88zM304 300.7L341 350.6C353.8 333.1 369.5 317.9 387.3 305.6L331.1 229.9C306 196 266.3 176 224 176C181.7 176 142 196 116.8 229.9L46.3 324.9C35.8 339.1 38.7 359.1 52.9 369.7C67.1 380.3 87.1 377.3 97.7 363.1L144 300.7L144 576C144 593.7 158.3 608 176 608C193.7 608 208 593.7 208 576L208 416C208 407.2 215.2 400 224 400C232.8 400 240 407.2 240 416L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 300.7zM496 608C575.5 608 640 543.5 640 464C640 384.5 575.5 320 496 320C416.5 320 352 384.5 352 464C352 543.5 416.5 608 496 608zM512 400L512 448L560 448C568.8 448 576 455.2 576 464C576 472.8 568.8 480 560 480L512 480L512 528C512 536.8 504.8 544 496 544C487.2 544 480 536.8 480 528L480 480L432 480C423.2 480 416 472.8 416 464C416 455.2 423.2 448 432 448L480 448L480 400C480 391.2 487.2 384 496 384C504.8 384 512 391.2 512 400z" />
+                </svg>
+                <h2 class="uppercase text-xl md:text-xl  text-blue-900 dark:text-gray-600"
+                    style="text-shadow: 2px 4px 10px rgba(22, 3, 62, 0.971);">
+                    Attribuer un Congé à:
+                    <label
+                        class="uppercase text-2xl md:text-3xl border-solide border-gray-900 border-b-2  text-blue-900 dark:text-gray-400  "
+                        style="text-shadow: 1px 2px 4px rgba(24, 7, 132, 0.5);">
+                        {{ $Fonct->nom_fonctionnaire }}
+                        {{ $Fonct->prenom_fonctionnaire }}
+                    </label>
+                </h2>
+                <button id="closeFormBtnCongéFonctionnaire"
+                    class="text-gray-600 text-4xl hover:text-red-600">&times;</button>
+            </div>
+
+            <div class="  shadow-lg  bg-white">
+
+                <form action="{{ route('update.fonctionaires', $Fonct->id_fonctionnaire) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- ajouter une formulaire de fonctionnaire  -->
+
+                    @include('pages.personel.congé_Fonctionnaire')
 
 
 
@@ -1235,31 +1295,31 @@
             });
         });
     </script>
-    <!-- =================================================================== Script pour afficher/masquer le formulaire Modifier information fonctionaire -->
+    <!-- =================================================================== Script pour afficher/masquer le formulaire Attribuer un Congé à un Fonctionnaire -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let showFormEditBtn = document.getElementById("showFormEditBtn");
-            let closeFormBtn = document.getElementById("closeFormBtnEditFonctionnaire");
-            let sidePanelFonctionaire = document.getElementById("sidePanelFonctionaire");
+            let showFormCongeBtn = document.getElementById("showFormCongeBtn");
+            let closeFormBtn = document.getElementById("closeFormBtnCongéFonctionnaire");
+            let sidePanelCongéFonctionaire = document.getElementById("sidePanelCongéFonctionaire");
 
-            if (showFormEditBtn && closeFormBtn && sidePanelFonctionaire) {
+            if (showFormCongeBtn && closeFormBtn && sidePanelCongéFonctionaire) {
                 // Afficher au milieu avec effet zoom
-                showFormEditBtn.addEventListener("click", function() {
-                    sidePanelFonctionaire.classList.remove("opacity-0", "scale-0", "pointer-events-none");
-                    sidePanelFonctionaire.classList.add("opacity-100", "scale-100");
+                showFormCongeBtn.addEventListener("click", function() {
+                    sidePanelCongéFonctionaire.classList.remove("opacity-0", "scale-0", "pointer-events-none");
+                    sidePanelCongéFonctionaire.classList.add("opacity-100", "scale-100");
                 });
 
                 // Cacher avec effet zoom inverse
                 closeFormBtn.addEventListener("click", function() {
-                    sidePanelFonctionaire.classList.remove("opacity-100", "scale-100");
-                    sidePanelFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
+                    sidePanelCongéFonctionaire.classList.remove("opacity-100", "scale-100");
+                    sidePanelCongéFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
                 });
 
                 // Fermer avec Escape
                 document.addEventListener("keydown", function(e) {
                     if (e.key === "Escape") {
-                        sidePanelFonctionaire.classList.remove("opacity-100", "scale-100");
-                        sidePanelFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
+                        sidePanelCongéFonctionaire.classList.remove("opacity-100", "scale-100");
+                        sidePanelCongéFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
                     }
                 });
             }
