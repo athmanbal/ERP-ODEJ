@@ -5,21 +5,23 @@
 
                    @foreach ($corps as $corp)
                        <a href="{{ route('fonctionaires', ['corp' => $corp->Id_Corps]) }}"
-                                class="w-1/{{ count($corps) * 2 }} text-center font-semibold
+                           class="w-1/{{ count($corps) * 2 }} text-center
+                                        px-4
                                         border-l-4
                                         transition-all duration-300 rounded-t-2xl
                                         hover:border-blue-900 hover:border-2  hover:border-l-4
                                         {{ $activeCorpId == $corp->Id_Corps ? 'bg-white text-blue-900 border-blue-700' : 'text-gray-900' }}">
 
 
-                           <div class="relative   mr-2 p-2  ">
-                               {{ $corp->Nom_Corps }}
+                           <div class="relative    px-2 py-2  text-sm  text-gray-700 dark:text-gray-200">
                                <span
-                                   class="ml-1 min-w-[24px] h-6 flex items-center justify-center
-                                    rounded-full  text-xs lowercase font-bold">
-                                   {{ $corp->fonctionnaires_count }} fonctionnaires
+                                   class="ml-1 m-2 min-w-[24px] h-6 flex items-center justify-center
+                                    rounded-full  lowercase  text-2xl font-bold">
+                                   {{ $corp->fonctionnaires_count }}
 
                                </span>
+                               {{ $corp->Nom_Corps }}
+
 
 
 

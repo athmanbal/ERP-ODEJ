@@ -537,7 +537,7 @@
                 <!-- Congé -->
                 <li>
 
-                    <a href="#"
+                    <a href="{{ route('conges.dashboard') }}"
                         class="group/doc
                        flex items-center
                        justify-center
@@ -568,18 +568,14 @@
 
                         <span>
 
-                            <button id="showFormCongeBtn">
 
-                                Congé et Autorésation
 
-                            </button>
+                            Congé et Autorésation
 
 
 
-                            <a href="{{ route('conges.dashboard') }}">
-                                <i class="fa-solid fa-arrow-up-right-from-square"> Congé et Autorésation
-                                </i>
-                            </a>
+
+
                         </span>
 
                         <i
@@ -1305,7 +1301,8 @@
             if (showFormCongeBtn && closeFormBtn && sidePanelCongéFonctionaire) {
                 // Afficher au milieu avec effet zoom
                 showFormCongeBtn.addEventListener("click", function() {
-                    sidePanelCongéFonctionaire.classList.remove("opacity-0", "scale-0", "pointer-events-none");
+                    sidePanelCongéFonctionaire.classList.remove("opacity-0", "scale-0",
+                        "pointer-events-none");
                     sidePanelCongéFonctionaire.classList.add("opacity-100", "scale-100");
                 });
 
@@ -1319,7 +1316,8 @@
                 document.addEventListener("keydown", function(e) {
                     if (e.key === "Escape") {
                         sidePanelCongéFonctionaire.classList.remove("opacity-100", "scale-100");
-                        sidePanelCongéFonctionaire.classList.add("opacity-0", "scale-0", "pointer-events-none");
+                        sidePanelCongéFonctionaire.classList.add("opacity-0", "scale-0",
+                            "pointer-events-none");
                     }
                 });
             }
