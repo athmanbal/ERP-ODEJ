@@ -13,15 +13,16 @@ class Conge extends Model
     protected $table = 'conges';
     protected $primaryKey = 'id_conge';
 
-    protected $fillable = [
-        'id_fonctionnaire',
-        'type_conge',
-        'date_depart',
-        'date_retour',
-        'nombre_jours',
-        'motif',
-        'statut',
-    ];
+protected $fillable = [
+    'id_fonctionnaire',
+    'type_conge',
+    'date_depart',
+    'date_retour',
+    'nombre_jours',
+    'motif',
+    'lieu_conge',
+    'statut',
+];
 
     protected $casts = [
         'date_depart' => 'date',
@@ -59,4 +60,25 @@ class Conge extends Model
     {
         return $query->whereYear('date_depart', $annee);
     }
+
+
+//  cette méthode pour le libellé arabe utilisé sur le titre de congé :
+public function libelleTypeArabe(): string
+{
+    return match ($this->type_conge) {
+        'annuel'       => 'العطلة السنوية العادية',
+        'maladie'      => 'عطلة مرضية',
+        'exceptionnel' => 'عطلة استثنائية',
+        'maternite'    => 'عطلة أمومة',
+        'sans_solde'   => 'عطلة بدون راتب',
+        default        => $this->type_conge,
+    };
+}
+// Numéro de référence affiché sur le titre (adapte le préfixe à votre codification réelle) :
+public function numeroReference(): string
+{
+    return str_pad($this->id_conge, 3, '0', STR_PAD_LEFT) . '/د.م.ش/' . $this->date_depart->format('Y');
+}
+
+
 }

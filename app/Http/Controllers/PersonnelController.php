@@ -16,6 +16,7 @@ use App\Models\Grade;
 use App\Models\Categoriefonctionnaire;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Traits\GenerePdfArabe;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -342,48 +343,19 @@ class PersonnelController extends Controller
 
 
     // ----------------------------------------------------------------------------------------------attestation de travail de fonctionaire
+    use GenerePdfArabe;
 
-
+    // Remplace l'ancienne méthode genererAttestation() par celle-ci :
     public function genererAttestation($id_fonctionnaire)
     {
         $fonctionnaire = Fonctionnaire::with('fonction')->findOrFail($id_fonctionnaire);
 
-        // Si mPDF est installé (recommandé pour un rendu RTL natif)
-        if (class_exists(\Mpdf\Mpdf::class)) {
-            $html = view('pages.personel.attestation', compact('fonctionnaire'))->render();
-
-            $mpdf = new \Mpdf\Mpdf([
-                'mode'                 => 'utf-8',
-                'format'               => 'A4',
-                'default_font'         => 'sans-serif',
-                'margin_left'          => 10,
-                'margin_right'         => 10,
-                'margin_top'           => 10,
-                'margin_bottom'        => 10,
-                'autoScriptToLang'     => true,
-                'autoLangToFont'       => true,
-            ]);
-
-            $mpdf->WriteHTML($html);
-            $pdfContent = $mpdf->Output('', 'S');
-
-            return response($pdfContent, 200, [
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="attestation_' . $fonctionnaire->id_fonctionnaire . '.pdf"',
-            ]);
-        }
-
-        // Pour DomPDF : Formater le HTML pour ligaturer les caractères arabes et inverser le sens
-        $rawHtml = view('pages.personel.attestation', compact('fonctionnaire'))->render();
-        $shapedHtml = $this->shapeArabicHtml($rawHtml);
-
-        $pdf = Pdf::loadHTML($shapedHtml)
-            ->setPaper('a4', 'portrait')
-            ->setOption(['defaultFont' => 'DejaVu Sans', 'isHtml5ParserEnabled' => true]);
-
-        return $pdf->stream('شهادة_عمل_' . $fonctionnaire->nom_fonctionnaire . '.pdf');
+        return $this->genererPdfArabe(
+            'pages.personel.attestation',
+            compact('fonctionnaire'),
+            'attestation_' . $fonctionnaire->id_fonctionnaire
+        );
     }
-
     /**
      * Traite les noeuds textes d'un document HTML pour connecter les lettres arabes et les inverser pour DomPDF
      */

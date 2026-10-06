@@ -4,7 +4,7 @@
 
     <div class="bg-white w-1/2 p-3 overflow-y-auto space-y-2 rounded shadow"
         style="shadow: 2px 2px 10px rgba(22, 3, 62, 0.971);">
-        <div style="text-shadow: 1px 1px 6px rgba(43, 2, 132, 0.971);>
+        <div style="text-shadow: 1px 1px 1px rgba(43, 2, 132, 0.971);>
             <h1 class="m-2 text-md font-bold">
             Détail Fonctionnaire </h1>
         </div>
@@ -71,7 +71,7 @@
 
 
     <div class="bg-white w-1/2 p-3 overflow-y-auto space-y-2 rounded shadow">
-        <div  style="text-shadow: 1px 1px 6px rgba(43, 2, 132, 0.971);>
+        <div  style="text-shadow: 1px 1px 1px rgba(43, 2, 132, 0.971);>
             <h1 class="m-2 text-md font-bold">Détail Poste </h1>
         </div>
         <div>

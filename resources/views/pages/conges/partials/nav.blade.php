@@ -1,17 +1,18 @@
-<ul class="nav nav-tabs mb-4">
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('conges.dashboard') ? 'active' : '' }}" href="{{ route('conges.dashboard') }}">
-            <i class="bi bi-speedometer2"></i> Tableau de bord
+@php
+    $lien = fn($actif) => 'px-4 py-2 text-sm font-medium border-b-2 ' .
+        ($actif ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300');
+@endphp
+
+<div class="border-b border-gray-200 mb-6">
+    <nav class="-mb-px flex gap-4">
+        <a href="{{ route('conges.dashboard') }}" class="{{ $lien(request()->routeIs('conges.dashboard')) }}">
+            Tableau de bord
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('conges.calendrier') ? 'active' : '' }}" href="{{ route('conges.calendrier') }}">
-            <i class="bi bi-calendar3"></i> Calendrier
+        <a href="{{ route('conges.calendrier') }}" class="{{ $lien(request()->routeIs('conges.calendrier')) }}">
+            Calendrier
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('conges.historique') ? 'active' : '' }}" href="{{ route('conges.historique') }}">
-            <i class="bi bi-clock-history"></i> Historique
+        <a href="{{ route('conges.historique') }}" class="{{ $lien(request()->routeIs('conges.historique')) }}">
+            Historique
         </a>
-    </li>
-</ul>
+    </nav>
+</div>

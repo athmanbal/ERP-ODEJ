@@ -89,9 +89,9 @@
 
         <!-------------------------------------------------------------Listes des fonctionnaires grouper par corps -->
         <div class="flex justify-between items-center">
-            <h1 class="bg-gray-100 text-xl  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg p-1"
+            <h1 class="bg-gray-100 text-2xl  bg-opacity-50 shadow-2xl  hover:shadow-lg transition-all rounded-lg p-1 dark:bg-gray-900 dark:text-gray-100 text-blue-900 font-semibold "
                 ">
-                Liste Fonctionaires grouper par Corps
+                Liste Fonctionaires par Corps
             </h1>
             <!-- ===========================================================================Bouton Ajouter fonctionaire -->
             <button id="showFormBtn"

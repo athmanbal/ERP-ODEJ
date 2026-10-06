@@ -15,8 +15,10 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
         "mpdf/mpdf": "^6.1",
+        "mpdf/qrcode": "^1.2",
         "spatie/laravel-medialibrary": "^11.11",
-        "unisharp/laravel-filemanager": "^2.9"
+        "unisharp/laravel-filemanager": "^2.9",
+        "upd_mpdf/upd_mpdf": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

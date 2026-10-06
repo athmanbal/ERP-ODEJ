@@ -1,38 +1,60 @@
-           <div class="flex   uppercase m-0 mt-0 bg-gray-100 ">
-               <div
-                   class="flex  w-full uppercase mb-0 mt-2 bg-gray-100 border-b-4 border-white text-sm md:text-md   dark:text-gray-100">
+
+<div class="mt-2 w-full overflow-x-auto bg-gray-100 dark:bg-gray-900">
+
+    <div class="flex w-1/2 min-w-max items-stretch gap-1
+                border-b-4 border-gray-300 dark:border-gray-700
+                text-sm font-semibold uppercase">
+
+        @foreach ($corps as $corp)
+
+            <a href="{{ route('fonctionaires', ['corp' => $corp->Id_Corps]) }}"
+               class="group flex flex-1 min-w-max items-center justify-center
+                      rounded-t-2xl border-b-4 border-l-4 px-4 py-2
+                      transition-all duration-300 ease-in-out
+
+                      {{ $activeCorpId == $corp->Id_Corps
+                          ? 'border-blue-700 bg-white text-blue-900 shadow-md
+                             dark:border-blue-400 dark:bg-gray-800 dark:text-blue-300'
+                          : 'border-transparent bg-gray-200 text-gray-700
+                             hover:border-blue-500 hover:bg-white hover:text-blue-900
+                             dark:bg-gray-900 dark:text-gray-300
+                             dark:hover:border-blue-400 dark:hover:bg-gray-800
+                             dark:hover:text-blue-300' }}">
+
+                <div class="flex flex-col items-center gap-1">
+
+                    {{-- Compteur des fonctionnaires --}}
+                    <span class="flex h-8 min-w-8 items-center justify-center
+                                 rounded-full px-2 text-sm font-bold
+                                 transition-colors duration-300
+
+                                 {{ $activeCorpId == $corp->Id_Corps
+                                     ? 'bg-blue-700 text-white dark:bg-blue-500'
+                                     : 'bg-gray-300 text-gray-800
+                                        group-hover:bg-blue-100
+                                        dark:bg-gray-700 dark:text-gray-200
+                                        dark:group-hover:bg-gray-600' }}">
+
+                        {{ $corp->fonctionnaires_count }}
+
+                    </span>
+
+                    {{-- Nom du corps --}}
+                    <span class="whitespace-nowrap text-xs md:text-sm">
+                        {{ $corp->Nom_Corps }}
+                    </span>
+
+                </div>
+
+            </a>
+
+        @endforeach
+
+    </div>
 
 
-                   @foreach ($corps as $corp)
-                       <a href="{{ route('fonctionaires', ['corp' => $corp->Id_Corps]) }}"
-                           class="w-1/{{ count($corps) * 2 }} text-center
-                                        px-4
-                                        border-l-4
-                                        transition-all duration-300 rounded-t-2xl
-                                        hover:border-blue-900 hover:border-2  hover:border-l-4
-                                        {{ $activeCorpId == $corp->Id_Corps ? 'bg-white text-blue-900 border-blue-700' : 'text-gray-900' }}">
+</div>
 
-
-                           <div class="relative    px-2 py-2  text-sm  text-gray-700 dark:text-gray-200">
-                               <span
-                                   class="ml-1 m-2 min-w-[24px] h-6 flex items-center justify-center
-                                    rounded-full  lowercase  text-2xl font-bold">
-                                   {{ $corp->fonctionnaires_count }}
-
-                               </span>
-                               {{ $corp->Nom_Corps }}
-
-
-
-
-
-                           </div>
-
-                       </a>
-                   @endforeach
-               </div>
-
-           </div>
 
 
 

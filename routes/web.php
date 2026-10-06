@@ -73,11 +73,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     //------------------------------------------------------------------------- Route for the getting the data POSTES SUPPERIEUR SHANT QUE le LE MODELE EST GRADES
 
-Route::get('/PostesSup', [GradeController::class, 'index'])->name('grades');
-Route::post('/PostesSup', [GradeController::class, 'store'])->name('store.grades');
-Route::get('/PostesSup/{id_grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
-Route::put('/PostesSup/{id_grade}', [GradeController::class, 'update'])->name('grades.update');
-Route::delete('/PostesSup/{id_grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
+    Route::get('/PostesSup', [GradeController::class, 'index'])->name('grades');
+    Route::post('/PostesSup', [GradeController::class, 'store'])->name('store.grades');
+    Route::get('/PostesSup/{id_grade}/edit', [GradeController::class, 'edit'])->name('grades.edit');
+    Route::put('/PostesSup/{id_grade}', [GradeController::class, 'update'])->name('grades.update');
+    Route::delete('/PostesSup/{id_grade}', [GradeController::class, 'destroy'])->name('grades.destroy');
 
 
     //------------------------------------------------------------------------- Route for the LARAVEL file manager PERSONEL
@@ -104,24 +104,27 @@ Route::delete('/PostesSup/{id_grade}', [GradeController::class, 'destroy'])->nam
     //--------------------------------------------------------------------------------- Route pour  Conges
 
 
-Route::prefix('conges')->name('conges.')->group(function () {
-    // Écran 1 : Tableau de bord
-    Route::get('/', [CongeController::class, 'dashboard'])->name('dashboard');
+    Route::prefix('conges')->name('conges.')->group(function () {
+        // Écran 1 : Tableau de bord
+        Route::get('/', [CongeController::class, 'dashboard'])->name('dashboard');
 
-    // Écran 2 : Nouveau congé (modal, soumis depuis n'importe quel écran)
-    Route::post('/', [CongeController::class, 'store'])->name('store');
+        // Écran 2 : Nouveau congé (modal, soumis depuis n'importe quel écran)
+        Route::post('/', [CongeController::class, 'store'])->name('store');
 
-    // Écran 3 : Historique
-    Route::get('/historique/{id_fonctionnaire?}', [CongeController::class, 'historique'])->name('historique');
+        // Écran 3 : Historique
+        Route::get('/historique/{id_fonctionnaire?}', [CongeController::class, 'historique'])->name('historique');
 
-    // Écran 4 : Calendrier
-    Route::get('/calendrier', [CongeController::class, 'calendrier'])->name('calendrier');
-    Route::get('/events', [CongeController::class, 'events'])->name('events');
+        // Écran 4 : Calendrier
+        Route::get('/calendrier', [CongeController::class, 'calendrier'])->name('calendrier');
+        Route::get('/events', [CongeController::class, 'events'])->name('events');
 
-    // Actions communes
-    Route::patch('/{conge}/statut', [CongeController::class, 'updateStatut'])->name('statut');
-    Route::delete('/{conge}', [CongeController::class, 'destroy'])->name('destroy');
-});
+        // Actions communes
+        Route::patch('/{conge}/statut', [CongeController::class, 'updateStatut'])->name('statut');
+        Route::delete('/{conge}', [CongeController::class, 'destroy'])->name('destroy');
+
+        // pdf impremer congé
+        Route::get('/{id_conge}/imprimer', [CongeController::class, 'imprimer'])->name('imprimer');
+    });
 
 
 
