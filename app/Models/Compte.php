@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Compte extends Model
 {
-    protected $table = 'comptes'; // nom de la table
+    use HasFactory;
 
-    protected $primaryKey = 'Id_Compte'; // clé primaire personnalisée
+    protected $table = 'comptes';
 
-    public $timestamps = true; // passe à false si pas de created_at/updated_at
+    protected $primaryKey = 'Id_Compte';
+
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
+    public $timestamps = true;
 
     protected $fillable = [
         'N_Compte',

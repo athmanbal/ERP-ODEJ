@@ -96,9 +96,8 @@
 
 <body>
 
-    <div>
-
-        <!-- En-tête haut -->
+    <div class="border-container ">
+            <!-- En-tête haut -->
         <div class="header-top">
             الجمهورية الجزائرية الديمقراطية الشعبية<br>
             وزارة الشباب والرياضة

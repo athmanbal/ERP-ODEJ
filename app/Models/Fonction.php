@@ -9,24 +9,32 @@ class Fonction extends Model
 {
     use HasFactory;
 
-        protected $table = 'fonctions'; // table associée
+    protected $table = 'fonctions';
 
-    protected $primaryKey = 'Id_Fonction'; // clé primaire
+    protected $primaryKey = 'id_fonction';
 
-    public $incrementing = true; // auto-incrémentation
+    public $incrementing = false;
+
     protected $keyType = 'int';
 
     protected $fillable = [
-        'Section',
-        'Taux_Prime',
-        'Nom_Fonction',
-        'Code_fonction',
-        'Niveau',
-        'valeur_Indiciere',
-        'Id_Corps'
+        'section',
+        'taux_prime',
+        'nom_fonction',
+        'code_fonction',
+        'niveau',
+        'valeur_indiciere',
+        'id_corps',
     ];
+
+    public $timestamps = false;
+
     public function corps()
     {
-        return $this->belongsTo(Corps::class, 'id_corps');
+        return $this->belongsTo(
+            Corps::class,
+            'id_corps',
+            'id_corps'
+        );
     }
 }

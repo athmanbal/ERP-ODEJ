@@ -438,7 +438,7 @@
 
 
                 <!-- ================= ETABLISSEMENTS ================= -->
-                <a href="#"
+                <a href="{{ route('etablissements') }}"
                     class="group relative overflow-hidden
                   bg-white rounded-2xl
                   border-2 border-gray-200

@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-
-
 class Fonctionnaire extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
 
+    protected $table = 'fonctionnaires';
+
     protected $primaryKey = 'id_fonctionnaire';
-    protected $table = 'fonctionnaires'; // car ta table n'est pas au pluriel
+
     public $incrementing = false;
+
     protected $keyType = 'int';
 
     protected $fillable = [
+        'id_fonctionnaire',
         'nom_fonctionnaire',
         'prenom_fonctionnaire',
+        'matricule_fonctionnaire',
         'date_naissance',
         'date_recretement',
         'date_sortie',
@@ -34,46 +37,101 @@ class Fonctionnaire extends Model implements HasMedia
         'id_service',
         'id_categoriefonctionnaire',
         'id_compte',
-        'lieu_naissance',
-         // j’ai utilisé ce champ pour stocker l’établissement
-        // ajoute ici d’autres colonnes que tu veux remplir via ton formulaire
-        'id_fonctionnaire',
-        'telephone',
         'id_etablissement',
+        'lieu_naissance',
+        'telephone',
     ];
-protected $casts = [
-    'date_naissance' => 'date',
-    'date_recretement' => 'date',
-    'date_sortie' => 'date',
-];
-    public function fonction()
-    {
-        return $this->belongsTo(Fonction::class, 'id_fonction');
 
-    }
+    protected $casts = [
+        'date_naissance' => 'date',
+        'date_recretement' => 'date',
+        'date_sortie' => 'date',
+    ];
+
+    // =========================
+    // RELATIONS
+    // =========================
+
+public function fonction()
+{
+    return $this->belongsTo(
+        Fonction::class,
+        'id_fonction',
+        'id_fonction'
+    );
+}
+
+
+public function grade()
+{
+    return $this->belongsTo(
+        Grade::class,
+        'id_grade',
+        'id_grade'
+    );
+}
+
+public function service()
+{
+    return $this->belongsTo(
+        Service::class,
+        'id_service',
+        'id_service'
+    );
+}
+
+public function etablissement()
+{
+    return $this->belongsTo(
+        Etablissement::class,
+        'id_etablissement',
+        'id_etablissement'
+    );
+}
+
+public function categorieFonctionnaire()
+{
+    return $this->belongsTo(
+        Categoriefonctionnaire::class,
+        'id_categoriefonctionnaire',
+        'Id_CategorieFonctionnaire'
+    );
+}
+
+public function compte()
+{
+    return $this->belongsTo(
+        Compte::class,
+        'id_compte',
+        'Id_Compte'
+    );
+}
 
 public function conges()
 {
-    return $this->hasMany(Conge::class, 'id_fonctionnaire', 'id_fonctionnaire');
+    return $this->hasMany(
+        Conge::class,
+        'id_fonctionnaire',
+        'id_fonctionnaire'
+    );
 }
 
-/**
- * Solde de congé annuel restant pour une année donnée.
- * Ajuste $droitAnnuel selon la réglementation applicable (ex: 30 jours).
- */
-public function soldeConge($annee = null)
-{
-    $annee = $annee ?? now()->year;
-    $droitAnnuel = 30;
+ // =========================
+    // SOLDE CONGE
+    // =========================
 
-    $joursUtilises = $this->conges()
-        ->approuves()
-        ->annee($annee)
-        ->where('type_conge', 'annuel')
-        ->sum('nombre_jours');
+    public function soldeConge($annee = null)
+    {
+        $annee = $annee ?? now()->year;
 
-    return max($droitAnnuel - $joursUtilises, 0);
+        $droitAnnuel = 30;
+
+        $joursUtilises = $this->conges()
+            ->approuves()
+            ->annee($annee)
+            ->where('type_conge', 'annuel')
+            ->sum('nombre_jours');
+
+        return max($droitAnnuel - $joursUtilises, 0);
+    }
 }
-}
-
-

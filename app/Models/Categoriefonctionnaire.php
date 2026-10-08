@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Categoriefonctionnaire extends Model
 {
-    protected $table = 'categoriefonctionnaires'; // nom de la table
+    use HasFactory;
 
-    protected $primaryKey = 'Id_CategorieFonctionnaire'; // clé primaire personnalisée
+    protected $table = 'categoriefonctionnaires';
 
-    public $timestamps = true; // à mettre false si tu n’as pas created_at/updated_at
+    protected $primaryKey = 'Id_CategorieFonctionnaire';
+
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
+    public $timestamps = true;
 
     protected $fillable = [
         'Nom_CategorieFonctionnaire',

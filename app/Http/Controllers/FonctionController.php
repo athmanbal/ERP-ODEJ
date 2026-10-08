@@ -12,7 +12,7 @@ class FonctionController extends Controller
     /**
      * Display a listing of the resource.
      */
- // -------------------------------------------------index---------------------------------------------
+    // -------------------------------------------------index---------------------------------------------
     public function index()
     {
         $fonctions = Fonction::with('corps')->get();
@@ -34,6 +34,12 @@ class FonctionController extends Controller
             'id_corps'          => 'required|integer|exists:corps,id_corps',
         ]);
 
+        $nextId = DB::table('fonctions')
+            ->lockForUpdate()
+            ->max('id_fonction');
+
+        $nextId = $nextId ? ((int) $nextId) + 1 : 1;
+        $validated['id_fonction'] = $nextId;
         Fonction::create($validated);
 
         return redirect()->route('fonctions')->with('message', 'Fonction ajoutée avec succès.');

@@ -7,61 +7,69 @@ use Illuminate\Http\Request;
 
 class EtablissementController extends Controller
 {
+    // -------------------------------------------------index---------------------------------------------
     public function index()
     {
-        $etablissements = Etablissement::all();
-        return view('etablissements.index', compact('etablissements'));
+        $etablissements = Etablissement::withCount('fonctionnaires')->get();
+
+        return view('pages.etablissement.etablissements', compact('etablissements'));
     }
 
-    public function create()
-    {
-        return view('etablissements.create');
-    }
-
+    // -------------------------------------------------store---------------------------------------------
     public function store(Request $request)
     {
-        $request->validate([
-            'Nom_etablissement' => 'required|string|max:255',
-            'address_etablissement' => 'nullable|string',
-            'telFax_etablissement' => 'nullable|string',
-            'mail_etablissement' => 'nullable|email',
+        $validated = $request->validate([
+            'nom_etablissement'     => 'required|string|max:255|unique:etablissements,nom_etablissement',
+            'address_etablissement' => 'nullable|string|max:255',
+            'type_etablissement'    => 'nullable|string|max:100',
+            'telFax_etablissement'  => 'nullable|string|max:30',
+            'mail_etablissement'    => 'nullable|email|max:255',
         ]);
 
-        Etablissement::create($request->all());
+        Etablissement::create($validated);
 
-        return redirect()->route('etablissements.index')
-                         ->with('success', 'Établissement créé avec succès.');
+        return redirect()->route('etablissements')->with('message', 'Établissement ajouté avec succès.');
     }
 
-    public function show(Etablissement $etablissement)
+    // -------------------------------------------------edit---------------------------------------------
+    public function edit($id_etablissement)
     {
-        return view('etablissements.show', compact('etablissement'));
+        $etablissement = Etablissement::findOrFail($id_etablissement);
+
+        return view('pages.etablissement.editEtablissement', compact('etablissement'));
     }
 
-    public function edit(Etablissement $etablissement)
+    // -------------------------------------------------update---------------------------------------------
+    public function update(Request $request, $id_etablissement)
     {
-        return view('etablissements.edit', compact('etablissement'));
-    }
+        $etablissement = Etablissement::findOrFail($id_etablissement);
 
-    public function update(Request $request, Etablissement $etablissement)
-    {
-        $request->validate([
-            'Nom_etablissement' => 'required|string|max:255',
-            'address_etablissement' => 'nullable|string',
-            'telFax_etablissement' => 'nullable|string',
-            'mail_etablissement' => 'nullable|email',
+        $validated = $request->validate([
+            'nom_etablissement'     => 'required|string|max:255|unique:etablissements,nom_etablissement,' . $id_etablissement . ',id_etablissement',
+            'address_etablissement' => 'nullable|string|max:255',
+            'type_etablissement'    => 'nullable|string|max:100',
+            'telFax_etablissement'  => 'nullable|string|max:30',
+            'mail_etablissement'    => 'nullable|email|max:255',
         ]);
 
-        $etablissement->update($request->all());
+        $etablissement->update($validated);
 
-        return redirect()->route('etablissements.index')
-                         ->with('success', 'Établissement mis à jour.');
+        return redirect()->route('etablissements')->with('message', 'Établissement modifié avec succès.');
     }
 
-    public function destroy(Etablissement $etablissement)
+    // -------------------------------------------------destroy---------------------------------------------
+    public function destroy($id_etablissement)
     {
+        $etablissement = Etablissement::withCount('fonctionnaires')->findOrFail($id_etablissement);
+
+        // Protection : on ne supprime pas un établissement qui a encore des fonctionnaires rattachés
+        if ($etablissement->fonctionnaires_count > 0) {
+            return redirect()->route('etablissements')
+                ->withErrors(['message' => "Suppression impossible : {$etablissement->fonctionnaires_count} fonctionnaire(s) sont rattachés à cet établissement."]);
+        }
+
         $etablissement->delete();
-        return redirect()->route('etablissements.index')
-                         ->with('success', 'Établissement supprimé.');
+
+        return redirect()->route('etablissements')->with('message', 'Établissement supprimé avec succès.');
     }
 }

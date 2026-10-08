@@ -17,6 +17,7 @@ use App\Http\Controllers\GradeController;
 use KitLoong\MigrationsGenerator\Schema\Models\Index;
 use UniSharp\LaravelFilemanager\Lfm;
 use App\Http\Controllers\CongeController;
+use App\Http\Controllers\EtablissementController;
 
 
 /*
@@ -127,8 +128,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
 
+  //--------------------------------------------------------------------------------- Route pour  Etablissements
 
 
+Route::get('/etablissements', [EtablissementController::class, 'index'])->name('etablissements');
+Route::post('/etablissements', [EtablissementController::class, 'store'])->name('store.etablissements');
+Route::get('/etablissements/{id_etablissement}/edit', [EtablissementController::class, 'edit'])->name('etablissements.edit');
+Route::put('/etablissements/{id_etablissement}', [EtablissementController::class, 'update'])->name('etablissements.update');
+Route::delete('/etablissements/{id_etablissement}', [EtablissementController::class, 'destroy'])->name('etablissements.destroy');
 
 
 
