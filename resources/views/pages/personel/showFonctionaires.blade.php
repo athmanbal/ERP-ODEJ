@@ -88,12 +88,12 @@
         <div
             class="group relative overflow-hidden
             grid grid-cols-12
-            gap-4
+            gap-1
             w-full
             bg-white
             border border-gray-200
             rounded-2xl
-            p-5
+            p-1
             shadow-sm
             hover:shadow-xl
             hover:-translate-y-1
@@ -111,7 +111,7 @@
                 <!-- Photo -->
                 <div
                     class="relative group/photo
-                    w-46 h-64
+                    w-32 h-46
                     rounded-2xl
                     overflow-hidden
                     bg-gray-100
@@ -297,7 +297,7 @@
                     class="grid grid-cols-1
                     sm:grid-cols-2
                     lg:grid-cols-3
-                    gap-3">
+                    gap-1">
 
 
                     <!-- Date naissance -->
