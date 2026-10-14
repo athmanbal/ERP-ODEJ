@@ -46,53 +46,64 @@ class PersonnelController extends Controller
 
     // ----------------------------------------------------------------------------------------------recuperer tout les fonctionaire
 
- public function liste(Request $request)
-{
-    $corps = Corps::withCount('fonctionnaires')->get();
-    $comptes = Compte::all();
-    $services = Service::all();
-    $grades = Grade::all();
-    $fonctions = Fonction::all();
-    $etablisssemnts = Etablissement::all();
-    $categoriefonctionnaires = Categoriefonctionnaire::all();
+    public function liste(Request $request)
+    {
+        $corps = Corps::withCount('fonctionnaires')->get();
+        $comptes = Compte::all();
+        $services = Service::all();
+        $grades = Grade::all();
+        $fonctions = Fonction::all();
+        $etablisssemnts = Etablissement::all();
+        $categoriefonctionnaires = Categoriefonctionnaire::all();
 
-    $activeCorpId = $request->query('corp', $corps->first()?->Id_Corps);
-    $search = $request->query('search');
+        $activeCorpId = $request->query('corp', $corps->first()?->Id_Corps);
+        $search = $request->query('search');
 
-    $query = Fonctionnaire::with('media')
-        ->join('Fonctions', 'Fonctions.id_Fonction', '=', 'Fonctionnaires.id_fonction')
-        ->join('corps', 'Fonctions.id_corps', '=', 'corps.Id_Corps')
-        ->select('Fonctionnaires.*');
+        $query = Fonctionnaire::with(
+            [
+                'fonction',
+                'grade',
+                'service',
+                'etablissement',
+                'categorieFonctionnaire',
+                'compte',
+                'media'
+            ]
 
-    if (!empty($search)) {
-        $query->where(function($q) use ($search) {
-            $q->where('Fonctionnaires.nom_fonctionnaire', 'LIKE', "%{$search}%")
-              ->orWhere('Fonctionnaires.prenom_fonctionnaire', 'LIKE', "%{$search}%")
-              ->orWhere('Fonctionnaires.id_fonctionnaire', 'LIKE', "%{$search}%");
-        });
-    } else {
-        $query->where('corps.Id_Corps', $activeCorpId);
+        )
+            ->join('Fonctions', 'Fonctions.id_Fonction', '=', 'Fonctionnaires.id_fonction')
+            ->join('corps', 'Fonctions.id_corps', '=', 'corps.Id_Corps')
+            ->select('Fonctionnaires.*');
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('Fonctionnaires.nom_fonctionnaire', 'LIKE', "%{$search}%")
+                    ->orWhere('Fonctionnaires.prenom_fonctionnaire', 'LIKE', "%{$search}%")
+                    ->orWhere('Fonctionnaires.id_fonctionnaire', 'LIKE', "%{$search}%");
+            });
+        } else {
+            $query->where('corps.Id_Corps', $activeCorpId);
+        }
+
+        $Fonctionnaires = $query->get();
+
+        if ($request->ajax()) {
+            return view('pages.personel.partials.tablefonctionnaires', compact('Fonctionnaires'))->render();
+        }
+
+        return view('pages.personel.personel', compact(
+            'corps',
+            'comptes',
+            'Fonctionnaires',
+            'activeCorpId',
+            'services',
+            'grades',
+            'fonctions',
+            'etablisssemnts',
+            'categoriefonctionnaires',
+            'search'
+        ));
     }
-
-    $Fonctionnaires = $query->get();
-
-    if ($request->ajax()) {
-        return view('pages.personel.partials.tablefonctionnaires', compact('Fonctionnaires'))->render();
-    }
-
-    return view('pages.personel.personel', compact(
-        'corps',
-        'comptes',
-        'Fonctionnaires',
-        'activeCorpId',
-        'services',
-        'grades',
-        'fonctions',
-        'etablisssemnts',
-        'categoriefonctionnaires',
-        'search'
-    ));
-}
 
 
 
@@ -603,11 +614,11 @@ class PersonnelController extends Controller
 
 
         $validated = $request->validate([
-             'file' => 'required|file|max:51200', // le fichier uploadé (50 Mo max
+            'file' => 'required|file|max:51200', // le fichier uploadé (50 Mo max
             'file-colllectios' => [
                 'required',
 
-                 Rule::in([
+                Rule::in([
                     'photo',
                     'Doosier_initial',
                     'Decision_promotion مقررات الترقية',

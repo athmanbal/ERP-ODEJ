@@ -96,7 +96,8 @@
             p-1
             shadow-sm
             hover:shadow-xl
-            hover:-translate-y-1
+            hover:-translate-y-0
+            hover:border-8
             hover:border-blue-700
             transition-all duration-300">
 
@@ -117,6 +118,7 @@
                     bg-gray-100
                     border-2 border-gray-200
                     shadow-sm
+
                     hover:border-blue-600
                     transition-all duration-300">
 
