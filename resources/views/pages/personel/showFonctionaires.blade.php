@@ -97,7 +97,7 @@
             shadow-sm
             hover:shadow-xl
             hover:-translate-y-0
-            hover:border-8
+
             hover:border-blue-700
             transition-all duration-300">
 

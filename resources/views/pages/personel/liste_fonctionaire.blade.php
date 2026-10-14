@@ -1,8 +1,8 @@
 <table id="TableFonctionaires" class="w-full border-collapse bg-white text-left text-sm text-gray-500 ">
     <thead class="bg-gray-50">
         <tr class="uppercase underline underline-offset-8">
-            <th scope="col" class="px-6 py-4 font-medium text-gray-900">Non Prenom</th>
-            <th scope="col" class="px-6 py-4 font-medium text-gray-900"> Date_Naissance</th>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900">Nom Prenom</th>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900"> Date_Recrutement</th>
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Grade</th>
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Etablissement</th>
             <th scope="col" class="px-6 py-4 font-medium text-gray-900">Corps</th>

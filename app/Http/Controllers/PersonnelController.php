@@ -67,7 +67,8 @@ class PersonnelController extends Controller
                 'etablissement',
                 'categorieFonctionnaire',
                 'compte',
-                'media'
+                'media',
+                'conges'
             ]
 
         )

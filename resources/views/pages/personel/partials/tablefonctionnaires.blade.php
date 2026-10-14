@@ -16,34 +16,48 @@
             </div>
             <div class="text-md">
                 <div class="font-bold text-gray-900 text-left">
-                    <a href="#" class="font-bold">
+                    <a href="{{ route('fonctionaires.show', $Fonctionnaire->id_fonctionnaire) }}"
+                        class="hover:underline">
                         {{ $Fonctionnaire->nom_fonctionnaire }}
                         {{ $Fonctionnaire->prenom_fonctionnaire }}
-                    </a>
+
                 </div>
-                <div class="text-gray-500 text-sm">jobs@sailboatui.com</div>
+                <p class="text-green-700 text-sm underline pl-4">
+                    <i class="fa-solid fa-phone text-blue-500"></i>
+                    {{ $Fonctionnaire->telephone }}
+                </p>
+                </a>
             </div>
         </th>
-        <td class="px-1 py-1"> {{ $Fonctionnaire->date_naissance }} </td>
-        <td class="px-1 py-1">  {{ $Fonctionnaire->fonction?->nom_fonction ?? 'Fonction non renseignée' }}  </td>
+        <td class="px-1 py-1"> {{ $Fonctionnaire->date_recretement }} </td>
+        <td class="px-1 py-1"> {{ $Fonctionnaire->fonction?->nom_fonction ?? 'Fonction non renseignée' }} </td>
         <td class="px-6 py-4">
-            <span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-                <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
-                Active
-            </span>
+            {{ $Fonctionnaire->etablissement?->nom_etablissement ?? 'Etablissement non renseignée' }}
+
+
+
         </td>
 
         <td class="px-1 py-1">
             <div class="flex gap-2">
-                <span class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600">
-                    {{ $Fonctionnaire->nom_corps }}
+
+
+                @php
+                    $enConge = $Fonctionnaire->estEnConge();
+                @endphp
+
+                <span
+                    class="inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-semibold
+                    {{ $enConge ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600' }}">
+
+                    <span class="h-2 w-2 rounded-full
+                     {{ $enConge ? 'bg-red-600' : 'bg-green-600' }}">
+                    </span>
+
+                    {{ $enConge ? 'En Congé' : 'Actif' }}
                 </span>
-                <span class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
-                    Product
-                </span>
-                <span class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600">
-                    Develop
-                </span>
+
+
             </div>
         </td>
 
@@ -51,14 +65,14 @@
         <td class="px-1 py-1">
             <div class="flex justify-end gap-4">
                 <!-- Button Show -->
-                <button class="btn p-1 border-0 border-b-2 border-gray-800 text-gray-900 hover:bg-gray-800 hover:text-gray-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                <button
+                    class="btn p-1 border-0 border-b-2 border-gray-800 text-gray-900 hover:bg-gray-800 hover:text-gray-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
                     <a x-data="{ tooltip: 'Voir' }"
                         href="{{ route('fonctionaires.show', $Fonctionnaire->id_fonctionnaire) }}"
                         class="relative group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.458 12C3.732 8.943 6.994 6.75 12 6.75c5.005 0 8.268 2.193 9.542 5.25-1.274 3.057-4.537 5.25-9.542 5.25-5.006 0-8.268-2.193-9.542-5.25z" />
                         </svg>
@@ -69,10 +83,11 @@
                 </button>
 
                 <!-- Button Edit -->
-                <button class="btn p-1 border-0 border-b-2 border-gray-800 text-gray-900 hover:bg-gray-800 hover:text-gray-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
+                <button
+                    class="btn p-1 border-0 border-b-2 border-gray-800 text-gray-900 hover:bg-gray-800 hover:text-gray-100 dark:bg-gray-100 dark:text-gray-800 dark:hover:bg-white">
                     <a x-data="{ tooltip: 'Edite' }" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="h-4 w-4" x-tooltip="tooltip">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-4 w-4" x-tooltip="tooltip">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
@@ -80,8 +95,8 @@
                 </button>
 
                 <!-- Button Delete -->
-                <form action="{{ route('delete.fonctionaires', $Fonctionnaire->id_fonctionnaire) }}"
-                    method="POST" onsubmit="return openCustomConfirmFonct(event, this);">
+                <form action="{{ route('delete.fonctionaires', $Fonctionnaire->id_fonctionnaire) }}" method="POST"
+                    onsubmit="return openCustomConfirmFonct(event, this);">
                     @csrf
                     @method('DELETE')
                     <button type="submit"

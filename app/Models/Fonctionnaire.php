@@ -52,71 +52,71 @@ class Fonctionnaire extends Model implements HasMedia
     // RELATIONS
     // =========================
 
-public function fonction()
-{
-    return $this->belongsTo(
-        Fonction::class,
-        'id_fonction',
-        'id_fonction'
-    );
-}
+    public function fonction()
+    {
+        return $this->belongsTo(
+            Fonction::class,
+            'id_fonction',
+            'id_fonction'
+        );
+    }
 
 
-public function grade()
-{
-    return $this->belongsTo(
-        Grade::class,
-        'id_grade',
-        'id_grade'
-    );
-}
+    public function grade()
+    {
+        return $this->belongsTo(
+            Grade::class,
+            'id_grade',
+            'id_grade'
+        );
+    }
 
-public function service()
-{
-    return $this->belongsTo(
-        Service::class,
-        'id_service',
-        'id_service'
-    );
-}
+    public function service()
+    {
+        return $this->belongsTo(
+            Service::class,
+            'id_service',
+            'id_service'
+        );
+    }
 
-public function etablissement()
-{
-    return $this->belongsTo(
-        Etablissement::class,
-        'id_etablissement',
-        'id_etablissement'
-    );
-}
+    public function etablissement()
+    {
+        return $this->belongsTo(
+            Etablissement::class,
+            'id_etablissement',
+            'id_etablissement'
+        );
+    }
 
-public function categorieFonctionnaire()
-{
-    return $this->belongsTo(
-        Categoriefonctionnaire::class,
-        'id_categoriefonctionnaire',
-        'Id_CategorieFonctionnaire'
-    );
-}
+    public function categorieFonctionnaire()
+    {
+        return $this->belongsTo(
+            Categoriefonctionnaire::class,
+            'id_categoriefonctionnaire',
+            'Id_CategorieFonctionnaire'
+        );
+    }
 
-public function compte()
-{
-    return $this->belongsTo(
-        Compte::class,
-        'id_compte',
-        'Id_Compte'
-    );
-}
+    public function compte()
+    {
+        return $this->belongsTo(
+            Compte::class,
+            'id_compte',
+            'Id_Compte'
+        );
+    }
 
-public function conges()
-{
-    return $this->hasMany(
-        Conge::class,
-        'id_fonctionnaire',
-        'id_fonctionnaire'
-    );
-}
+    public function conges()
+    {
+        return $this->hasMany(
+            Conge::class,
+            'id_fonctionnaire',
+            'id_fonctionnaire'
+        );
+    }
 
- // =========================
+    // =========================
     // SOLDE CONGE
     // =========================
 
@@ -133,5 +133,21 @@ public function conges()
             ->sum('nombre_jours');
 
         return max($droitAnnuel - $joursUtilises, 0);
+    }
+
+    // =========================
+    // en CONGE
+    // =========================
+
+
+    public function estEnConge(): bool
+    {
+        $aujourdHui = now()->toDateString();
+
+        return $this->conges()
+            ->where('statut', 'approuve')
+            ->whereDate('date_depart', '<=', $aujourdHui)
+            ->whereDate('date_retour', '>=', $aujourdHui)
+            ->exists();
     }
 }
